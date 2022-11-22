@@ -1,0 +1,8 @@
+int = 1
+float = 1.0
+char = '1'
+bool = true
+string = "1"
+unit = ()
+
+jest tylko jedna wartość typu unit, może być przydatne do funkcji 0 argumentowych, i funkcji void, oraz do algebraicznych typów danych

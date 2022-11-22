@@ -1,0 +1,15 @@
+instalcja ocamla
+
+sudo pacman -S ocaml opam
+
+instalcja pkaietów
+
+opam install utop ocamlbuild dune
+
+szukanie pakietów z słowem proof
+
+opam search proof
+
+wyświetlnie informacji o pakiecie
+
+opam show ocamlfind

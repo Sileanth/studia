@@ -1,0 +1,258 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{templatka}
+
+%==== BITWA Z CZCIONKĄ ====%
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amssymb}
+%\RequirePackage[polish]{babel}
+\RequirePackage{polski}
+\RequirePackage{microtype} % dodaje sylabowanie słów na końcach wierszy
+
+%\RequirePackage{courier} % bo lubię tę czcionkę w sumie
+
+\RequirePackage[ttdefault=true]{AnonymousPro} % będzie jak VS Code :v
+
+\sloppy
+
+\parindent=0pt
+
+%\RequirePackage{letltxmacro}
+%\LetLtxMacro\origttfamily\ttfamily
+%\DeclareRobustCommand*{\ttfamily}{
+%  \origttfamily
+%  \hyphenchar\font=`\-\relax
+%  \fontdimen1\font=.25em\relax %.25 originally || 3
+%  \fontdimen2\font=.167em\relax %.167 || 4
+%  \fontdimen3\font=.167em\relax %.167 || 7
+%}
+
+%\makeatletter
+%\DeclareRobustCommand\vttfamily{
+%  \not@math@alphabet\vttfamily\relax
+%  \fontfamily{cmvtt}
+%  \selectfont
+%}
+%\DeclareTextFontCommand{\textvtt}{\vttfamily}
+%\makeatother
+
+\renewcommand*\familydefault{\ttdefault} % ustawia czcionkę maszynową jako domyślną
+
+\RequirePackage{ragged2e}
+%\justifying % justuje tekst
+
+%!=== SKRÓTY MATEMATYCZNE ===!%
+
+\RequirePackage{mathastext}
+\RequirePackage{amsmath}
+\RequirePackage{mathtools}
+\RequirePackage{dsfont}
+
+% fancy fonts in math mode
+\RequirePackage{eufrak}
+\RequirePackage{calrsfs}
+
+\RequirePackage{graphicx} % for rotating \obet
+
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\C}{\mathds{C}}
+
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Po}[1]{\mathcal{P}(#1)}
+\newcommand{\zbiezjed}{{\to \above 0pt \to}}
+\newcommand{\rodz}[1]{\mathcal{#1}}
+\newcommand{\obet}{\rotatebox[origin=c]{90}{$\rightharpoondown$}}
+\newcommand{\wek}[1]{\overline{#1}}
+
+\newcommand{\parl}{\langle}
+\newcommand{\parr}{\rangle}
+
+\newcommand{\rarrow}[2]{\xrightarrow[#1]{#2}}
+\newcommand{\point}{\indent $\hookrightarrow$ }
+\newcommand{\dzielnat}{\triangleleft}
+
+\newcommand{\dowod}{{\large\color{acc}DOWÓD:}\bigskip\\}
+
+\RequirePackage{worldflags}
+
+\newcommand{\ang}[1]{{\color{sep}[\worldflag[length=10px, width=5px]{GB} #1]}}
+
+%==== MARGINESY ====%
+
+\RequirePackage{geometry}
+% [showframe]
+% to show borders
+
+\geometry {
+    a4paper,
+    total={180mm, 267mm}
+}
+
+\pagestyle{empty} % strony nie będą ponumerowane
+
+% domyślne marginesy są 0, wcięcie to komenda %* \indent
+\newlength\tindent
+\setlength{\tindent}{\parindent}
+\setlength{\parindent}{0pt}
+\renewcommand{\indent}{$\quad$}
+
+%==== KOLORY I OZDOBNIKI ====%
+
+\RequirePackage{xcolor}
+
+\definecolor{back}{HTML}{282828}%{011718}
+\definecolor{text}{HTML}{fbf1c7}%{e0e0e0}
+
+\definecolor{title-color}{HTML}{E86354}%{E0655A}
+\definecolor{def}{HTML}{c9cc23}%{D9B86C}
+\definecolor{acc}{HTML}{fabd2f}%{6FBDB0}
+
+\definecolor{sep}{HTML}{458588}%{00b0a5}
+\definecolor{sep2}{HTML}{689d6a}
+
+\pagecolor{back}
+\color{text}
+
+\RequirePackage{sectsty} % żeby można było zmienić styl nagłówków
+\sectionfont{\LARGE\ttfamily\color{title-color}}
+\subsectionfont{\Large\ttfamily\color{title-color}}
+
+\RequirePackage[hidelinks]{hyperref} % linki w spisie treści będą białe, url będzie zielonkawe
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=text,
+    urlcolor=acc
+}
+
+\newcommand{\podz}[1]{{\color{#1}\dotfill}} % wykropkowana linia do wydzielania sekcji w dokumencie
+
+%==== KWADRACIKOWE SZALENSTWO ====%
+
+\RequirePackage[framemethod=TikZ]{mdframed}
+
+\definecolor{defback}{HTML}{2f2e2d}%{32302f}
+\definecolor{txt}{HTML}{fbf1c7}
+\definecolor{bor}{HTML}{636311}
+
+\mdfdefinestyle{definicja} {
+  outerlinewidth = 1,%
+  roundcorner = 10pt,%
+  leftmargin = 10,%
+  rightmargin = 15 ,%
+  innertopmargin = \topskip,%
+  splittopskip = \topskip,%
+  backgroundcolor = defback,
+  outerlinecolor  = bor,
+  fontcolor = txt
+}
+
+\newcommand{\pdef}{ \begin{mdframed}[style=definicja] }
+\newcommand{\kdef}{\end{mdframed}}
+
+%==== GRAPHY I TAKIE TAM ====%
+
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+% skrócone polecenie do środowiska rysującego?
+\newcommand{\pgraf}{\begin{center}\begin{tikzpicture}}
+\newcommand{\kgraf}{\end{tikzpicture}\end{center}}
+
+\newcommand{\paxis}[1]{\begin{axis}[axis y line = middle, axis x line = middle, enlarge y limits = true, enlarge x limits = true, #1]} % tworzy graf z osiami na środku, w dodatkowym argumencie oddzielone przecinkami można zdefiniować inne opcje, jak np dziedzinę (domain=początek:koniec)
+\newcommand{\kaxis}{\end{axis}} % kończy graf
+
+
+\RequirePackage{graphicx}
+
+\graphicspath{ {./} } % obrazy będą wczytywane jako ścieżki od aktualnego folderu c:
+
+\RequirePackage{array} % w sumie nie wiem po co mi była, ale lepiej mieć tak na wszelki wypadek
+
+% \makecell[l] {tekst} - pozwala zrobić komórkę wyjustowaną do lewej?
+% pozwala robić na siłę entery w nodes w tikz
+\RequirePackage{makecell} 
+
+%==== JĘZYKI PROGAMOWANIA ====%
+
+\RequirePackage{listings}
+%* \begin{lstlisting} zeby zaczac
+
+% kolory z githuba
+\definecolor{gitred}{HTML}{FA7970}
+\definecolor{gityellow}{HTML}{FAA356}
+\definecolor{gitgreen}{HTML}{7CE38B}
+\definecolor{gitlightblue}{HTML}{77BDFD}
+\definecolor{gitblue}{HTML}{77BDFB}
+\definecolor{gitpurple}{HTML}{CEA5FB}
+\definecolor{git25gray}{HTML}{89929B}
+\definecolor{git75gray}{HTML}{21262D}
+\definecolor{git90gray}{HTML}{161B22}
+
+
+%* zasady dodawania nowych języków w latexu to strona 44 dokumentacji listings
+% podstawowe zasady racketa
+\lstdefinelanguage{racket}{
+  keywords=[1]{define, let, struct},
+  morekeywords=[2]{modulo, floor, quotient},
+  morekeywords=[3]{and, or, not},
+  morekeywords=[4]{if, cond},
+  morecomment=[l]{;}
+}
+\lstdefinelanguage{juleczka}
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},
+      sensitive=true,
+      alsoother={$},
+      morecomment=[l]\#,
+      morecomment=[n]{\#=}{=\#},
+      morestring=[s]{"}{"},
+      morestring=[m]{'}{'},
+} [keywords,comments,strings]
+% kolorowanie składni dla racketa
+\lstdefinestyle{IIcolors} {
+  keywordstyle=[1]{\color{gitred}},
+  keywordstyle=[2]{\color{gityellow}},
+  keywordstyle=[3]{\color{gitgreen}},
+  keywordstyle=[4]{\color{gitpurple}},
+  commentstyle=\color{git25gray},
+  showtabs=true,
+  keepspaces=true,
+  numbers=left,
+  numberstyle=\tiny\ttfamily\color{git25gray},
+  breaklines=true,
+  backgroundcolor=\color{git75gray},
+  literate={[}{{{\color{gitlightblue}[}}}1 {]}{{{\color{gitlightblue}]}}}1 {+}{{{\color{gitblue}+}}}1 {-}{{{\color{gitblue}-}}}1 {*}{{{\color{gitblue}*}}}1 {/}{{{\color{gitblue}/}}}1 {=}{{{\color{gitblue}=}}}1 {>}{{{\color{gitblue}>}}}1 {<}{{{\color{gitblue}<}}}1,
+}
+\lstset{style=IIcolors}
+
+%==== GŁUPOTY ====%
+
+\RequirePackage{tikzducks}
+
+\definecolor{ducky-yellow}{HTML}{f2ca63}
+\newcommand{\kdowod}{\begin{flushright}\emph{\scriptsize\color{def}i śmiga}\\ \begin{tikzpicture}\duck[body=ducky-yellow, bill=title-color,scale=0.36, bowtie, devil=title-color];\end{tikzpicture}\end{flushright}}
+
+\RequirePackage{marvosym} % śmieszne znaczki
+\RequirePackage{phaistos} % paczuszka pozwalająca pisać hieroglify
+
+\newcommand{\kawa}{\text{\color{def}\large\Coffeecup}}
+\newcommand{\nietoperz}{\text{\color{acc}\large\Bat}}
+
+\newcommand{\kotek}{\text{\PHcat}}
+\newcommand{\baranek}{\text{\PHram}}
+\newcommand{\kwiatuszek}{\text{\PHrosette}}
+
+
+
+\justifying
+
+\endinput

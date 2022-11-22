@@ -1,0 +1,23 @@
+if true then 4 else 5 # int=4
+if false then 1 else 3.5 # błąd bo if może zwracać 2 różne typy
+4.75 + 2.34 # błąd bo + jest dla intów
+false || "ab">"cd" # boo = false
+if true then ();; unit=()
+f false then () else 4;;if zwraca różne typy
+let x = 2 in x^"aa";;bo nie ma konkanetonowa inta i stringa
+let y = "abc" in y^y;; string="abcabc"
+utop # (fun x -> x.[1]) "abcdef";; char='b'
+(fun x -> x) true;; bool=true
+let x = [1;2] in x@x;; int list = [1; 2; 1; 2], @ to append
+let rec f f = f+f in f 42;; int = 84
+[1,true];; : (int * bool) list = [(1, true)]
+
+
+zjebany ocaml ma useless ifa bez elsa po co to gówno
+utop # if false then ();;
+- : unit = ()
+
+utop # if true then 17;;
+Error: This expression has type int but an expression was expected of type 
+       unit because it is in the result of a conditional with no else branch
+

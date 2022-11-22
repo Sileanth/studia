@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/grep/META"
+  "_build/install/default/lib/grep/dune-package"
+  "_build/install/default/lib/grep/opam"
+]
+bin: [
+  "_build/install/default/bin/grep"
+]
