@@ -34,10 +34,10 @@ Przyjmijmy że w turniej gra n drużyn. Wtedy każda drużyna rozegra w trakcie 
 Przynajmniej jedna drużyna rozegrała wszystkie mecze. Wtedy zagrała ona mecz z każdą inna drużyną. Czyli każda drużyna rozegrała co najmniej jeden mecz. Czyli mamy $n-1$ szufladek możliwych liczby gier: $\{1, 2, \ldots  ,(n-1)\}$. Oraz n kulek(liczba drużyn), wtedy z zasady szufladkowej przynajmniej 2 drużyny mają taką samą liczbę meczy.
 
 \subsubsection*{2'}
-Zadna drużyna nie rozegrała $n-1$ meczy. Wtedy tak samo mamy $n-1$ szufladek: $\{0,1, \ldots ,(n-2)\}$ Oraz n kulek. Czyli przynajmniej 2 drużyny rozegrały taką samą liczbę meczy.
+Żadna drużyna nie rozegrała $n-1$ meczy. Wtedy tak samo mamy $n-1$ szufladek: $\{0,1, \ldots ,(n-2)\}$ Oraz n kulek. Czyli przynajmniej 2 drużyny rozegrały taką samą liczbę meczy.
 
 \subsection*{b) }
-Półączmy środki boków odcinkami, podzieli nam to trójkąt na 3 mniejsze trójkąty równoboczne, o bokach długości $\frac{1}{2}$. Podział ten można zobaczyć na rysunku poniżej:
+Połączmy środki boków odcinkami, podzieli nam to trójkąt na 3 mniejsze trójkąty równoboczne, o bokach długości $\frac{1}{2}$. Podział ten można zobaczyć na rysunku poniżej:
 \begin{center}
 \begin{tikzpicture}
     \coordinate (A) at (-1, 0);
@@ -65,10 +65,10 @@ możliwych sum. Zaś wszystkich podzbiorów $S$ jest $2^{10} = 1024$ Czyli z zas
 Liczba możliwych rozstawień figur szachowych na szachownicy:
 \[ {64 \choose 2} {62 \choose 2} {60 \choose 2} {58 \choose 1} {57 \choose 1} {56 \choose 8} {48 \choose 8} {40 \choose 2} {38 \choose 2} {36 \choose 2} {34 \choose 1} {33 \choose 1}\]
 
-Gdzie najpierw z wszystkich pól wybieramy białe gońce, potem z postałych pól czarne gońce, dalej białe wieże, białego króla, białego hetmana, białe pionki, czarne pionki, czarne wieże, białe skoczki, czarne skoczki, czarnego króla, czarnego hetmana.
+Gdzie najpierw z wszystkich pól wybieramy białe gońce, potem z pozostałych pól czarne gońce, dalej białe wieże, białego króla, białego hetmana, białe pionki, czarne pionki, czarne wieże, białe skoczki, czarne skoczki, czarnego króla, czarnego hetmana.
 
 \subsection*{b)}
-Teraz zostało dodane ograniczenie że obaj graczę muszą mieć gońce na polach różnego koloru. Skorzystamy z poprzedniego wyniku tylko zmienimy wyrazy odpawiadające gońcom.
+Teraz zostało dodane ograniczenie że obaj gracze muszą mieć gońce na polach różnego koloru. Skorzystamy z poprzedniego wyniku tylko zmienimy wyrazy odpawiadające gońcom.
 Najpierw wybieramy gońce białego ${32 \choose 1}$ możliwości czarnopolowego gońca, oraz
 ${32 \choose 1}$ białopolowego gońca. Z kolei czarny gracz ma już mniej możliwości:
 ${31 \choose 1}$ możliwości czarnopolowego gońca, oraz ${31 \choose 1}$  białopolowego gońca. Po podstawieniu tych liczb za 2 pierwsze wyrazy wzoru z podpunktu a wychodzi:
@@ -78,7 +78,7 @@ ${31 \choose 1}$ możliwości czarnopolowego gońca, oraz ${31 \choose 1}$  bia�
 \subsection*{Zadanie 9}
 \subsection*{a)}
 \[ 10 \sum^5_{i=2} ({5 \choose i}  {9 \choose 5-i} (5-i)!)\]
-Po pierwsze 10 bierze się stad że musimy rozpatrzeć wszystkie możliwości dla cyfry która występuję więcej razy. Następnie rozpatrujemy wszystkie możliwości ile ta cyfra występuje w numerze, co najmniej 2 i co najwyżej 5. Dla każego tego przypadku musimy rozważyć które z 5 pól będą zajmowane przez tą cyfrę: $5 \choose i$. Następnie musimy rozważyć które z pozostałych cyfr pojawią się w numerze, i żadna nie może się powtórzyć, Stąd wychodzi ${9 \choose 5-i} $. Następnie trzeba ustalić w jakiej kolejności są ustawione na wolnych polach numeru, stąd $(5-i)!$.
+Po pierwsze 10 bierze się stad że musimy rozpatrzeć wszystkie możliwości dla cyfry która występuję więcej razy. Następnie rozpatrujemy wszystkie możliwości ile ta cyfra występuje w numerze, co najmniej 2 i co najwyżej 5. Dla każdego tego przypadku musimy rozważyć które z 5 pól będą zajmowane przez tą cyfrę: $5 \choose i$. Następnie musimy rozważyć które z pozostałych cyfr pojawią się w numerze, i żadna nie może się powtórzyć, Stąd wychodzi ${9 \choose 5-i} $. Następnie trzeba ustalić w jakiej kolejności są ustawione na wolnych polach numeru, stąd $(5-i)!$.
 
 \subsection*{b)}
 Policzmy najpierw liczbę wszystkich możliwych 5 cyfrowych numerów: \[10^5\] Teraz wystarczy policzyć te numery w których nie powtarza się żadna cyfra:
@@ -135,7 +135,7 @@ Przykład dla $n = 5, m = 7$ jest na rysunku.
 
 \end{tikzpicture}
 \end{center}
-Naszymi szufladkami będą grupy pól o tym samym numerze, jest ich dokładnie m. Zaś naszymi kulkami będą wieże, jest ich $m(k-1) + 1$. Czyli z zasady szufladkowej w przynajmniej jednej szufladce jest k kulek. Czyli wieże odpawiadające kulkom z tej szufladki się nie szachują.
+Naszymi szufladkami będą grupy pól o tym samym numerze, jest ich dokładnie m. Zaś naszymi kulkami będą wieże, jest ich $m(k-1) + 1$. Czyli z zasady szufladkowej w przynajmniej jednej szufladce jest k kulek. Czyli wieże odpowiadające kulkom z tej szufladki się nie szachują.
 \end{document}
 
 
