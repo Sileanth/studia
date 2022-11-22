@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\title{Lista 4}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+
+\section*{Zadanie 3}
+\subsection*{Treść}
+Pokaż, że iloczyn dowolnych k kolejnych liczb naturalnych dzieli się przez k!.
+\subsection*{Rozwiązanie}
+Iloczyn w zadaniu możemy zapisać dla pewnego $n \in \mathbb{N}$ jako:
+\[\prod^{k-1}_{i = 0} (n-i)\]
+Możemy domnożyć 1 zapisane jako $\frac{(n-k)!}{(n-k)!}$
+
+\[\frac{(n-k)!}{(n-k)!} \prod^{k-1}_{i = 0} (n-i)  = \frac{1}{(n-k)!} \prod^{n}_{i=1} i  = \frac{(n)!}{(n-k)!}\]
+
+Żeby ta liczba była podzielna przez $k!$ to iloraz tej liczby oraz k! musi być naturalny
+\[\frac{(n)!}{(n-k)! k!} = {n\choose k} \in \mathbb{N} \]
+
+\section*{Zadanie 4}
+\subsection*{a)}
+Przyjmijmy że w turniej gra n drużyn. Wtedy każda drużyna rozegra w trakcie całego turnieju $n-1$ meczy. Rozpatrzmy 2 przypadki:
+\subsubsection*{1'}
+Przynajmniej jedna drużyna rozegrała wszystkie mecze. Wtedy zagrała ona mecz z każdą inna drużyną. Czyli każda drużyna rozegrała co najmniej jeden mecz. Czyli mamy $n-1$ szufladek możliwych liczby gier: $\{1, 2, \ldots  ,(n-1)\}$. Oraz n kulek(liczba drużyn), wtedy z zasady szufladkowej przynajmniej 2 drużyny mają taką samą liczbę meczy.
+
+\subsubsection*{2'}
+Zadna drużyna nie rozegrała $n-1$ meczy. Wtedy tak samo mamy $n-1$ szufladek: $\{0,1, \ldots ,(n-2)\}$ Oraz n kulek. Czyli przynajmniej 2 drużyny rozegrały taką samą liczbę meczy.
+
+\subsection*{b) }
+Półączmy środki boków odcinkami, podzieli nam to trójkąt na 3 mniejsze trójkąty równoboczne, o bokach długości $\frac{1}{2}$. Podział ten można zobaczyć na rysunku poniżej:
+\begin{center}
+\begin{tikzpicture}
+    \coordinate (A) at (-1, 0);
+    \coordinate (B) at (1, 0);
+    \coordinate (C) at (0, 1.70);
+    \coordinate (D) at (-0.5, 0.85);
+    \coordinate (E) at (0.5, 0.85);
+    \coordinate (F) at (0, 0);
+    \draw[thin] (A)--(B)--(C)--cycle;
+    \draw[thin] (D)--(E);
+    \draw[thin] (E)--(F)--(D);
+
+\end{tikzpicture}
+\end{center}
+Naszymi szufladkami będą trójkąty (4), zaś kulkami punkty (5), wtedy z zasady szufladkowej w przynajmniej jednym trójkącie znajdują się 2 punkty. A maksymalna odległość między dwoma punktami w trójkącie to maksimum z długości boków. Jako że każdy trójkąt jest równoboczny o boku równym 0.5, to maksimum wynosi $\frac{1}{2}$. Czyli  te dwa punkty oddalone są o co najwyżej $\frac{1}{2}$.
+\subsection*{c)}
+Przyjmijmy że ten wielościan ma n ścian. Wtedy każda ściana ma przynajmniej 3 krawędzie i maksymalnie $n-1$ krawędzi, bo każda krawędź jest dzielona z dokładnie jedną ścianą. Więc mamy $n-1-3+1$ szufladek (możliwych liczb krawędzi), oraz n kulek (ścian). Czyli z zasady szufladkowej przynajmniej 2 ściany mają taką samą liczbę krawędzi.
+
+\section*{Zadanie 6}
+Minimalna suma maksymalnie 10 liczb ze zbioru $S$ wynosi co najmniej 0, zaś maksymalna co najwyżej 990. Daję to 991
+możliwych sum. Zaś wszystkich podzbiorów $S$ jest $2^{10} = 1024$ Czyli z zasady szufladkowej wynika że przynajmniej 2 podzbiory mają taką samą sumę. 
+
+\section*{Zadanie 10}
+\subsection*{a)}
+Liczba możliwych rozstawień figur szachowych na szachownicy:
+\[ {64 \choose 2} {62 \choose 2} {60 \choose 2} {58 \choose 1} {57 \choose 1} {56 \choose 8} {48 \choose 8} {40 \choose 2} {38 \choose 2} {36 \choose 2} {34 \choose 1} {33 \choose 1}\]
+
+Gdzie najpierw z wszystkich pól wybieramy białe gońce, potem z postałych pól czarne gońce, dalej białe wieże, białego króla, białego hetmana, białe pionki, czarne pionki, czarne wieże, białe skoczki, czarne skoczki, czarnego króla, czarnego hetmana.
+
+\subsection*{b)}
+Teraz zostało dodane ograniczenie że obaj graczę muszą mieć gońce na polach różnego koloru. Skorzystamy z poprzedniego wyniku tylko zmienimy wyrazy odpawiadające gońcom.
+Najpierw wybieramy gońce białego ${32 \choose 1}$ możliwości czarnopolowego gońca, oraz
+${32 \choose 1}$ białopolowego gońca. Z kolei czarny gracz ma już mniej możliwości:
+${31 \choose 1}$ możliwości czarnopolowego gońca, oraz ${31 \choose 1}$  białopolowego gońca. Po podstawieniu tych liczb za 2 pierwsze wyrazy wzoru z podpunktu a wychodzi:
+
+\[ {32 \choose 1}{32 \choose 1} {31 \choose 1} {31 \choose 1} {60 \choose 2} {58 \choose 1} {57 \choose 1} {56 \choose 8} {48 \choose 8} {40 \choose 2} {38 \choose 2} {36 \choose 2} {34 \choose 1} {33 \choose 1}\]
+
+\subsection*{Zadanie 9}
+\subsection*{a)}
+\[ 10 \sum^5_{i=2} ({5 \choose i}  {9 \choose 5-i} (5-i)!)\]
+Po pierwsze 10 bierze się stad że musimy rozpatrzeć wszystkie możliwości dla cyfry która występuję więcej razy. Następnie rozpatrujemy wszystkie możliwości ile ta cyfra występuje w numerze, co najmniej 2 i co najwyżej 5. Dla każego tego przypadku musimy rozważyć które z 5 pól będą zajmowane przez tą cyfrę: $5 \choose i$. Następnie musimy rozważyć które z pozostałych cyfr pojawią się w numerze, i żadna nie może się powtórzyć, Stąd wychodzi ${9 \choose 5-i} $. Następnie trzeba ustalić w jakiej kolejności są ustawione na wolnych polach numeru, stąd $(5-i)!$.
+
+\subsection*{b)}
+Policzmy najpierw liczbę wszystkich możliwych 5 cyfrowych numerów: \[10^5\] Teraz wystarczy policzyć te numery w których nie powtarza się żadna cyfra:
+\[{10 \choose 5} 5!\]
+I po odjęciu otrzymamy te numery w których powtarza się co najmniej jedna cyfra
+\[ 10^5 - {10 \choose 5} 5!\]
+
+
+\newpage
+\section*{Zadanie 8}
+
+Liczba położonych wież musi być mniejsza równa od liczby pól na szachownicy, czyli 
+\[m(k-1) + 1 \leq n m\]
+Stąd wynika że $k < n \leq m$. Ponumerujmy teraz pola numerami od 0 do m, tak by w żadnym wierszu ani kolumnie nie powtarzały się numery. Można to zrobić, według wzoru $f(x,y) = (x+y) \% m$. Jest to możliwe gdyż $n \leq m$. Takie ponumerowanie gwarantuję że wieże stojące na polach o tym samym numerze się nie szachują.
+Przykład dla $n = 5, m = 7$ jest na rysunku.
+\begin{center}
+\begin{tikzpicture}
+\draw[step=1cm,gray] (-2,-2) grid (5,3);
+\node at (-1.5,2.5) {0};
+\node at (-0.5,2.5) {1};
+\node at (0.5,2.5) {2};
+\node at (1.5,2.5) {3};
+\node at (2.5,2.5) {4};
+\node at (3.5,2.5) {5};
+\node at (4.5,2.5) {6};
+\node at (-1.5,1.5) {1};
+\node at (-0.5,1.5) {2};
+\node at (0.5,1.5) {3};
+\node at (1.5,1.5) {4};
+\node at (2.5,1.5) {5};
+\node at (3.5,1.5) {6};
+\node at (4.5,1.5) {0};
+\node at (-1.5,0.5) {2};
+\node at (-0.5,0.5) {3};
+\node at (0.5,0.5) {4};
+\node at (1.5,0.5) {5};
+\node at (2.5,0.5) {6};
+\node at (3.5,0.5) {0};
+\node at (4.5,0.5) {1};
+\node at (-1.5,-0.5) {3};
+\node at (-0.5,-0.5) {4};
+\node at (0.5,-0.5) {5};
+\node at (1.5,-0.5) {6};
+\node at (2.5,-0.5) {0};
+\node at (3.5,-0.5) {1};
+\node at (4.5,-0.5) {2};
+\node at (-1.5,-1.5) {4};
+\node at (-0.5,-1.5) {5};
+\node at (0.5,-1.5) {6};
+\node at (1.5,-1.5) {0};
+\node at (2.5,-1.5) {1};
+\node at (3.5,-1.5) {2};
+\node at (4.5,-1.5) {3};
+
+\end{tikzpicture}
+\end{center}
+Naszymi szufladkami będą grupy pól o tym samym numerze, jest ich dokładnie m. Zaś naszymi kulkami będą wieże, jest ich $m(k-1) + 1$. Czyli z zasady szufladkowej w przynajmniej jednej szufladce jest k kulek. Czyli wieże odpawiadające kulkom z tej szufladki się nie szachują.
+\end{document}
+
+
+
