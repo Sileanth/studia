@@ -63,8 +63,8 @@ let take_while (p : 'a -> bool) (xs : 'a lazy_list) =
 let rec for_all p xs =
   match xs with
   | Nil -> true
-  | Cons (x, xs) ->
-    p x && for_all p (force xs)
+  | Cons (x, _) ->
+    p x && for_all p (tail xs)
 
 
 
@@ -73,13 +73,12 @@ let sing x =
 let primes =
   let is_prime n source =
     source
-    |> take_while (fun p -> p * p <= n)
     |> for_all (fun p -> n mod p <> 0) in
   let rec worker n curr =
     (fun prime_stream -> 
       if is_prime n curr
-        then Cons (n, fix (worker (n+1) (Cons (n, ref (Lazy (fun () -> curr) )))))
+        then Cons (n, fix (worker (n+1) (Cons (n, ref (Ready curr)))))
         else force (fix (worker (n+1) curr))
     )
       in
-  (Cons (2, fix (worker 3 (sing 2))))
+  force (fix (worker 2 Nil))
