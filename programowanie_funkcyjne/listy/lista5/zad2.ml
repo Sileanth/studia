@@ -17,8 +17,8 @@ type 'a lambda_fix = Fix of ('a lambda_fix -> 'a)
   let unfix = function
   | Fix f -> f
 
-  let y t = let p (Fix f) x = t (f (Fix f)) x in 
-    p (Fix p)
+let y t x = let p (Fix f) = t (f (Fix f)) in 
+  p (Fix p) x
 
 let fix f = (fun x a -> f (unfix x x) a) (Fix (fun x a -> f (unfix x x) a));;
 
