@@ -19,22 +19,67 @@ let fix (f : 'a mylazy -> 'a) : 'a mylazy =
 
 
 type 'a lazy_list =
+  | Nil
   | Cons of 'a * 'a lazy_list mylazy 
 
 
 let head (ls : 'a lazy_list) =
   match ls with
+  | Nil -> failwith "pustoooo"
   | Cons (l, ls) -> l
 
 let tail (ls : 'a lazy_list) =
   match ls with
+  | Nil -> failwith "puuuuusto"
   | Cons (l, ls) -> force ls
 
 
 let stream_of_ones = fix (fun stream_of_ones -> Cons(1, stream_of_ones))
 
 
-let nat_stream =
+let nat_from n =
   let rec succ x =
     fun nat_stream -> Cons (x, fix (succ (x+1))) in
-  fix (succ 1)
+   force (fix (succ n))
+
+let filter (p : 'a -> bool) (xs : 'a lazy_list) =
+  let rec filt (source : 'a lazy_list) =
+    (fun filter_stream -> 
+      match source with
+      | Nil -> Nil
+      | Cons (l, ls) ->if p l then Cons (l, fix (filt (tail source)) ) else force (fix (filt (tail source))))
+    in (fix (filt xs))
+
+
+let take_while (p : 'a -> bool) (xs : 'a lazy_list) =
+  let rec take (source : 'a lazy_list) =
+    (fun take_stream -> 
+      match source with
+      | Nil -> Nil
+      | Cons (l, ls) ->if p l then Cons (l, fix (take (tail source)) ) else Nil)
+    in force (fix (take xs))
+
+
+let rec for_all p xs =
+  match xs with
+  | Nil -> true
+  | Cons (x, xs) ->
+    p x && for_all p (force xs)
+
+
+
+let sing x =
+  Cons (x, ref (Ready Nil))
+let primes =
+  let is_prime n source =
+    source
+    |> take_while (fun p -> p * p <= n)
+    |> for_all (fun p -> n mod p <> 0) in
+  let rec worker n curr =
+    (fun prime_stream -> 
+      if is_prime n curr
+        then Cons (n, fix (worker (n+1) (Cons (n, ref (Lazy (fun () -> curr) )))))
+        else force (fix (worker (n+1) curr))
+    )
+      in
+  (Cons (2, fix (worker 3 (sing 2))))
