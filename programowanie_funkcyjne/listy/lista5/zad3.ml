@@ -11,9 +11,6 @@ let right (Tree (l,v,r)) =
 let value (Tree (l,v,r)) =
   v
 
-
-
-
 let gen_left_range ((a, b), (c, d))  =
   ((a, b), (a+c, b+d))
 

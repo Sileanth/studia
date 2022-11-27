@@ -13,15 +13,17 @@ let next (prev : 'a dllist) =
 
 let elem (prev : 'a dllist) = 
   match prev with
-  | lazy {prev; elem; next} -> Lazy.force elem
+  | lazy {prev; elem; next} -> elem
 
 
-let of_list (xs : 'a list) =
-  let rec rek first prev xs =
-    match xs with 
-    | [] -> first 
-    | x :: xs -> let rec node = lazy ({prev = prev; elem = x; next =  (rek first node xs) }) in
-      lazy (Lazy.force node )
-  in let rec first = rek first first xs  
-in first
-    
+
+
+
+let rec left v p =
+  let rec g = lazy {prev = left (v-1) g ; elem = v; next = p} in g
+
+let rec right v p=
+  let rec g = lazy {prev = p; elem = v; next = right (v+1) g} in g
+
+let rec integers = lazy {prev = left (-1) integers; elem = 0; next = right 1 integers}
+  

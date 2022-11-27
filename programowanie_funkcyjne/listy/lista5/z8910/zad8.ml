@@ -8,7 +8,7 @@ type _ fin_type =
 | Bool : bool fin_type
 | Pair : 'a fin_type * 'b fin_type -> ('a * 'b) fin_type
 | Empty : empty fin_type
-| Eith :'a fin_type * 'b fin_type -> (('a, 'b) Either.t) fin_type
+| Eith :'a fin_type * 'b fin_type -> (('a , 'b) Either.t) fin_type
 | Func : 'a fin_type * 'b fin_type -> ('a -> 'b) fin_type
 
 
