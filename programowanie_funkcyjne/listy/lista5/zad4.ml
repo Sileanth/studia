@@ -7,8 +7,7 @@ let prev (prev : 'a dllist) =
 | lazy {prev; elem; next} -> prev
 
 
-let next (prev : 'a dllist) = 
-  match prev with
+let next = function
   | lazy {prev; elem; next} -> next
 
 let elem (prev : 'a dllist) = 
@@ -17,13 +16,29 @@ let elem (prev : 'a dllist) =
 
 
 
+let rec gen (prev : 'a dllist) (first : 'a dllist) xs =
+  match xs with
+  | [] -> (prev, first)
+  | x :: xs -> 
+    let rec rob () = let (a, b) = gen (rob () |> fst) first xs in
+     lazy {prev = rob () |> fst; elem = x; next = a},b in
+    rob ()
+
+let from_lsit xs =
+  match xs with
+  | [] -> failwith "puuuuusto"
+  | x :: xs -> 
+    let rec first () = 
+      let (a,b) = gen (first ()) (first ()) xs in
+      lazy {prev = a; elem = x; next = b} in
+      first ()
 
 
-let rec left v p =
-  let rec g = lazy {prev = left (v-1) g ; elem = v; next = p} in g
+let rec left_int v p =
+  let rec g = lazy {prev = left_int (v-1) g ; elem = v; next = p} in g
 
-let rec right v p=
-  let rec g = lazy {prev = p; elem = v; next = right (v+1) g} in g
+let rec right_int v p=
+  let rec g = lazy {prev = p; elem = v; next = right_int (v+1) g} in g
 
-let rec integers = lazy {prev = left (-1) integers; elem = 0; next = right 1 integers}
+let rec integers = lazy {prev = left_int (-1) integers; elem = 0; next = right_int 1 integers}
   
