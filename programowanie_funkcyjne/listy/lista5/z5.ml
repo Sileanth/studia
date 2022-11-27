@@ -15,5 +15,12 @@ let elem (prev : 'a dllist) =
   | lazy {prev; elem; next} -> elem
 
 
-
+  let rec left_int v p =
+    let rec g = lazy {prev = left_int (v-1) g ; elem = v; next = p} in g
+  
+  let rec right_int v p=
+    let rec g = lazy {prev = p; elem = v; next = right_int (v+1) g} in g
+  
+  let rec integers = lazy {prev = left_int (-1) integers; elem = 0; next = right_int 1 integers}
+    
 
