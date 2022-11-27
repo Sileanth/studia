@@ -24,13 +24,11 @@ let rec gen (prev : 'a dllist) xs first =
   match xs with
   | [] -> first, prev
   | x :: xs -> 
-    let last = ref (sing x) in
     let rec z = lazy begin
-        let (a,b) = gen z xs first in
-       last := b; {prev = prev; elem = x; next = a} 
+        let (a,b) = gen (fst z) xs first in
+        (lazy {prev = prev; elem = x; next = a}), b
     end in
-    let k = (Lazy.force z) in
-    lazy k, !last 
+    Lazy.force z
 
 
 
@@ -38,16 +36,8 @@ let rec gen (prev : 'a dllist) xs first =
 let rec cycle xs =
   match xs with
   | [] -> failwith "puuusto"
-  | x :: xs -> 
+  | x :: xs -> let last = ref (sing x) in
     let rec first = lazy begin
       let (a,b) = gen first xs first in
-      {prev = b; elem = x; next = a}
+      last := b; {prev = b; elem = x; next = a}
     end in first
-
-let x = (cycle [1 ; 2 ; 3;]);;
-
-if (x == next (prev x)) && (x == prev (next x)) then
-  print_endline "śmiga"
-else print_endline "nie śmiga"
-
-
