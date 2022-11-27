@@ -48,7 +48,7 @@ let filter (p : 'a -> bool) (xs : 'a lazy_list) =
       match source with
       | Nil -> Nil
       | Cons (l, ls) ->if p l then Cons (l, fix (filt (tail source)) ) else force (fix (filt (tail source))))
-    in (fix (filt xs))
+    in force (fix (filt xs))
 
 
 let take_while (p : 'a -> bool) (xs : 'a lazy_list) =
