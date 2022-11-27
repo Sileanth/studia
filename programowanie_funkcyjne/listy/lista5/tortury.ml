@@ -24,8 +24,8 @@ let rec gen (prev : 'a dllist) xs first =
   match xs with
   | [] -> first, prev
   | x :: xs -> 
-    let rec z = lazy begin
-        let (a,b) = gen (fst z) xs first in
+    let rec (z,s) = lazy begin
+        let (a,b) = gen z xs first in
         (lazy {prev = prev; elem = x; next = a}), b
     end in
     Lazy.force z
@@ -36,8 +36,8 @@ let rec gen (prev : 'a dllist) xs first =
 let rec cycle xs =
   match xs with
   | [] -> failwith "puuusto"
-  | x :: xs -> let last = ref (sing x) in
+  | x :: xs -> 
     let rec first = lazy begin
       let (a,b) = gen first xs first in
-      last := b; {prev = b; elem = x; next = a}
+      {prev = b; elem = x; next = a}
     end in first

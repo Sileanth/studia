@@ -29,7 +29,7 @@ let rec gen (prev : 'a dllist) xs first =
         let (a,b) = gen z xs first in
        last := b; {prev = prev; elem = x; next = a} 
     end in
-    let k = (Lazy.force z) in
+    let k = (Lazy.force z) in (* forcowanie by wykonało się przypisanie wartości last*)
     lazy k, !last 
 
 
