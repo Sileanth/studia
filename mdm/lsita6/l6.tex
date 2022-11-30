@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Lista 6}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+
+\section*{Zadanie 1}
+
+W lewej stronie rozważamy wszystkie możliwe rozmiary delegacji $\sum^n_{k=1}$. Następnie dla danego rozmiaru rozważamy wszystkie możliwe składy osobowe o tym rozmiarze ${n \choose k} $ oraz ich lidera $k$. 
+
+Z kolei po prawej stronie, rozważamy wszystkich możliwych liderów $k$. A następnie rozważamy dla każdego pozostałego pracownika czy będzie w delegacji lub nie $2^{n-1}$.
+
+\section*{Zadanie 2}
+Rozważmy 2 rozłączne przypadki i je zsumujmy. 
+
+\subsection*{Ciągi kończące się zerem:}
+W tym przypadku żeby były jakiekolwiek ciągi spełniające warunki, to 0 musi być co najmniej tyle co 1 $l \geq k$.
+Żeby nie było dwóch jedynek pod rząd, to możemy skleić każdą 1 z 0 po prawej stronie. Wtedy będziemy mieli k sklejonych $1 0$ oraz $l-k$ pojedynczych $0$. Czyli możemy teraz patrzeć że mamy ciąg długości $(l-k) + k$. I teraz wystarczy rozważyć które miejsca będą zajęte przez zera, a które przez sklejenia. Wychodzi więc $ {l \choose l -k}$. Dolna część wyrazu newtona może wyjść ujemna gdy $l < k$. I wtedy przyjmuję że wartość symbolu newtona jest równa 0.
+
+\subsection*{Ciągi kończące się jedynką:}
+    Mamy więc ustaloną ostatnią pozycję ciągu. I przedostatnia pozycja ciągu musi być 0. Czyli ten przypadek można sprowadzić do poprzedniego przypadku z k zmniejszonym o 1. Wychodzi więc ${l \choose l-k+1}$.
+
+\subsection*{Podsumowanie:}
+Oba przypadki są rozłączne więc wystarczy je dodać:
+$ {l \choose l -k} + {l \choose l-k+1}$.
+
+
+\section*{Zadanie 3}
+Będziemy przede wszystkim korzystać z tego że na przedziale $[1, n]$ jest $\lfloor \frac{n}{a} \rfloor$ liczb podzielnych przez a. Przyjmijmy następujące oznaczenia że X, Y Z, V to odpowiednio liczby podzielne prze 2, 3, 7, 5 na przedziale $[1, n]$. Wtedy:
+ \[\lfloor \frac{n}{3} \rfloor = |Y|, \lfloor \frac{n}{2} \rfloor = |X|, \lfloor \frac{n}{7} \rfloor = |Z|, \lfloor \frac{n}{5} \rfloor = |V|\]
+
+Wtedy musimy policzyć:
+ \[ |(X \cup Y) \setminus (((Z \cup V) \cap X ) \cup ((Z \cup V) \cap Y )) |\]
+Z zasady włączeń i wyłączeń wychodzi:
+
+
+\[ 
+    \begin{aligned}
+    (\lfloor \frac{n}{3} \rfloor + \lfloor \frac{n}{2} \rfloor - \lfloor \frac{n}{2*3} \rfloor )
+    -(
+     (\lfloor \frac{n}{2 * 5} \rfloor + \lfloor \frac{n}{2 * 7} \rfloor - \lfloor \frac{n}{2*5*7} \rfloor ) \\
+     + (\lfloor \frac{n}{3 * 5} \rfloor + \lfloor \frac{n}{3 * 7} \rfloor - \lfloor \frac{n}{3*5*7} \rfloor ) \\
+     - (\lfloor \frac{n}{2*5*7} \rfloor +  \lfloor \frac{n}{3*5*7} \rfloor - \lfloor \frac{n}{2*3*5*7} \rfloor)
+    )
+    \end{aligned}
+    \]
+
+\section*{Zadanie 4}
+
+Liczba wszystkich permutacji n-elementowych wynosi $n!$. Wystarczy odjąć od tego te permutacje w których przynajmniej jedna z k liczb pojawia się na swoim miejscu.
+
+\[ n! - | P_1 \cup P_2 \cup P_3 \dots P_k |\]
+
+Możemy skorzystać z zasady włączeń i wyłączeń by obliczyć co mamy odjąć. 
+
+\[ | P_1 \cup P_2 \cup P_3 \dots P_k | = \sum^k_{i=1} (-1)^{i+1} {k \choose i} (n-i)! \]
+
+W i-tym kroku rozpatrujemy te permutacje które mają przynajmniej i pozycji poprawnych dla zbioru k liczb. Czyli wybieramy wszystkie możliwe i liczby, stąd $ k \choose i$ oraz permutujemy resztę, stąd $(n-i)!$.
+
+\section*{Zadanie 6}
+Przyjmuję że w tym zadania rozróżniam każdy z przedmiotów.
+Oznaczmy przez $\Omega$ zbiór wszystkich rozłożeń przedmiotów. Jego moc wynosi $| \Omega | = 20^n$. 
+Teraz oznaczmy przez $S_i$ zbiór tych rozłożeń w których i-ta szafa jest pusta, moc takiego zbioru wynosi $| S_i | = (20-4)^n$ Bo nie możemy nic włożyć do 4 szuflad z i-tej szafy. Z kolei $(20 - 4i)^n$ to moc zbioru tych permutacji w których i konkretnych szaf jest pustych. Odpowiedzią na to zadanie jest wzór:
+\[ 20^n - |S_1 \cup S_2 \dots \cup S_5 | \]
+Możemy to policzyć z zasady włączeń i wyłączeń:
+\[ 20^n - \sum^5_{i=1} (-1)^(i+1) {5 \choose i} (20-4i)^n \]
+W i-tym kroku rozpatrujemy wszystkie rozłożenia w których co najmniej i szaf jest pustych.
+
+
+\section*{Zadanie 10}
+Wszystkich ustawień gdzie na przemian siedzą kobieta i mężczyzna jest $2 (n!)^2$, dwójka się bierze stąd że musimy ustalić która parzystość miejsc jest zajmowana przez którą płeć. $n!$ to liczba jak mogą sie ustawić mężczyźni, i kobiety.
+
+Teraz od tej liczby należy odjąć te ustawienia w których przynajmniej jedna para siedzi koło siebie. Można to policzyć z zasady włączeń i wyłączeń.
+
+Najpierw policzy wzór na te rozłożenia w których przynajmniej k par siedzi koło siebie.
+\[ P_k = 2 {n \choose k} k! (n-k)! ^2\]
+2 analogicznie co w wzorze na wszystkie kombinację. Potem wybieramy wszystkie pary które muszą siedzieć, stad ${n \choose k}$, potem wybieramy ich kolejność $k!$, a na koniec ustalamy kolejność pozostałych osób $(n-k)! ^2$.
+Czyli ostateczna odpowiedź to:
+\[ 2 (n!)^2 - \sum^n_{k=1} P_k \]
+
+\section*{Zadanie 9} 
+Policzmy najpierw liczbę wszystkich możliwych ustawień
+$(2n)!$. Teraz wystarczy odjąć wszystkie niepoprawne rozstawienia. Wyznaczmy wzór na rozstawienie w których przynajmniej k wrogów siedzi koło siebie:
+\[ {n \choose k} 2^k (2n - 2k + k)! \]
+Najpierw wybieramy te pary ${n \choose k}$ potem w każdej parze ustalamy która osoba jest pierwsza $2^k$, od tego momentu traktujemy taką parę jak jedną osobą. To teraz musimy policzyć wszystkie rozłożenia pozostałych osób $2n - 2k$ oraz naszych k par. Stąd wychodzi $(2n - 2k + k)!$.
+\newline
+Teraz wystarczy skorzystać z zasady włączeń i wyłączeń.
+\[ (2n)! - \sum^n_{k=1} (-i)^{i+1} {n \choose k} 2^k (2n - 2k + k)! \]
+\end{document}
+
+
+
