@@ -21,9 +21,10 @@ let lit sn =
 let (^^) (f :  ('c, 'a) format) (s :  ('a, 'b) format) (k : (string -> 'b))  = 
     f (s k)
 
-
+let ksprintf (z : ('a, 'b) format) (k : string -> 'b) : 'a =
+  z k ""
 let sprintf (z : ('a, string) format) =
-  z (fun s -> s) ""
+  ksprintf z (fun x -> x)
 
 let z =sprintf (lit "Ala ma " ^^ int ^^ lit " kot" ^^ str ^^ lit "." ^^ lit "abc" ^^ int) ;;
 
