@@ -36,4 +36,4 @@ let kprintf z k =
 let printf z =
   kprintf z () 
 
-let v = printf (Lit "abc" ^^ Int ^^ Lit "cda" ^^ String ) 12 "hd"
+let _ = printf (Int ^^ Lit " abc " ^^ Int ^^ Lit " cda " ^^ String ) 13 12 "hd"
