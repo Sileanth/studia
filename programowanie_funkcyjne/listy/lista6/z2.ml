@@ -7,15 +7,15 @@ type (_, _) format =
 let (^^) (i :  ('c, 'a) format) (o :  ('a, 'b) format) 
   = Cat (i, o)
 
-let rec robol : type a b. (a, b) format -> (string -> b) -> string -> a =
+let rec helper : type a b. (a, b) format -> (string -> b) -> string -> a =
   function 
-  | Lit (l) -> fun (k : string -> b) (s : string) -> k (s ^ l)
+  | Lit l -> fun (k : string -> b) (s : string) -> k (s ^ l)
   | Int -> (fun(k : string -> b) (s : string) -> (fun (i : int) -> k ( s ^ (string_of_int i) )))
   | String -> (fun (k : string -> b) (s : string) -> (fun (sn : string) -> k (s ^ sn)))
-  | Cat (i, o) -> fun (k : string -> b) (s : string) -> robol i (robol o k) s
+  | Cat (i, o) -> fun (k : string -> b) (s : string) -> helper i (helper o k) s
 
 let ksprintf z k =
-  robol z k ""
+  helper z k ""
 
 let sprintf z =
   ksprintf z (fun x -> x)
@@ -23,16 +23,17 @@ let sprintf z =
 let conc_func (f : 'a -> 'b) (s : 'b -> 'c) =
   fun x -> s (f x)
 
-let rec robcio : type a b. (a, b) format -> b -> a =
+let rec help2 : type a b. (a, b) format-> (unit -> b) -> (unit -> a) =
   function 
-  | Lit l -> fun (k : b) -> print_string l; k
-  | Int -> fun (k : b) (i : int) -> print_int i; k
-  | String -> fun (k : b) (s : string) -> print_string s; k
-  | Cat (i, o) ->  fun (k : b) -> robcio i (robcio o k) 
+  | Lit l -> fun  (k : unit -> b) () -> print_string l; k ()
+  | Int -> fun  (k : unit -> b) ()  (i : int) ->  print_int i; k ()
+  | String -> fun  (k : unit -> b) ()  (s : string) -> print_string s; k ()
+  | Cat (i, o) -> fun   (k : unit -> b) ()-> help2 i (help2 o k ) ()
 
-
+let kprintf z k =
+  help2 z (fun () -> k) () 
 
 let printf z =
-  robcio z  ()
+  kprintf z () 
 
-let v = printf (Lit "abc" ^^ Int ^^ Lit "cda" )
+let v = printf (Lit "abc" ^^ Int ^^ Lit "cda" ^^ String ) 12 "hd"
