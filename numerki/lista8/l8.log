@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.12)  9 DEC 2022 14:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.12)  9 DEC 2022 15:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -341,7 +341,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  100i,6n,104p,441b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/opt/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on l8.pdf (5 pages, 175551 bytes).
+Output written on l8.pdf (5 pages, 179007 bytes).
 PDF statistics:
  94 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
