@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.12)  9 DEC 2022 14:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.12)  9 DEC 2022 14:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -331,7 +331,12 @@ Overfull \hbox (120.4882pt too wide) detected at line 134
 \OML/cmm/m/it/10 P[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 xP[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 []P[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 []P[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 P[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 ^^@ []\OT1/cmr/m/n/10 ) + []\OML/cmm/m/it/10 P[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 P[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 c[]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 d[]P[]
  []
 
-[3] [4] [5] (./l8.aux) ) 
+[3] [4]
+Overfull \hbox (1.00763pt too wide) detected at line 195
+\OT1/cmr/m/n/10 0 = \OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 f \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]; q[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]\OMS/cmsy/m/n/10 i ^^@ h\OML/cmm/m/it/10 f \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 q[]; q[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 f \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 f \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 q[]; q[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 q[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]; q[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[]\OMS/cmsy/m/n/10 i
+ []
+
+[5] (./l8.aux) ) 
 Here is how much of TeX's memory you used:
  13344 strings out of 474971
  272790 string characters out of 5751677
@@ -341,7 +346,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  100i,6n,104p,441b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/opt/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></opt/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on l8.pdf (5 pages, 175363 bytes).
+Output written on l8.pdf (5 pages, 177181 bytes).
 PDF statistics:
  94 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
