@@ -26,7 +26,7 @@ runIOStreamTrans (ReadS f) = do
 runIOStreamTrans (WriteS o s) = do
     putChar o
     runIOStreamTrans s 
-
+--zadanie 3
 helper :: StreamTrans i o a -> [i] -> [o] -> ([o], a)
 helper (Return a) _ o = (o, a)
 helper (ReadS f) [] o = helper (f Nothing) [] o
@@ -34,3 +34,10 @@ helper (ReadS f) (x : xs) o = helper (f (Just x)) xs o
 helper (WriteS o s) xs o = helper s xs (s : o)
 listTrans :: StreamTrans i o a -> [i] -> ([o], a)
 listTrans (Return a) _ = ([], a)
+
+-- zadanie 4
+runCycle :: StreamTrans a a b - -> b
+runCycle (Return b) = b
+runCycle (WriteS _ (Return b))  = b
+runCycle (WriteS _ (WriteS o s)) = runCycle (WriteS o s)
+runCycle (WriteS o (ReadS f)) = runCycle (f o)
