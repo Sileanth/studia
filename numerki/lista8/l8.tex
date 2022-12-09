@@ -153,6 +153,33 @@ Wyciągając stałe przed nawias wychodzi
     2^{-(k-1)} 2^{-(l-1)} \int^a_b (1-x^2)^{-1/2} T_k(x)  T_l(x)  dx = 0 = \langle \overline{T}_k \overline{T}_l \rangle
 \]
 Czyli rzeczywiście nasz zgadnięty ciąg jest standardowym ciągiem wielomianów, dla tego przedziału i wagi.
+\subsection*{Zadanie 3}
+Jakim wzorem wyraża się n-ty wielomian optymalny dla funkcji $f$ w sensie normy
+\[
+  ||f||_2 := \sqrt{\int^1_{-1} 
+    (1-x^2)^{-1/2} f^2 (x) dx
+  }  
+\]
+Zauważmy że jest to taka sama norma jak w poprzednim zadaniu, więc skorzystajmy z wzoru na wykładzie dla ortogonalnego ciągu $\overline{T}_k$
+\[
+  w^*_n = \sum^n_{k=0} \frac{\langle f, P_k \rangle}{\langle P_k , P_k \rangle} P_k  
+\]
+Dowód:
+analogicznie do zadania 7 z poprzedniej listy
+Korzystając z zadania 5 z poprzedniej listy wystarczy pokazać że
+\[ 
+    \forall w \in \Pi_n \langle f - w^*_n , w \rangle = 0 
+\]
+Możemy sie ograniczyć do wektorów bazowych, bo każdy wektor można przedstawić jako kombinację liniową wektorów bazowych. Rozważmy jako bazę nasz ciąg ortogonalny obcięty do n.
+Wtedy korzystając z liniowości wychodzi
+\[
+  \langle f -  \sum^n_{k=0} \frac{\langle f, P_k \rangle}{\langle P_k , P_k \rangle} P_k, P_j \rangle = \langle f, P_j \rangle - \sum^n_{k=0} \frac{\langle f, P_k \rangle}{\langle P_k , P_k \rangle}\langle  P_k, P_j \rangle
+\]
+Korzystając że $P_k \perp P_l$ dla $k \neq l$ wychodzi
+\[
+  \langle f, P_j\rangle - \frac{\langle f , P_j \rangle}{\langle P_j , P_j \rangle} \langle P_j, P_j \rangle = 0
+\]
+
 \end{document}
 
 

@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1670591237 "/home/sileanth/studia/numerki/lista8/l8.tex" "l8.pdf" "l8" 1670591237
-  "/home/sileanth/studia/numerki/lista8/l8.tex" 1670591237 6555 bf5735d2ade7f86a9f6411315fef0d83 ""
+["pdflatex"] 1670592595 "/home/sileanth/studia/numerki/lista8/l8.tex" "l8.pdf" "l8" 1670592596
+  "/home/sileanth/studia/numerki/lista8/l8.tex" 1670592595 7800 f3c9f637ac990475671b02991662c59e ""
   "/opt/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1668252018 2971 def0b6c1f0b107b3b936def894055589 ""
   "/opt/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1668252018 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1668252018 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -139,8 +139,8 @@
   "/opt/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1668252018 4606413 746423c1ba5fda3073a2cc1d3c6fd444 ""
   "/opt/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1668252018 3063416 ff9c928df535f65ff62c627fa56a594f ""
   "/opt/texlive/2022/texmf.cnf" 1668252018 585 9e8504408f25e5ac7fa614e58817b8d1 ""
-  "l8.aux" 1670591237 131 2871e4345042cf91ff8d8042f5630902 "pdflatex"
-  "l8.tex" 1670591237 6555 bf5735d2ade7f86a9f6411315fef0d83 ""
+  "l8.aux" 1670592596 131 6b30961aae5fedecfae30488cc4587d0 "pdflatex"
+  "l8.tex" 1670592595 7800 f3c9f637ac990475671b02991662c59e ""
   (generated)
   "l8.aux"
   "l8.log"
