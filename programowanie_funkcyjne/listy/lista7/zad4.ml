@@ -5,17 +5,27 @@ module type Monad = sig
 end
 
 module Err : sig 
- 
+include Monad
+val fail : 'a t
+val catch : 'a t -> (unit -> 'a t) -> 'a t
+val run : 'a t -> 'a option
 end =
 struct
-  type 'a t = (unit -> 'a) ->  'a
+  type 'a t = (unit -> 'a) -> 'a
   
   let fail : 'a t = fun cont -> cont ()
   let return (x : 'a) : 'a t  = fun cont -> x
 
-  let catch (exp : 'a t) (catch : unit -> 'a t) : 'a t =
+  let catch (exp : 'a t) (err : unit -> 'a t) : 'a t =
     fun cont ->
-      exp catch
+      exp (fun () ->err () cont)
+
+  let bind m f =
+    fun k ->
+      let a = m k
+
+  let run m =
+    m ()
 
 
 end

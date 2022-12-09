@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\title{Lista 4}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+
+\section*{Zadanie 1}
+\subsection*{Treść}
+Niech $ \{ P_k \}$ będzie ciągiem standardowych wielomianów ortogonalnych w przedziale $[a, b]$, z wagą $p(x)$. Wykazać że zachodzi związek rekurencyjny
+\[ P_0(x) = 1, \; P_1(x) = x - c_1, \]
+\[ P_k(x) = (x - c_k) P_{k-1}(x) - d_k P_{k-2}(x) \; (k = 2,3, \dots) \]
+gdzie
+\[ c_k = \frac{ \langle x P_{k-1}, P_{k-1}  \rangle}{\langle P_{k-1}, P_{k-1} \rangle } \] 
+\[ d_k = \frac{ \langle  P_{k-1}, P_{k-1}  \rangle}{\langle P_{k-2}, P_{k-2} \rangle } \] 
+
+\subsection*{Rozwiązanie}
+Przeprowadźmy silną indukcję po k:
+
+
+\subsubsection*{Baza indukcji}
+Dla $k = 0$ w oczywisty sposób zachodzi zależność. Rozpatrzmy więc $k = 1$. Jako że $P_0 \perp P_1$ to:
+
+\[ 
+    0 = \langle P_0 , P_1 \rangle=  \langle 1, x - c_1 \rangle   = \langle 1 , x \rangle - c_1  \langle 1, 1 \rangle
+\]
+Więc 
+\[
+    c_1 = \frac{\langle x , 1 \rangle}{\langle 1,1 \rangle } =    \frac{\langle P_0 x , P_0 \rangle}{\langle P_0,P_0 \rangle } 
+\]
+
+\subsubsection*{Krok indukcyjny}
+Pokażmy że ta zależność zachodzi dla k wielomianu. Rozpiszmy $P_k$ w następujący sposób
+
+\[
+   P_k = x P_{k-1} + \sum_{i=0}^{k-1} \alpha_i P_i
+\]
+Teraz wiemy że $P_k$ ortogonalne z poprzednimi wielomianami. Rozpatrzmy $j \leq k-3 $
+
+\[
+    \langle P_k , P_j \rangle = \langle x P_{k-1} + \sum_{i=0}^{k-1} \alpha_i P_i , P_j \rangle = \langle x P_{k-1} , P_j \rangle + \sum_{i=0}^{k-1} \alpha_i \langle P_i , P_j \rangle 
+\]
+Korzystając z tego że $ \{ P_x \} $ to ciąg ortogonalny, otrzymujemy
+\[
+    \langle x P_{k-1} , P_j \rangle + \alpha_j \langle P_j, P_j \rangle   
+\]
+Udowodnijmy teraz krótki lemat 1
+\[ 
+    \langle x f , g \rangle = \int_b^a p(x) x f (x) g(x) dx = \int_b^a p(x) f x (x) g(x) dx = \langle f , x g \rangle 
+\] 
+Używając tego lematu otrzymujemy
+\[
+     \langle x P_{k-1} , P_j \rangle + \alpha_j \langle P_j, P_j \rangle = \langle  P_{k-1} , x P_j \rangle + \alpha_j \langle P_j, P_j \rangle 
+\]
+Wielomian $x P_j$ ma mniejszy stopień niż $P_{k-1}$ więc są one ortogonalne. Czyli wychodzi
+\[
+   0 = \langle P_k , P_j \rangle = \alpha_j \langle P_j, P_j \rangle 
+\]
+Wielomian $P_j$ nie jest zerowy więc jego iloczyn skalarny z samym sobą jest niezerowy więc $\alpha_j = 0$. Usuwając zera z sumy w wzorze na $P_k$ wychodzi
+\[ P_k = x P_{k-1} + \alpha_{k-1} P_{k-1} + \alpha_{k-2} P_{k-2}\]
+
+Rozpatrzmy teraz $j = k-2$
+\[ 
+    \langle P_k , P_{k-2} \rangle = \langle x P_{k-1} + \alpha_{k-1} P_{k-1} + \alpha_{k-2} P_{k-2} , P_{k-2} \rangle 
+\]
+Można to porozbijać z liniowości
+\[
+    \langle x  P_{k-1}, P_{k-2} \rangle + \langle \alpha_{k-1} P_{k-1}, P_{k-2} \rangle +\alpha_{k-2}  \langle P_{k-2} , P_{k-2} \rangle 
+\]
+Środkowy wyraz się zeruje z ortogonalności
+\[
+    \langle x P_{k-1}, P_{k-2}  \rangle + \alpha_{k-2} \langle  P_{k-2} , P_{k-2} \rangle = 0
+\]
+Korzystając z lematu 1 wychodzi wzór na $\alpha_{k-2}$
+\[
+    \alpha_{k-2} = - \frac{\langle  P_{k-1}, x P_{k-2}  \rangle}{\langle  P_{k-2} , P_{k-2} \rangle }
+\]
+Mamy już prawie dobrą postać, ale trzeba naprawić licznik, rozpiszmy w tym celu $P_{k-1}$ podobnie jak rozpisaliśmy $P_{k}$
+\[ P_{k-1} - x P_{k-2}  =  \sum_{i-0}^{k-2} \beta_i P_i \]
+Czyli wychodzi 
+\[ x P_{k-2}  =P_{k-1} - \sum_{i-0}^{k-2} \beta_i P_i \]
+Możemy to podstawić
+\[
+    \langle  P_{k-1}, x P_{k-2}  \rangle = \langle P_{k-1} , P_{k-1} - \sum_{i-0}^{k-2} \beta_i P_i \rangle = 
+\]
+Z liniowości wychodzi
+\[
+    \langle P_{k-1} , P_{k-1} - \sum_{i-0}^{k-2} \beta_i P_i \rangle = 
+    \langle   P_{k-1} , \rangle + \sum_{i-0}^{k-2} \beta_i \langle  P_{k-1}, P_i \rangle
+\]
+Z ortogonalności $P_i \perp P_{k-1}$ wychodzi
+\[
+    \langle  P_{k-1}, x P_{k-2}  \rangle = \langle   P_{k-1} ,P_{k-1} \rangle + \sum_{i-0}^{k-2} \beta_i \langle  P_{k-1}, P_i \rangle = \langle P_{k-1}, P_{k-1}  \rangle
+\]
+Podstawiając to do wzoru na $\alpha_{k-2}$ wychodzi
+\[
+    \alpha_{k-2} = - \frac{\langle  P_{k-1},  P_{k-1}  \rangle}{\langle  P_{k-2} , P_{k-2} \rangle }
+\]
+Co zgadza się z wzorem na $d_k$.
+
+Rozpatrzmy teraz $j = k-1$. Możemy też rozpisać $P_k$
+\[
+    \langle P_k , P_{k-1} \rangle =   \langle x P_{k-1} + \alpha_{k-1} P_{k-1} + \alpha_{k-2} P_{k-2}, P_{k-1} \rangle 
+\]
+Z liniowości wychodzi
+\[
+    \langle P_k , P_{k-1} \rangle =   \langle x P_{k-1} , P_{k-1} \rangle +
+    \langle \alpha_{k-1} P_{k-1},  P_{k-1}  \rangle +
+    \langle \alpha_{k-2} P_{k-2} ,  P_{k-1} \rangle
+\]
+Z $P_{k-2} \perp P_{k-1}$ wychodzi
+\[
+    \langle P_k , P_{k-1} \rangle = 0 =   \langle x P_{k-1} , P_{k-1} \rangle +
+    \langle \alpha_{k-1} P_{k-1},  P_{k-1}  \rangle 
+\]
+Wychodzi więc następujący wzór na $\alpha_{k-1}$
+\[
+    \alpha_{k-1} = - \frac{\langle x P_{k-1} , P_{k-1} \rangle}{\langle P_{k-1},  P_{k-1}  \rangle }
+\]
+Czyli wychodzi dokładnie $-c_k$ Podstawiając alphy do wzory na $P_k$ wychodzi
+\[ 
+    P_k = x P_{k-1} + \alpha_{k-1} P_{k-1} + \alpha_{k-2} P_{k-2} =
+    P_{k-1} (x -
+    \frac{\langle x P_{k-1} , P_{k-1} \rangle}{\langle P_{k-1},  P_{k-1}  \rangle })  + \frac{\langle  P_{k-1},  P_{k-1}  \rangle}{\langle  P_{k-2} , P_{k-2} \rangle } P_{k-2} = P_{k-1} (x - c_k) - d_k P_{k-2}
+\]
+\section*{Zadanie 2}
+Niech $\overline{T}_k(x) $ będzie standardowymi wielomianami ortogonalnymi w przedziale $[-1, 1]$ z wagą $(1-x^2)^{-\frac{1}{2}}$. Znaleźć związek rekurencyjny spełniany przez te wielomiany
+
+Zgadujemy na podstawie zadania 1 z listy 7, że ten ciąg wielomianów to podkręcone wielomiany Czybeszewa. Czyli są spełnione następujące własności
+\[ \overline{T}_0(x) = 1 \qquad \overline{T}_1(x) = x \]
+\[ \overline{T}_k(x) = \overline{T}_{k-1}(x) - \frac{1}{2} \overline{T}_{k-2}(x)  = 2^{-(k-1)} T_k(x)\]
+
+Z zadania l7.1 wiemy że dla $k \neq l$
+\[
+  \langle T_k , T_l \rangle = \int^a_b (1-x^2)^(-1/2) T_k(x) T_l(x) dx= 0
+\]
+W takim razie
+\[
+    \langle \overline{T}_k \overline{T}_l \rangle = \langle T_k 2^{-(k-1)}, T_l 2^{-(l-1)}\rangle =
+    \int^a_b (1-x^2)^{-1/2} T_k(x) 2^{-(k-1)} T_l(x) 2^{-(l-1)} dx
+\]
+Wyciągając stałe przed nawias wychodzi
+\[
+    2^{-(k-1)} 2^{-(l-1)} \int^a_b (1-x^2)^{-1/2} T_k(x)  T_l(x)  dx = 0 = \langle \overline{T}_k \overline{T}_l \rangle
+\]
+Czyli rzeczywiście nasz zgadnięty ciąg jest standardowym ciągiem wielomianów, dla tego przedziału i wagi.
+\end{document}
+
+
+
