@@ -1,31 +1,56 @@
+
+
+
 module type Monad = sig
   type 'a t
   val return : 'a -> 'a t
   val bind : 'a t -> ('a -> 'b t) -> 'b t
 end
 
-module Err : sig 
-include Monad
-val fail : 'a t
-val catch : 'a t -> (unit -> 'a t) -> 'a t
-val run : 'a t -> 'a option
-end =
+module Err: sig
+  include Monad
+  val fail : 'a t
+  val run : 'a t -> 'a option 
+  val catch : 'a t -> (unit -> 'a t) -> 'a t
+end = 
 struct
-  type 'a t = (unit -> 'a) -> 'a
-  
-  let fail : 'a t = fun cont -> cont ()
-  let return (x : 'a) : 'a t  = fun cont -> x
+  type 'r ans = 'r option 
+  type 'a t = { run : 'r. ('a -> 'r ans) -> 'r ans}
 
-  let catch (exp : 'a t) (err : unit -> 'a t) : 'a t =
-    fun cont ->
-      exp (fun () ->err () cont)
+  let fail = {run = (fun k -> None)}
+
+  let return x = {run = fun k -> k x}
+
+  let catch m f =
+      match m.run (fun a -> Some a)  with 
+      | None -> f ()
+      | Some a -> return a
 
   let bind m f =
-    fun k ->
-      let a = m k
-
-  let run m =
-    m ()
-
-
+    { run = fun k ->
+      match m.run (fun a -> Some (f a)) with
+      | None -> None
+      | Some x -> x.run k
+    }
+  let run m : 'a option =
+    m.run (fun a -> Some a)
+end
+module BT : sig
+  include Monad
+  val fail : 'a t
+  val flip : bool t
+  val run : 'a t -> 'a Seq.t
+end = struct
+  type 'r ans = 'r Seq.t
+  type 'a t = { run : 'r. ('a -> 'r ans) -> 'r ans}
+  let return x = {run = fun k -> k x}
+  let fail = {run = fun k -> Seq.empty}
+  let flip = {run = fun k -> Seq.concat_map k (List.to_seq [true ; false])}
+  let run (m : 'a t) = m.run (fun a -> Seq.return a)
+  let bind m (f : 'a -> 'b t) =
+    { run = fun k ->
+      let seq = m.run (fun a -> Seq.return a) in
+      let z = Seq.concat_map (fun a -> (f a).run (fun z -> Seq.return z )) seq in
+      Seq.concat_map (fun b -> k b) z
+    }
 end
