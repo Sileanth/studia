@@ -54,3 +54,42 @@ end = struct
       Seq.concat_map (fun b -> k b) z
     }
 end
+
+
+module Make(State : sig type t end) : sig
+  include Monad
+  val get : State.t t
+  val set : State.t -> unit t
+  val run : State.t -> 'a t -> 'a
+end = struct
+  type s = State.t
+  type 'r ans = s -> 'r
+  type 'a t = { run : 'r. ('a -> 'r ans) -> 'r ans}
+  
+  let return x = {run = fun k -> k x}
+  
+  let set s = {run = fun k -> 
+    fun old_s -> k () s}
+  
+  let get = {run = fun k ->
+    fun s -> k s s}
+  
+  let run (s : s) (m : 'a t) =
+    m.run (fun a -> fun s -> a) s
+  
+  let bind (m : 'a t) (f : 'a -> 'b t)  =
+    {run = fun k -> 
+      (m.run (fun a -> (f a).run k))
+    }
+
+end
+
+
+  
+  let z x = Seq.return x 
+  let u x  = Seq.cons x Seq.empty
+
+
+
+
+

@@ -15,3 +15,9 @@ module BT : sig
   val flip : bool t
   val run : 'a t -> 'a Seq.t
 end
+module Make(State : sig type t end) : sig
+  include Monad
+  val get : State.t t
+  val set : State.t -> unit t
+  val run : State.t -> 'a t -> 'a
+end
