@@ -35,21 +35,16 @@ end = struct
 
 
    (* funkcja concatM jest wywoławana tylko z z niepustym xs, więc ignor warningi *)
-  let rec concatM (xs : 'a sbt_list) (ms : 'a t) =
-    let rec help xs (Cons (a, s, m)) =
-      match xs with
-      | Nil -> Cons (a, s, ms)
-      | Cons (a, s, m) -> Cons (a, s, fun ns -> help (m ns) xs)
-    in let Cons (a, s, n) = xs in
-    help (n s) xs
+  let rec concatM (a : 'a t) (b : 'a t) =
+    fun s -> match a s with
+    | Nil -> b s
+    | Cons (x, s, a) -> Cons (x, s, concatM a b)
 
   let rec bind (m : 'a t) (f : 'a -> 'b t) =
     fun s -> 
       match m s with
       | Nil -> Nil
-      | Cons (a, sa, ma) ->
-          match (f a sa) with
-          | Nil -> bind ma f sa
-          | Cons (b, sb, mb) -> concatM (Cons (b, sb, mb)) (bind ma f) 
+      | Cons (a, sa, ma) -> concatM (f a) (bind ma f) s
+
 
 end
