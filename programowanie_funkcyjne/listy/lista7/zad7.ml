@@ -34,12 +34,12 @@ end = struct
     | Cons (a, s, m) -> Seq.cons a (run s m)
 
 
-   (* funkcja concatM jest wywoławana tylko z z niepustym xs, więc ignor warningi *)
   let rec concatM (a : 'a t) (b : 'a t) =
     fun s -> match a s with
     | Nil -> b s
     | Cons (x, s, a) -> Cons (x, s, concatM a b)
-
+  
+    (* Taki trochę concat map *)
   let rec bind (m : 'a t) (f : 'a -> 'b t) =
     fun s -> 
       match m s with

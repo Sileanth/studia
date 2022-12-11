@@ -67,10 +67,10 @@ end = struct
   type 'a t = { run : 'r. ('a -> 'r ans) -> 'r ans}
   
   let return x = {run = fun k -> k x}
-  
+
   let set s = {run = fun k -> 
     fun old_s -> k () s}
-  
+   
   let get = {run = fun k ->
     fun s -> k s s}
   
