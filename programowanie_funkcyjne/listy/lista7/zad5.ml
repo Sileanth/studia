@@ -54,42 +54,40 @@ type 'a regexp =
 let ( +% ) r1 r2 = Or(r1, r2)
 let ( *% ) r1 r2 = Cat(r1, r2)
 
-let suf pref xs =
-  let rec help n xs =
-    match xs with
-    | [] -> []
-    | y :: ys -> if n = 0 then xs else help (n-1) ys
-  in help (List.length pref) xs
 
 
 let rec match_regexp (reg : 'a regexp) (xs : 'a list) : 'a list option BT.t =
   match reg with
-  | Eps -> return (Some [])
+  | Eps -> return None 
   | Lit p -> begin match xs with
-    | [] -> return None
-    | x :: xs -> if p x then return (Some [x]) else return None
+    | [] -> fail
+    | x :: xs -> if p x then return (Some xs) else fail 
   end
   | Or (a, b) -> 
       let* c = BT.flip in
         if c then match_regexp a xs
         else match_regexp b xs
   | Cat (a,b) -> begin 
-      let* pref = match_regexp a xs in 
-      match pref with
-        | None -> return None
-        | Some xa -> match_regexp b (suf xa xs) 
+      let* suf = match_regexp a xs in 
+      match suf with
+        | None -> match_regexp b xs
+        | Some xa -> match_regexp b xa
   end
   | Star a -> begin
-      let* pref = match_regexp a xs in
-      match pref with
+      let* suf = match_regexp a xs in
+      match suf with
       | None -> return None
-      | Some xa -> match_regexp a (suf xa xs)
+      | Some xa -> 
+          let* c = flip in
+          if c then match_regexp (Star a) xa
+          else return (Some xa)
   end
 
 
+let p = Star (Star (Lit ((<>) 'b')) +% (Lit ((=) 'b') *% Lit ((=) 'a')))
 
-
-
-
-
+let z = match_regexp p ['c' ; 'b' ;'a' ;'c';'c';'b';'a';'a';'b';'b';'a']
+let ans = List.of_seq (run z)
+let pustak = match_regexp p []
+let pusta_ans = List.of_seq (run pustak)
 
