@@ -85,9 +85,7 @@ end = struct
 end
 
 
-  
-  let z x = Seq.return x 
-  let u x  = Seq.cons x Seq.empty
+
 
 
 

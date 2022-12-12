@@ -29,19 +29,7 @@ let flip = BT.flip
 let fail = BT.fail
 let return = BT.return
 let run = BT.run
-let rec select a b =
-  if a >= b then BT.fail
-  else
-    let* c = BT.flip in
-    if c then BT.return a
-    else select (a+1) b
 
-let triples n =
-  let* a = select 1 n in
-  let* b = select a n in
-  let* c = select b n in
-  if a*a + b*b = c*c then BT.return (a, b, c)
-  else BT.fail
 
 type 'a regexp =
   | Eps
@@ -72,7 +60,10 @@ let rec match_regexp (reg : 'a regexp) (xs : 'a list) : 'a list option BT.t =
       let* suf = match_regexp a xs in 
       match suf with
         | None -> match_regexp b xs
-        | Some xa -> match_regexp b xa
+        | Some xa -> let* suf' = match_regexp b xa in
+          return (match suf' with
+          | None -> Some xa
+          | Some res -> Some res)
   end
   | Star a -> begin
       let* suf = match_regexp (Or (a, Eps)) xs in

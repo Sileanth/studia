@@ -13,6 +13,6 @@ struct
   let run a = a ()
 
   let bind x f = 
-    fun () -> f (x ())
+    fun () -> f (x ()) ()
 end
 
