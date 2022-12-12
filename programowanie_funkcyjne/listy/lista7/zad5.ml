@@ -54,7 +54,10 @@ type 'a regexp =
 let ( +% ) r1 r2 = Or(r1, r2)
 let ( *% ) r1 r2 = Cat(r1, r2)
 
-
+let append a b =
+  let* c = flip in
+  if c then a
+  else b
 
 let rec match_regexp (reg : 'a regexp) (xs : 'a list) : 'a list option BT.t =
   match reg with
@@ -64,9 +67,7 @@ let rec match_regexp (reg : 'a regexp) (xs : 'a list) : 'a list option BT.t =
     | x :: xs -> if p x then return (Some xs) else fail 
   end
   | Or (a, b) -> 
-      let* c = BT.flip in
-        if c then match_regexp a xs
-        else match_regexp b xs
+      append (match_regexp a xs) (match_regexp b xs)
   | Cat (a,b) -> begin 
       let* suf = match_regexp a xs in 
       match suf with
@@ -74,13 +75,10 @@ let rec match_regexp (reg : 'a regexp) (xs : 'a list) : 'a list option BT.t =
         | Some xa -> match_regexp b xa
   end
   | Star a -> begin
-      let* suf = match_regexp a xs in
+      let* suf = match_regexp (Or (a, Eps)) xs in
       match suf with
       | None -> return None
-      | Some xa -> 
-          let* c = flip in
-          if c then match_regexp (Star a) xa
-          else return (Some xa)
+      | Some xa -> append (match_regexp (Star a) xa) (return (Some xa))
   end
 
 
@@ -90,4 +88,10 @@ let z = match_regexp p ['c' ; 'b' ;'a' ;'c';'c';'b';'a';'a';'b';'b';'a']
 let ans = List.of_seq (run z)
 let pustak = match_regexp p []
 let pusta_ans = List.of_seq (run pustak)
+
+
+(* Ta implementacja ma tą wadę że powtarzają się wyniki *)
+
+
+
 
