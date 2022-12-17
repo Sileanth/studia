@@ -1,9 +1,5 @@
-import Control.Monad
-import Data.Bitraversable (Bitraversable)
+import Control.Monad (ap, foldM)
 import qualified Data.Char as Low
-import Data.Maybe
-import Distribution.Simple.Utils (xargs)
-import Distribution.Types.IncludeRenaming (IncludeRenaming (IncludeRenaming))
 import System.IO (isEOF)
 
 -- Zadanie 1
