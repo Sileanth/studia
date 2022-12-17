@@ -1,6 +1,5 @@
 import Control.Monad
 import qualified Data.Char as Low
-import Data.List2010
 import Data.Maybe
 import Distribution.Simple.Utils (xargs)
 import Distribution.Types.IncludeRenaming (IncludeRenaming (IncludeRenaming))
@@ -106,7 +105,7 @@ catchOutputHelper os (ReadS f) =
           Nothing -> catchOutputHelper os $ f Nothing
           Just x -> catchOutputHelper os $ f (Just x)
     )
-catchOutputHelper os (WriteS o t) = catchOutputHelper (o : os) t
+catchOutputHelper os (WriteS o t) = catchOutputHelper (app o os) t
 
 -- outputy są na liście w kolejności odwrotnej do kolejności wypisania
 catchOutput :: StreamTrans i o a -> StreamTrans i b (a, [o])
@@ -141,6 +140,7 @@ data BF
   | Output
   | Input
   | While [BF]
+  deriving (Eq)
 
 tokens = ['<', '>', '+', '-', '.', ',', '[', ']']
 
@@ -154,37 +154,37 @@ parseToken '-' = Dec
 parseToken '.' = Output
 parseToken ',' = Input
 
-el :: a -> [a] -> bool
-el c [] = false
+el :: Char -> [Char] -> Bool
+el c [] = False
 el c (x : xs) = c == x || el c xs
 
 parseTokens =
   ReadS
     ( \x ->
         case x of
-          Nothing -> ()
+          Nothing -> Return ()
           Just x -> if el x tokens then WriteS x parseTokens else parseTokens
     )
 
--- jak jest koniec outputu to parser domyka wszystkie nawiasy whila
-parser :: StreamTrans Char BF ()
-parser =
+parser wh =
   ReadS
     ( \x ->
         case x of
-          Nothing -> Return ()
+          Nothing -> if wh then error "unclosed ]" else Return ()
           Just x ->
             if el x singleTokens
-              then WriteS (parseToken x) parser
+              then WriteS (parseToken x) $ parser wh
               else
                 if x == '['
-                  then whileParser
-                  else Return ()
+                  then whileParser wh
+                  else if wh && x == ']' then Return () else error "unexpected ]"
     )
 
-whileParser = do
-  bfs <- catchOutput parser
-  WriteS (While $ snd bfs) parser
+whileParser wh = do
+  bfs <- catchOutput (parser True)
+  WriteS (While $ snd bfs) (parser wh)
 
 brainFuckParser :: StreamTrans Char BF ()
-brainFuckParser = parseTokens |>| Parser
+brainFuckParser = parseTokens |>| parser False
+
+z = take 8 $ fst $ listTrans brainFuckParser ['<', '[', '.', '+', '[', '+', ']', ']', 'a', '.', '.']
