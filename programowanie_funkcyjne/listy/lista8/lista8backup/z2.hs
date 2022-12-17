@@ -1,4 +1,5 @@
 import Control.Monad
+import Data.Bitraversable (Bitraversable)
 import qualified Data.Char as Low
 import Data.Maybe
 import Distribution.Simple.Utils (xargs)
@@ -188,3 +189,37 @@ brainFuckParser :: StreamTrans Char BF ()
 brainFuckParser = parseTokens |>| parser False
 
 z = take 8 $ fst $ listTrans brainFuckParser ['<', '[', '.', '+', '[', '+', ']', ']', 'a', '.', '.']
+
+-- Zadanie 8
+type Tape = ([Integer], Integer, [Integer])
+
+coerseEnum :: (Enum a, Enum b) => a -> b
+coerseEnum = toEnum . fromEnum
+
+evalBF :: Tape -> BF -> StreamTrans Char Char Tape
+evalBF (p, c, n) Inc = Return (p, c + 1, n)
+evalBF (p, c, n) Dec = Return (p, c - 1, n)
+evalBF (p : ps, c, n) MoveL = Return (ps, p, c : n)
+evalBF (p, c, n : ns) MoveR = Return (c : p, n, ns)
+evalBF (p, c, n) Output = WriteS (coerseEnum c) (Return (p, c, n))
+evalBF (p, c, n) Input =
+  ReadS
+    ( \x ->
+        case x of
+          Nothing -> error "no input"
+          Just x -> Return (p, coerseEnum x, n)
+    )
+evalBF (p, c, n) (While bfs) =
+  if c == 0
+    then Return (p, c, n)
+    else do
+      tape <- evalBFBlock (p, c, n) bfs
+      evalBF tape (While bfs)
+
+evalBFBlock :: Tape -> [BF] -> StreamTrans Char Char Tape
+evalBFBlock = foldM evalBF -- jeśli rozwiązałeś zadanie 9
+
+runBF :: [BF] -> StreamTrans Char Char ()
+runBF bfs = do
+  tape <- evalBFBlock ([0 ..], 0, [0 ..]) bfs
+  return ()
