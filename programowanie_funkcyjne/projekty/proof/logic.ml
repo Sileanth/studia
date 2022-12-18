@@ -7,7 +7,10 @@ type term =
   | Sym of sym * term list
 and formula =
   | Neg
+  | Top
   | Imp of formula * formula
+  | And of formula * formula
+  | Or of formula * formula
   | Rel of rel * term list
   | All of string * formula
 
@@ -46,6 +49,15 @@ end = struct
 end
 open NewVar
 
+
+let rec max_free_var_in_term (t : term) =
+  match t with
+  | Var v  -> v
+  | Sym (s, st) -> List.fold_left (fun a b -> max a b) (-1) (List.map max_free_var_in_term st)
+
+let rec 
+
+
 let rec free_in_term (v : var) (t : term) = 
   match t with
   | Var nv      -> nv = v
@@ -53,8 +65,11 @@ let rec free_in_term (v : var) (t : term) =
 and free_in_formula (v : var) ( f : formula) =
   match f with
   | Neg         -> false
+  | Top         -> false
   | All (_,  f) -> free_in_formula (v+1) f
   | Imp (p, s)  -> free_in_formula v p || free_in_formula v s
+  | And (p, s)  -> free_in_formula v p || free_in_formula v s
+  | Or  (p, s)  -> free_in_formula v p || free_in_formula v s
   | Rel (_, ts) -> List.exists (free_in_term v) ts
 
 let rec apply_inc_in_term (inc : int) (t : term) : term =
@@ -65,7 +80,10 @@ let rec apply_inc_in_term (inc : int) (t : term) : term =
 let rec apply_inc_in_formula (inc : int) (f : formula) : formula=
   match f with 
   | Neg         -> Neg
+  | Top         -> Top 
   | Imp (a, b)  -> Imp (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
+  | And (a, b)  -> And (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
+  | Or  (a, b)  -> Or  (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
   | All (s, f)  -> All (s, apply_inc_in_formula (inc + 1) f)
   | Rel (s, ts) -> Rel (s, List.map (apply_inc_in_term inc) ts)
 
@@ -80,10 +98,13 @@ let psubt_in_term = psubt_in_term_helper 0
 
 let rec psub_in_formula_helper (inc : int) (map : term VarMap.t) (f : formula) : formula =
   match f with
-  | Neg -> Neg
-  | Imp (a, b) -> Imp (psub_in_formula_helper inc map a, psub_in_formula_helper inc map b)
+  | Neg         -> Neg
+  | Top         -> Top 
+  | Imp (a, b)  -> Imp (psub_in_formula_helper inc map a, psub_in_formula_helper inc map b)
+  | And (a, b)  -> And (psub_in_formula_helper inc map a, psub_in_formula_helper inc map b)
+  | Or  (a, b)  -> Or  (psub_in_formula_helper inc map a, psub_in_formula_helper inc map b)
   | Rel (s, ts) -> Rel (s, List.map (psubt_in_term_helper inc map) ts)
-  | All (s, f) -> All (s, psub_in_formula_helper (inc + 1) map f)
+  | All (s, f)  -> All (s, psub_in_formula_helper (inc + 1) map f)
 
 let psub_in_formula = psub_in_formula_helper 0
 
@@ -99,7 +120,10 @@ let rec eq_formula a b =
   match (a, b) with
   | All (_, a) , All (_, b)  -> eq_formula a b
   | Imp (a,b), Imp (c, d)    -> eq_formula a c && eq_formula b d
+  | And (a,b), And (c, d)    -> eq_formula a c && eq_formula b d
+  | Or (a,b), Or (c, d)      -> eq_formula a c && eq_formula b d
   | Neg, Neg                 -> true
+  | Top, Top                 -> true
   | Rel (x, xt), Rel (y, yt) -> x = y && xt = yt
   | _, _                     -> false
 
@@ -117,7 +141,6 @@ let rec rem xs f =
   | (x :: xs) -> x :: rem xs f
 
 
-  (* Poprawić by używało eq_formula *)
 let sum (xs : formula list) (ys : formula list)=
   xs @ List.filter (fun y -> not (List.exists (eq_formula y) xs)) ys
 
@@ -140,6 +163,8 @@ let bot_e (env, f) f =
   if eq_formula f Neg then (env, f)
   else failwith "wrong usage of bottom elimination"
 
+let top_i = ([], Top)
+
 let all_i (env, f) =
   env, (All (new_var (), apply_inc_in_formula 1 f)) 
 
@@ -149,5 +174,42 @@ let all_e (env, all) t =
     | All (_, f) -> subst_in_formula (Var 0) t (apply_inc_in_formula (-1) f)
     | _          -> failwith "wrong usage of for_all elimination"
 
+let and_i (e1, f1) (e2, f2) =
+  sum e1 e2, And (f1, f2)
+
+let and_e1 (env, f) =
+  match f with
+  | And (f, s) -> (env, f)
+  | _          -> failwith "wrong usage of and elim1"
+
+let and_e2 (env, f) =
+  match f with
+  | And (f, s) -> (env, s)
+  | _          -> failwith "wrong usage of and elim1"
+
+
+let or_i1 (env, a) b = 
+  env, Or (a, b)
+
+let or_i2 (env, b) a = 
+  env, Or (a, b)
+
+let or_e (env, f_or) (env1, a) (env2, b) =
+  if not (eq_formula a b) 
+  then 
+    failwith "a and b not equal in or elimination" 
+  else match f_or with
+  | Or (o1, o2) -> sum (sum (rem env1 o1) (rem env2 o2)) env, a
+  | _           -> failwith "wrong usage of or elimination"
+  
+
+let equiv (env, form) f =
+  if eq_formula form f then (env, f)
+  else failwith "formulas in equiv are not equal"
+
+let ren (env, form) x y =
+  if not (free_in_formula y form) && not (List.exists (free_in_formula y) env) 
+    then (List.map (subst_in_formula (Var x) (Var y)) env, subst_in_formula (Var x) (Var y) form)
+    else failwith "var y is free"
 
 
