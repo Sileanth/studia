@@ -64,7 +64,7 @@ exception RulesErrors of string
 let rec rem xs f = 
   match xs with
   | [] -> []
-  | (x :: xs) when x = f -> xs
+  | (x :: xs) when x = f -> xs 
   | (x :: xs) -> x :: rem xs f
 
 let sum xs ys =

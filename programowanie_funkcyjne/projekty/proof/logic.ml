@@ -1,7 +1,7 @@
 
 type var = int 
-type sym = int 
-type rel = int
+type sym = string 
+type rel = string 
 type term =
   | Var of var
   | Sym of sym * term list
@@ -10,6 +10,8 @@ and formula =
   | Imp of formula * formula
   | Rel of rel * term list
   | All of string * formula
+
+(* Pytanie otwarte czy chcę w All trzymać nazwę związanej zmiennej? *)
 
 module OrderedTerm : sig
   type t = term
@@ -31,6 +33,7 @@ end = struct
       | 1  -> 1
       | _  -> compare (Sym (a, xs)) (Sym (b, ys)) 
 end
+module VarMap = Map.Make(OrderedTerm)
 (* Moduł do generowania nowych nazw zmiennych by się nie dublowały. Chyba niepotrzebny *)
 module NewVar : sig 
   val new_var : unit -> string
@@ -42,7 +45,6 @@ end = struct
     string_of_int z
 end
 open NewVar
-module VarMap = Map.Make(OrderedTerm)
 
 let rec free_in_term (v : var) (t : term) = 
   match t with
@@ -59,6 +61,13 @@ let rec apply_inc_in_term (inc : int) (t : term) : term =
   match t with 
   | Var v       -> Var (v+inc)
   | Sym (s, st) -> Sym (s, List.map (apply_inc_in_term inc) st)
+
+let rec apply_inc_in_formula (inc : int) (f : formula) : formula=
+  match f with 
+  | Neg         -> Neg
+  | Imp (a, b)  -> Imp (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
+  | All (s, f)  -> All (s, apply_inc_in_formula (inc + 1) f)
+  | Rel (s, ts) -> Rel (s, List.map (apply_inc_in_term inc) ts)
 
 let rec psubt_in_term_helper (inc : int) (map : term VarMap.t) (t : term) : term =
   match VarMap.find_opt (apply_inc_in_term (-inc) t) map with
@@ -79,10 +88,66 @@ let rec psub_in_formula_helper (inc : int) (map : term VarMap.t) (f : formula) :
 let psub_in_formula = psub_in_formula_helper 0
 
 let subst_in_term x s t = psubt_in_term (VarMap.singleton x s) t
-let subst_in formula x s t = psub_in_formula (VarMap.singleton x s) t
+let subst_in_formula x s t = psub_in_formula (VarMap.singleton x s) t
 
+
+
+let eq_term a b =
+  a = b
+
+let rec eq_formula a b = 
+  match (a, b) with
+  | All (_, a) , All (_, b)  -> eq_formula a b
+  | Imp (a,b), Imp (c, d)    -> eq_formula a c && eq_formula b d
+  | Neg, Neg                 -> true
+  | Rel (x, xt), Rel (y, yt) -> x = y && xt = yt
+  | _, _                     -> false
 
 type env = formula list
 type theorem = env * formula
+
+let consequnce (_, cons) = cons
+let assumptions (env, _) = env
+
+
+let rec rem xs f = 
+  match xs with
+  | [] -> []
+  | (x :: xs) when eq_formula x f -> xs
+  | (x :: xs) -> x :: rem xs f
+
+
+  (* Poprawić by używało eq_formula *)
+let sum (xs : formula list) (ys : formula list)=
+  xs @ List.filter (fun y -> not (List.exists (eq_formula y) xs)) ys
+
+
+
+
+(* Reguły wnioskowania *)
+let by_assumption f = 
+  [f], f
+
+let imp_i f (env, form) =
+  rem env f, Imp (f, form)
+
+let imp_e (env1, imp) (env2, pimp) =
+  sum env1 env2, match imp with 
+    | Imp (a, b) when eq_formula pimp a -> b
+    | _  -> failwith "wrong usage of implication elimination"
+
+let bot_e (env, f) f =
+  if eq_formula f Neg then (env, f)
+  else failwith "wrong usage of bottom elimination"
+
+let all_i (env, f) =
+  env, (All (new_var (), apply_inc_in_formula 1 f)) 
+
+
+let all_e (env, all) t =
+  env, match env with
+    | All (_, f) -> subst_in_formula (Var 0) t (apply_inc_in_formula (-1) f)
+    | _          -> failwith "wrong usage of for_all elimination"
+
 
 
