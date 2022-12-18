@@ -1,0 +1,3 @@
+
+
+indeksy de b
