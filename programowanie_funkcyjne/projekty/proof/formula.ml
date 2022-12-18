@@ -17,38 +17,18 @@ and formula =
 
 (* Pytanie otwarte czy chcę w All trzymać nazwę związanej zmiennej? *)
 
-module OrderedTerm : sig
-  type t = term
+module OrderedVar: sig
+  type t = var 
   val compare : t -> t -> int
 end = struct
-  type t = term
-  let rec compare a b = 
-    match (a, b) with
-    | Var a, Var b  -> if a < b then -1 else if a = b then 0 else 1
-    | Sym _, Var _  -> 1
-    | Var _, Sym _  -> -1
-    | Sym (a, _) , Sym (b, _) when a < b -> -1 
-    | Sym (a, _) , Sym (b, _) when a > b -> 1 
-    | Sym (_, []) , Sym (_, []) -> 0
-    | Sym (_, x :: xs) , Sym (_, [])  -> 1 
-    | Sym (_, []) , Sym (_, x :: xs) -> -1
-    | Sym (a, x :: xs) , Sym (b, y :: ys) -> match compare x y with
-      | -1 -> -1
-      | 1  -> 1
-      | _  -> compare (Sym (a, xs)) (Sym (b, ys)) 
+  type t = var
+  let compare a b =
+    if a = b then 0
+    else if a < b then -1
+    else 1
 end
-module VarMap = Map.Make(OrderedTerm)
+module VarMap = Map.Make(OrderedVar)
 (* Moduł do generowania nowych nazw zmiennych by się nie dublowały. Chyba niepotrzebny *)
-module NewVar : sig 
-  val new_var : unit -> string
-end = struct
-  let count = ref 0
-  let new_var () =
-    let z = !count in
-    count := !count + 1;
-    string_of_int z
-end
-open NewVar
 
 
 let rec max_free_var_in_term (t : term) =
@@ -105,10 +85,11 @@ let rec apply_inc_in_formula (inc : int) (f : formula) : formula=
   | Rel (s, ts) -> Rel (s, List.map (apply_inc_in_term inc) ts)
 
 let rec psubt_in_term_helper (inc : int) (map : term VarMap.t) (t : term) : term =
-  match VarMap.find_opt (apply_inc_in_term (-inc) t) map with
-  | Some sub -> apply_inc_in_term inc sub 
-  | None     -> match t with
-    | Var v        -> Var v
+    match t with
+    | Var v -> begin match (VarMap.find_opt v map) with
+      | None   -> Var v
+      | Some t -> t
+    end
     | Sym (s , xt) -> Sym (s, List.map (psubt_in_term_helper inc map) xt)
 
 let psubt_in_term = psubt_in_term_helper 0
@@ -145,105 +126,3 @@ let rec eq_formula a b =
   | Top, Top                 -> true
   | Rel (x, xt), Rel (y, yt) -> x = y && xt = yt
   | _, _                     -> false
-
-type env = formula list
-type theorem = env * formula
-
-let consequnce (_, cons) = cons
-let assumptions (env, _) = env
-
-
-let rec rem xs f = 
-  match xs with
-  | [] -> []
-  | (x :: xs) when eq_formula x f -> xs
-  | (x :: xs) -> x :: rem xs f
-
-
-let sum (xs : formula list) (ys : formula list)=
-  xs @ List.filter (fun y -> not (List.exists (eq_formula y) xs)) ys
-
-
-
-
-(* Deduction rules *)
-let by_assumption f = 
-  [f], f
-
-  (* Impliacja *) 
-let imp_i f (env, form) =
-  rem env f, Imp (f, form)
-
-let imp_e (env1, imp) (env2, pimp) =
-  sum env1 env2, match imp with 
-    | Imp (a, b) when eq_formula pimp a -> b
-    | _  -> failwith "wrong usage of implication elimination"
-
-
-(* Bot *) 
-let bot_e (env, f) f =
-  if eq_formula f Neg then (env, f)
-  else failwith "wrong usage of bottom elimination"
-
-  (* Top *)
-let top_i = ([], Top)
-
-
-(* For all *)
-let all_i (env, f) =
-  env, (All (new_var (), apply_inc_in_formula 1 f)) 
-
-let all_e (env, all) t =
-  env, match env with
-    | All (_, f) -> subst_in_formula (Var 0) t (apply_inc_in_formula (-1) f)
-    | _          -> failwith "wrong usage of for_all elimination"
-
-
-    (* Exists *)
-
-let ex_i (env, sf) x t f : theorem = 
-  if eq_formula sf (subst_in_formula x t f) 
-  then env ,Ex ((new_var ()), f)  
-  else failwith "wrong usage of exist introduction"
-
-    (* And *)
-let and_i (e1, f1) (e2, f2) =
-  sum e1 e2, And (f1, f2)
-
-let and_e1 (env, f) =
-  match f with
-  | And (f, s) -> (env, f)
-  | _          -> failwith "wrong usage of and elim1"
-
-let and_e2 (env, f) =
-  match f with
-  | And (f, s) -> (env, s)
-  | _          -> failwith "wrong usage of and elim1"
-
-
-  (* Or *)
-let or_i1 (env, a) b = 
-  env, Or (a, b)
-
-let or_i2 (env, b) a = 
-  env, Or (a, b)
-
-let or_e (env, f_or) (env1, a) (env2, b) =
-  if not (eq_formula a b) 
-  then 
-    failwith "a and b not equal in or elimination" 
-  else match f_or with
-  | Or (o1, o2) -> sum (sum (rem env1 o1) (rem env2 o2)) env, a
-  | _           -> failwith "wrong usage of or elimination"
-  
-  (* Renaming *)
-let equiv (env, form) f =
-  if eq_formula form f then (env, f)
-  else failwith "formulas in equiv are not equal"
-
-let ren (env, form) x y =
-  if not (free_in_formula y form) && not (List.exists (free_in_formula y) env) 
-    then (List.map (subst_in_formula (Var x) (Var y)) env, subst_in_formula (Var x) (Var y) form)
-    else failwith "var y is free"
-
-
