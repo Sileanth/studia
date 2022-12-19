@@ -6,7 +6,7 @@ module type Theory = sig
   val axiom : axiom -> formula 
 end
 
-module Logic(T : Theory) : sig
+module Make(T : Theory) : sig
   type theorem 
 
   val axiom : T.axiom -> theorem
