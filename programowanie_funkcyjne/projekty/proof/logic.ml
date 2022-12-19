@@ -82,8 +82,8 @@ let imp_e (env1, imp) (env2, pimp) =
 
 
 (* Bot *) 
-let bot_e (env, f) f =
-  if eq_formula f Neg then (env, f)
+let bot_e (env, neg) f =
+  if eq_formula neg Neg then (env, f)
   else failwith "wrong usage of bottom elimination"
 
   (* Top *)
@@ -118,12 +118,12 @@ let and_i (e1, f1) (e2, f2) =
 
 let and_e1 (env, f) =
   match f with
-  | And (f, s) -> (env, f)
+  | And (f, _) -> (env, f)
   | _          -> failwith "wrong usage of and elim1"
 
 let and_e2 (env, f) =
   match f with
-  | And (f, s) -> (env, s)
+  | And (_, s) -> (env, s)
   | _          -> failwith "wrong usage of and elim1"
 
 
