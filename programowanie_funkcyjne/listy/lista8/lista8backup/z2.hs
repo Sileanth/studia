@@ -35,7 +35,7 @@ runIOStreamTrans (ReadS f) = do
     then runIOStreamTrans (f Nothing)
     else do
       x <- getChar
-      runIOStreamTrans (f (Just x))
+      runIOStreamTrans $ f (Just x)
 runIOStreamTrans (WriteS o t) = do
   putChar o
   runIOStreamTrans t
@@ -197,6 +197,7 @@ evalBFBlock = foldM evalBF -- jeśli rozwiązałeś zadanie 9
 
 zeros :: [Integer]
 zeros = 0 : zeros
+
 
 runBF :: [BF] -> StreamTrans Char Char ()
 runBF bfs = do
