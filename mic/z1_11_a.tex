@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Zadanie 1.11.A}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+\section*{Treść}
+Udowodnić żu suma dowolnej (nawet nieprzeliczalnej) rodziny przedziałów na prostej, postaci $[a, b], a < b$, jest zbiorem borelowskim.
+
+\section*{Rozwiązanie}
+Niech $A \subset P(\mathbb{R})$ będzie rodziną z treści zadania. Zdefinijmy na A następującą relację:
+$a \sim b \iff a \cap b \neq \emptyset$. W sposób oczywisty jest ona symetryczna oraz zwrotna. Jak weźmiemy jej przechodnie domknięcie to będzie ona dodatkowo przechodnia. Czyli będzie relacją równoważności. Oznaczmy to domknięcie jako $\smile$.
+
+Rozważmy teraz zbiór klas abstrakcji zbiora A dla relacji $\smile$. Oznaczmy go jako $D$. A dokładniej rozważmy $C = \{ \cup x :  x \in D \}$ Zauważmy że jest to rodzina rozłącznych przedziałów na prostej.
+
+Teraz jako że każda klasa abstrakcji D, ma przynajmniej jeden element będący przedziałem $[a, b], a < b$, czyli każdy przedział należący do C ma przynajmniej jeden punkt wymierny. Z tego faktu, oraz rozłączności elementów C, wynika przeliczalność C(Istnieje funkcja różnowartościowa z C w $\mathbb{Q}$).
+Jako żę $\cup A = \cup C$ która jest przeliczalną sumą zbiorów borelowskich, czyli $\cup A$ jest zbiorem borelowskim.
+
+\end{document}
+
+
+
