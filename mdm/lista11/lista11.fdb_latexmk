@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1673386011 "/home/sileatnh/studia/mdm/lista11/lista11.tex" "lista11.pdf" "lista11" 1673386011
-  "/home/sileatnh/studia/mdm/lista11/lista11.tex" 1673386011 5334 a2b9bd2a001d933792bca8e8eecd0f7a ""
+["pdflatex"] 1673446175 "/home/sileatnh/studia/mdm/lista11/lista11.tex" "lista11.pdf" "lista11" 1673446175
+  "/home/sileatnh/studia/mdm/lista11/lista11.tex" 1673446175 4487 e763ebd57b7935f78c1b8d1a6b21ae9b ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1 4410454 406f2f0db1d8532f59352758264c1970 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1 2828763 6c586d5422e743c48144a33adc448e64 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -34,7 +34,6 @@
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1 36281 c355509802a035cadc5f15869451dcee ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1 35752 024fb6c41858982481f6968b5fc26508 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1 32722 d7379af29a190c3f453aba36302ff5a9 ""
-  "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb" 1 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb" 1 135942 859a90cad7494a1e79c94baf546d7de5 ""
@@ -143,8 +142,8 @@
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1 325 f9f16d12354225b7dd52a3321f085955 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/tex/latex/xcolor/xcolor.sty" 1 56029 3f7889dab51d620aa43177c391b7b190 ""
   "/nix/store/c3q3p5ba3k871p4ln73c6vqn8f7f6hr6-texlive-combined-full-2021-final/share/texmf/web2c/texmf.cnf" 1 41920 fe0da7d84f4c9c5e2c984108447022bd ""
-  "lista11.aux" 1673386011 228 2fd906b5d90d57a5d37995df2ab3c3e4 "pdflatex"
-  "lista11.tex" 1673386011 5334 a2b9bd2a001d933792bca8e8eecd0f7a ""
+  "lista11.aux" 1673446175 131 90b5c9cbb63ea6c65704c859e710def0 "pdflatex"
+  "lista11.tex" 1673446175 4487 e763ebd57b7935f78c1b8d1a6b21ae9b ""
   "skoczek.png" 1673382265 3612 23669dfd97edf27291d2c3324a78c87c ""
   (generated)
   "lista11.aux"
