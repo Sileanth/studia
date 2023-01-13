@@ -7,7 +7,7 @@ import RefLang
 type instance Loc (ST s) = STRef s (Value (ST s))
 
 instance MonadFresh (ST s) where
-  freshLoc =  
+  freshLoc = newSTRef (VLoc )
 
 instance MonadHeap (ST s) where
   heapGet = readSTRef
