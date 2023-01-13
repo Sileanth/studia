@@ -74,7 +74,7 @@ module Make(T : Theory) = struct
     type ren_info = var * var
 
     type proof_tree =
-      | Goal  of goal
+      | Goal of goal
       | Lemat of theorem
       | AndI  of node * proof_tree * proof_tree
       | AndE1 of node * proof_tree
@@ -93,7 +93,7 @@ module Make(T : Theory) = struct
       | Ren   of node * proof_tree * ren_info
     
     type view = 
-        | VGoal  of goal
+        | VGoal of goal
         | VLemat of theorem
         | VAndI  of node * proof_tree * proof_tree
         | VAndE1 of node * proof_tree
@@ -113,23 +113,23 @@ module Make(T : Theory) = struct
 
 
     let view = function 
-      | Goal (g)                -> VGoal (g)
-      | Lemat (th)              -> VLemat (th)
-      | AndI (n, pf1, pf2)      -> VAndI (n, pf1, pf2)
-      | AndE1 (n, pf)           -> VAndE1 (n, pf)  
-      | AndE2 (n, pf)           -> VAndE2 (n, pf)
-      | ImpE (n, pf1, pf2)      -> VImpE (n, pf1, pf2)
-      | ImpI (n,pf)             -> VImpI (n,pf)
-      | BotE (n, pf)            -> VBotE (n, pf)
-      | AllI (n, pf)            -> VAllI (n, pf) 
-      | AllE (n,pf,info)        -> VAllE (n,pf,info)
-      | ExI (n, pf, info)       -> VExI (n, pf, info)
-      | ExE (n, pf1, pf2)       -> VExE (n, pf1, pf2)
-      | OrI1 (n, pf)            -> VOrI1 (n, pf)
-      | OrI2 (n,pf)             -> VOrI2 (n,pf)
+      | Goal (g) -> VGoal (g)
+      | Lemat (th) -> VLemat (th)
+      | AndI (n, pf1, pf2) -> VAndI (n, pf1, pf2)
+      | AndE1 (n, pf) -> VAndE1 (n, pf)  
+      | AndE2 (n, pf) -> VAndE2 (n, pf)
+      | ImpE (n, pf1, pf2) -> VImpE (n, pf1, pf2)
+      | ImpI (n,pf) -> VImpI (n,pf)
+      | BotE (n, pf) -> VBotE (n, pf)
+      | AllI (n, pf) -> VAllI (n, pf) 
+      | AllE (n,pf,info) -> VAllE (n,pf,info)
+      | ExI (n, pf, info) -> VExI (n, pf, info)
+      | ExE (n, pf1, pf2) -> VExE (n, pf1, pf2)
+      | OrI1 (n, pf) -> VOrI1 (n, pf)
+      | OrI2 (n,pf) -> VOrI2 (n,pf)
       | OrE  (n, pf1, pf2, pf3) -> VOrE  (n, pf1, pf2, pf3)
-      | Equiv (n, pf, info)     -> VEquiv (n, pf, info)
-      | Ren (n, pf, info)       -> VRen (n, pf, info)
+      | Equiv (n, pf, info) -> VEquiv (n, pf, info)
+      | Ren (n, pf, info) -> VRen (n, pf, info)
 
 
 
@@ -230,8 +230,8 @@ module Make(T : Theory) = struct
     | COrI1   of context * node
     | COrI2   of context * node
     | COrEL   of context * node * proof_tree * proof_tree
-    | COrER   of context * node * proof_tree * proof_tree
-    | COrEM   of context * node * proof_tree * proof_tree
+    | COmEL   of context * node * proof_tree * proof_tree
+    | COlEL   of context * node * proof_tree * proof_tree
     | CEquiv  of context * node * equiv_info 
     | CRen    of context * node * ren_info
 
@@ -248,116 +248,28 @@ module Make(T : Theory) = struct
 
   let up_proof_tree (pf : proof_tree) (ctx : context) : (proof_tree * context) = 
       match ctx with
-        | CRoot -> failwith "you are on top of proof tree"
-        | CAndIL (ctx, n, r)   -> andI n pf r, ctx
-        | CAndIR (ctx, n, l)   -> andI n l pf, ctx
-        | CAndE1 (ctx, n)      -> andE1 n pf, ctx 
-        | CAndE2 (ctx, n)      -> andE2 n pf, ctx
-        | CImpeEL(ctx, n, r)   -> impE n pf r, ctx 
-        | CImpeER (ctx, n,  l) -> impE n l pf, ctx   
-        | CimpI (ctx, n)       -> impI n pf, ctx 
-        | CBotE (ctx, n)       -> botE n pf, ctx 
-        | CAllI (ctx, n)       -> allI n pf, ctx 
-        | CAllE (ctx, n, i)    -> allE i n pf, ctx 
-        | CExI (ctx, n, i)     -> exI i n pf, ctx
-        | CExEL (ctx, n, r)    -> exE n pf r, ctx
-        | CExER (ctx, n, l)    -> exE n l pf, ctx
-        | COrI1 (ctx, n)       -> orI1 n pf, ctx
-        | COrI2 (ctx, n)       -> orI2 n pf, ctx 
-        | COrEL (ctx, n, m, r) -> orE n pf m r, ctx
-        | COrEM (ctx, n, l, r) -> orE n l pf r, ctx
-        | COrER (ctx, n, l, m) -> orE n l m pf, ctx
-        | CEquiv (ctx, n, i)   -> equiv_b n i pf, ctx
-        | CRen (ctx, n, i)     -> ren_b n i pf, ctx
-  (* ignores lemat nodes *)
-  let down_left_tree (pf : proof_tree) (ctx : context) : (proof_tree * context) =
-    match view pf with
-      | VGoal (g)                -> failwith "you are on the bottom of tree"
-      | VLemat (th)              -> failwith "you are on the bottom of tree"
-      | VAndI (n, pf1, pf2)      -> 
-        begin match view pf1 with
-          | VLemat _ -> pf2, CAndIR (ctx, n, pf1)
-          | _         -> pf1, CAndIL (ctx, n, pf2)
-        end
-      | VAndE1 (n, pf)           -> pf, CAndE1 (ctx, n)
-      | VAndE2 (n, pf)           -> pf, CAndE2 (ctx, n)
-      | VImpE (n, pf1, pf2)      -> 
-          begin match view pf1 with 
-            | VLemat _ -> pf2, CImpeER (ctx, n, pf1)
-            | _        -> pf1, CImpeEL (ctx, n, pf2)
-          end
-      | VImpI (n,pf)             -> pf, CimpI (ctx, n)
-      | VBotE (n, pf)            -> pf, CBotE (ctx, n) 
-      | VAllI (n, pf)            -> pf, CAllI (ctx, n)
-      | VAllE (n,pf,info)        -> pf, CAllE (ctx, n, info)
-      | VExI (n, pf, info)       -> pf, CExI (ctx, n, info)
-      | VExE (n, pf1, pf2)       -> 
-          begin match view pf1 with 
-            | VLemat _ -> pf2, CExER (ctx, n, pf1)
-            | _        -> pf1, CExEL(ctx, n, pf2)
-          end
-      | VOrI1 (n, pf)            -> pf, COrI1 (ctx, n)
-      | VOrI2 (n,pf)             -> pf, COrI2 (ctx, n)
-      | VOrE  (n, pf1, pf2, pf3) -> 
-          begin match view pf1, view  pf2 with
-            | VLemat _, VLemat _ -> pf3, COrER (ctx, n, pf1, pf2)
-            | VLemat _, _        -> pf2, COrEL (ctx, n, pf1, pf3)
-            | _, _               -> pf1, COrEL (ctx, n, pf2, pf3)
-          end
-      | VEquiv (n, pf, info)     -> pf, CEquiv (ctx, n, info)
-      | VRen (n, pf, info)       -> pf, CRen (ctx, n, info)
-
-  let rec to_the_left_bottom (pf : proof_tree) (ctx : context) : proof_tree * context =
-    match view pf with
-      | VGoal (g) -> goal g, ctx
-      | VLemat th -> lemat th, ctx
-      | _         -> let npf, nctx = down_left_tree pf ctx in to_the_left_bottom npf nctx
-  let rec rek (pf : proof_tree) (ctx : context) : (proof_tree * context) =
-    let up () = let npf, nctx = up_proof_tree pf ctx in 
-      to_the_left_bottom npf nctx 
-    in match ctx with 
-      | CRoot  -> up () 
-      | CAndIL (ctx, n, r) -> 
-          to_the_left_bottom r (CAndIL (ctx, n, pf)) 
-      | CImpeEL (c, n, r) ->
-        begin match view r with 
-          | VLemat _ -> up ()
-          | _        -> to_the_left_bottom r (CImpeER (ctx, n, pf))  
-        end
-      | CExEL (c, n, r) ->
-        begin match view r with 
-          | VLemat _ -> up ()
-          | _        ->  to_the_left_bottom r (CExER (ctx, n, pf)) 
-        end
-      | COrEL (c, n, m, r) -> 
-        begin match view m, view r with 
-          | VLemat _, VLemat _ -> up () 
-          | VLemat _, _        -> to_the_left_bottom r (COrER (ctx, n, pf, m))  
-          | _, _               -> to_the_left_bottom m (COrEM (ctx, n, pf, r))  
-        end
-      | COrEM (c, n, l, r) -> 
-        begin match view r with 
-          | VLemat _ -> up () 
-          | _        -> to_the_left_bottom r (COrER (ctx, n, l, pf))  
-        end
-      | _ -> up ()
-
-  let next_goal (p : proof) : proof =
-    match p with
-    | Complete th     -> failwith "dowód jest skończony"
-    | Sketch (g, ctx) -> 
-        let pf, ctx  = rek (goal g) ctx in 
-        begin match view pf with 
-          | VGoal g -> Sketch (g, ctx)
-          | _       -> failwith "brak niedokończonego celu"
-        end
-
- end
+      | CRoot -> failwith "you are on top of proof tree"
+      | CAndIL (ctx, n, r)  -> andI n pf r, ctx
+      | CAndIR (ctx, n, l)  -> andI n l pf, ctx
+      | CAndE1 (ctx, n)     -> andE1 n pf, ctx 
+      | CAndE2 (ctx, n)     -> andE2 n pf, ctx
+      | CImpeEL(ctx, n, r) -> impE n pf r, ctx 
+      | CImpeER (ctx, n, pf, l)  -> impE n l pf, ctx   
+      (* | CimpI   of context * node *)
+      (* | CBotE   of context * node *) 
+      (* | CAllI   of context * node *)
+      (* | CAllE   of context * node * all_elim_info *)
+      (* | CExI    of context * node * ex_intro_info *) 
+      (* | CExEL   of context * node * proof_tree *)
+      (* | CExER   of context * node * proof_tree *)
+      (* | COrI1   of context * node *)
+      (* | COrI2   of context * node *)
+      (* | COrEL   of context * node * proof_tree * proof_tree *)
+      (* | COmEL   of context * node * proof_tree * proof_tree *)
+      (* | COlEL   of context * node * proof_tree * proof_tree *)
+      (* | CEquiv  of context * node * equiv_info *) 
+      (* | CRen    of context * node * ren_info *)
+  
 
 
-        
-    (* | COrEL   of context * node * proof_tree * proof_tree *)
-    (* | COrEM   of context * node * proof_tree * proof_tree *)
-
-
-   
+end
