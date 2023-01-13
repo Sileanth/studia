@@ -58,13 +58,13 @@ let gen_free_var_in_formula t =
 
 let rec free_in_term (v : var) (t : term) = 
   match t with
-  | Var nv      -> nv <> v
-  | Sym (_, ts) -> List.for_all (free_in_term v) ts |> not
+  | Var nv      -> nv = v
+  | Sym (_, ts) -> List.exists (free_in_term v) ts 
 and free_in_formula (v : var) ( f : formula) =
   let zero =
     true
   in let bin a b = 
-    free_in_formula v a && free_in_formula v a
+    free_in_formula v a || free_in_formula v a
   in let kwant f = 
     free_in_formula (v+1) f
   in match f with
@@ -75,7 +75,7 @@ and free_in_formula (v : var) ( f : formula) =
   | Imp (p, s)  -> bin p s 
   | And (p, s)  -> bin p s 
   | Or  (p, s)  -> bin p s 
-  | Rel (_, ts) -> List.for_all (free_in_term v) ts |> not
+  | Rel (_, ts) -> List.exists (free_in_term v) ts 
 
 let rec apply_inc_in_term (inc : int) (t : term) : term =
   match t with 

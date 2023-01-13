@@ -64,7 +64,7 @@ module Make(T : Theory) = struct
     val orI2 : node -> proof_tree -> proof_tree
     val orE : node -> proof_tree -> proof_tree -> proof_tree -> proof_tree
     val equiv_b : node -> equiv_info -> proof_tree -> proof_tree
-    val ren_b : node -> ren_info -> proof_tree -> proof_tree
+    val ren_b : ren_info -> node -> proof_tree -> proof_tree
   end = struct  
     
     type proof_tree =
