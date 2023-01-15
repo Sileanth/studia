@@ -13,7 +13,7 @@ module Make(T : Theory) = struct
   
   module StringMap = Map.Make(String)
   
-  type assump = (string * theorem) list
+  type assump = (formula StringMap.t)
   type free_binding = (var StringMap.t *  string VarMap.t )
   
   type node = formula * assump * free_binding
@@ -93,23 +93,23 @@ module Make(T : Theory) = struct
       | Ren   of node * proof_tree * ren_info
     
     type view = 
-        | VGoal  of goal
-        | VLemat of theorem
-        | VAndI  of node * proof_tree * proof_tree
-        | VAndE1 of node * proof_tree
-        | VAndE2 of node * proof_tree
-        | VImpE  of node * proof_tree * proof_tree
-        | VImpI  of node * proof_tree
-        | VBotE  of node * proof_tree
-        | VAllI  of node * proof_tree
-        | VAllE  of node * proof_tree * all_elim_info 
-        | VExI   of node * proof_tree * ex_intro_info 
-        | VExE   of node * proof_tree * proof_tree
-        | VOrI1  of node * proof_tree
-        | VOrI2  of node * proof_tree
-        | VOrE   of node * proof_tree * proof_tree * proof_tree
-        | VEquiv of node * proof_tree * equiv_info 
-        | VRen   of node * proof_tree * ren_info
+      | VGoal  of goal
+      | VLemat of theorem
+      | VAndI  of node * proof_tree * proof_tree
+      | VAndE1 of node * proof_tree
+      | VAndE2 of node * proof_tree
+      | VImpE  of node * proof_tree * proof_tree
+      | VImpI  of node * proof_tree
+      | VBotE  of node * proof_tree
+      | VAllI  of node * proof_tree
+      | VAllE  of node * proof_tree * all_elim_info 
+      | VExI   of node * proof_tree * ex_intro_info 
+      | VExE   of node * proof_tree * proof_tree
+      | VOrI1  of node * proof_tree
+      | VOrI2  of node * proof_tree
+      | VOrE   of node * proof_tree * proof_tree * proof_tree
+      | VEquiv of node * proof_tree * equiv_info 
+      | VRen   of node * proof_tree * ren_info
 
 
     let view = function 
@@ -314,9 +314,10 @@ module Make(T : Theory) = struct
       | _         -> let npf, nctx = down_left_tree pf ctx in to_the_left_bottom npf nctx
   let rec rek (pf : proof_tree) (ctx : context) : (proof_tree * context) =
     let up () = let npf, nctx = up_proof_tree pf ctx in 
-      to_the_left_bottom npf nctx 
+      rek npf nctx
     in match ctx with 
-      | CRoot  -> up () 
+      | CRoot  -> let npf, nctx = up_proof_tree pf ctx in 
+        to_the_left_bottom npf nctx 
       | CAndIL (ctx, n, r) -> 
           to_the_left_bottom r (CAndIL (ctx, n, pf)) 
       | CImpeEL (c, n, r) ->
@@ -352,12 +353,101 @@ module Make(T : Theory) = struct
           | _       -> failwith "brak niedokończonego celu"
         end
 
+
+  let intro name = function 
+    | Complete _ -> failwith "dowód jest skończony"
+    | Sketch ((f, a, (sb, bs)), ctx) -> match f with
+      | Imp (l,r) -> 
+        begin if StringMap.exists (fun s _ -> s = name ) a  
+          then failwith "nazwa jest zajęta"
+          else 
+            let (ng : goal) = r, (StringMap.add name l a), (sb, bs) 
+            in let parent = CimpI (ctx, (f, a, (sb, bs))) 
+            in Sketch (ng,parent) 
+        end
+      | _ -> failwith "nie jest to implikacja"
+
+  let and_construct = function 
+    | Complete _ -> failwith "dowód jest skończony" 
+    | Sketch ((f, a, (sb, bs)), ctx) -> match f with 
+      | And (l, r) ->
+        let ng = l, a, (sb, bs) in 
+        let r = goal (l, a, (sb, bs)) in 
+        let parent = CAndIL (ctx, ((f, a, (sb, bs))), r) in 
+        Sketch (ng, parent)
+      | _ -> failwith "to nie jest koniunkcja"
+  
+  let and_elim_1 r = function 
+    | Complete _ -> failwith "dowód jest nieskończony"
+    | Sketch ((f, a, fb), ctx) -> 
+        let ng = And (f, r), a, fb in
+        let parent = CAndE1 (ctx, (f,a, fb)) in 
+        Sketch (ng, parent)
+   
+   let and_elim_2 l = function 
+    | Complete _ -> failwith "dowód jest nieskończony"
+    | Sketch ((f, a, fb), ctx) -> 
+        let ng = And (f, l), a, fb in
+        let parent = CAndE2 (ctx, (f,a, fb)) in 
+        Sketch (ng, parent)
+  
+    let or_construct_1 = function 
+      | Complete _ -> failwith "dowód jest skończony" 
+      | Sketch ((f, a, (sb, bs)), ctx) -> match f with 
+        | Or (l, r) ->
+          let ng = l, a, (sb, bs) in 
+          let parent = COrI1 (ctx, ((f, a, (sb, bs)))) in 
+          Sketch (ng, parent)
+        | _ -> failwith "to nie jest koniunkcja"
+    
+    let or_construct_2 = function 
+      | Complete _ -> failwith "dowód jest skończony" 
+      | Sketch ((f, a, (sb, bs)), ctx) -> match f with 
+        | Or (l, r) ->
+          let ng = r, a, (sb, bs) in 
+          let parent = COrI2 (ctx, ((f, a, (sb, bs)))) in 
+          Sketch (ng, parent)
+        | _ -> failwith "to nie jest koniunkcja"
+
+    let forall_intro = function 
+      | Complete _ -> failwith "dowód jest skończony"
+      | Sketch ((f, a, fb), ctx) -> match f with 
+        | All (name, nf) -> 
+          let ng = (apply_inc_in_formula (-1) nf), a, fb in 
+          let parent = CAllI (ctx, (f, a, fb)) in 
+          Sketch (ng, parent)
+        | _ -> failwith "f <> forall"
+
+    let forall_exlim form name (t : term) = function 
+      | Complete _ -> failwith "dowód nie jest skończony"
+      | Sketch ((f, a, fb), ctx) ->
+          let all = All (name, form) in
+          if eq_formula f (subst_in_formula 0 t form) 
+          then 
+            let ng = all, a, fb in  
+            let parent = CAllE (ctx, (f, a, fb), t)
+            in Sketch (ng, parent) 
+          else 
+            failwith "niepoprawna formuła i term" 
+    
+    let rename_kwant name = function 
+      | Complete _ -> failwith "dowód jest skończony" 
+      | Sketch ((f, a, fb), ctx) -> match f with 
+        | All (old_name, af) ->
+            let new_f = All (name, af)
+            in Sketch ((new_f, a, fb), CEquiv (ctx, (f, a, fb), f))
+        | Ex (old_name, af) ->
+          let new_f = Ex (name, af)
+          in Sketch ((new_f, a, fb), CEquiv (ctx, (f, a, fb), f))
+        | _ -> failwith "f <> kwant" 
+
+
+
+
  end
 
 
         
-    (* | COrEL   of context * node * proof_tree * proof_tree *)
-    (* | COrEM   of context * node * proof_tree * proof_tree *)
 
 
    
