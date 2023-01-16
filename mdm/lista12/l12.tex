@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Lista 12}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+\maketitle
+\section*{Zadanie 12}
+
+\subsection*{$MST(G) \leq TSP(G)$}
+Zauważmy że krawędzie wchodzące w skład $TSP(G)$ uspójniają graf. 
+A najmniejszy koszt uspójnienia grafu to $MST(G)$ czyli ta nierównośc zachodzi.
+
+\subsection*{$ 2MST(G) \geq TSP(G)$}
+Zauważmy że jak wybierzemy dowolny wierzchołek z $MST(G)$. I puścimy go w tym drzewie. 
+To odwiedzi on każdy wierzchołek, oraz odwiedzi każda krawędź dokładnie dwa razy 
+(raz w jedną, raz w drugą stronę). Czyli mamy kandydata na $TSP(G)$, 
+którego koszt wynosi $2 MST(G)$. Czyli $TSP(G)$ nie może być większe.
+
+\section*{Zadanie 1}
+Puśmy następującego dfsa w dowolnym punkcie. I w zmiennej
+ ans otrzymamy punkt rozpinający jeśli on istnieje.
+
+\lstinputlisting[language=c++]{low.cpp}
+Mój algorytm to pojedyńczego wywołania dfsa, więc jego złożoność to $O(n+m)$. 
+
+A poprawnośc można uzasadnić w następujący Popatrzmy na drzewo wywołań dfs 
+(Czyli wierzchołki orginalnego grafu oraz krawędzie którymi przeszedł dfs). Kluczowa obserwacja jest taka że wierzchołek może być połączony krawędzia nie drzewiową, tylko z wierzchołkiem który 
+leży na ścieżce między nim a korzeniem. Bo gdyby istniała taka krawędź niedrzewiowa która nie idzie do przodka, to by dfs nią przeszedł, czyli byłaby drzewiowa sprzeczność.
+
+Jeśli korzeń naszego drzewa ma stopień większy niż 1 to jest on punktem artykulacji. 
+Udowodnijmy to: na pewno ten wierzchołek rozspójnia nasze drzewo, ale być może krawędzie które nie weszły
+w skład naszego drzewa, zapobiegają temu. Ale one mogą łączyć tylko wierzchołek i jego przodka, czyli nie mogą łączyć rozłącznych podrzew.
+
+
+Teraz rozpatrzmy pozostałe wierzchołki, policzmy dla nich funkcje low. Czyli jak wysoko można zajść w górę z danego wierzchołka,
+mogąc iść dowolną liczbę razy krawędziami drzewowymi w dół drzewa, i maksymalnie jeden w góre krawędzią niedrzewiową.
+Jeśli low danego wierzchołka jest mniejsze równe od jego głębokości to jest punktem artykulacji. 
+Bo wszystkie krawędzie niedrzewiowe jego potomków, nie mogą wyjść z jego podrzewa.
+
+\section*{Zadanie 2}
+Będę rozważał tutaj grafy spójne. Ale problem dla grafu niespójnego sprowadza się odpaleniu następującego algorytmu dla każdej spójnej i wymaga by każda spójna była dwudzielna.
+
+Graf dwudzielny można pokolorować na 2 kolory, tak by sąsiednie wierzchołki miały różne kolory. Zauważmy że z dokładnością do izomorfizmu istnieje maksymalnie jedno dwukolorowanie (To na który z dwóch kolorów pokolorujemy pierwszy wierzchołek determinuje kolorowanie całego grafu). 
+
+\lstinputlisting[language=c++]{2col.cpp}
+
+Algorytm sprowadza się do dfa, więc jego złożoność wynosi $O(n+m)$.
+
+\section*{Zadanie 3} 
+\lstinputlisting[language=c++]{topo.cpp}
+Obserwacja jest taka że, gdy wierzchołek ma stopień wejściowy równy zero to może 
+on być pierwszy w sortowaniu topologicznym. Dodatkowo możemy wtedy resztę problemu sprowadzić do grafu z usuniętym pierwszym wierzchołkiem (co zmniejsza stopień wejściowy pozostałych wierzchołków).
+
+Złożonośc tego algorytmu wynosi $O(n+m)$. Po pierwsze trzeba wyznaczyć wierzchołki które na start mają $in(x) = 0$ kosztuje to $O(n)$ operacji. W trakcie działania programu usuniemy wszystkie krawędzie, czyli $O(m)$ operacji. I każdy wierzchołek będziemy maksymalnie raz wrzucać na listę wynikową, stąd $O(n)$ operacji. Sumarycznie daję to wymaganą złożoność.
+
+
+\section*{Zadanie 6}
+Załóżmy niewprost że otrzymane drzewo $T$ nie jest $MSP(G)$. weźmy wtedy minimalne $i$ takie że $e_i \in MSP(G) \land e_i \not\in T$. Wtedy istnieje $e_j$ takie że $e_j \in T \land e_j \not\in MSP(G)$, jest tak bo drzewa o takim samym rozmiarze mają tyle samo krawędzi. Zauważmy że 
+
+\section*{Zadanie 7}
+Wystarczy puścić algorytm z zadania 6 tylko dla ujemnych wag krawędzi.
+\end{document}
