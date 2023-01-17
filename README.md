@@ -1,2 +1,2 @@
-# studia
+# Studia
 random bullshit ze studiów
