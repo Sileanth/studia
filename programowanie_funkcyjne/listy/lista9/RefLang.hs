@@ -1,7 +1,11 @@
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE UndecidableInstances #-}
 module RefLang where
 import Control.Monad.ST
 import Data.STRef
+import Control.Monad.Trans.State.Lazy
+import Control.Monad.Fail 
 import qualified Data.Map as Map
 
 type Var = String
@@ -37,6 +41,45 @@ class Monad m => MonadHeap m where
   heapGet :: Loc m -> m (Value m)
   -- Ustawia wartość na stercie pod podaną lokacją
   heapSet :: Loc m -> Value m -> m ()
+--Zadanie 1
+type instance Loc (ST s) = STRef s (Value (ST s))
+
+instance MonadFresh (ST s) where 
+    freshLoc = newSTRef (VNum 0)
+
+
+instance MonadHeap (ST s) where 
+    heapGet = readSTRef 
+    heapSet = writeSTRef 
+
+--Zadanie 2
+type instance Loc (MonadFreshStateT m) = Integer
+
+newtype MonadFreshStateT m a = MonadFreshState (StateT Integer m a)
+  deriving (Functor, Applicative, Monad)
+
+instance Monad m => MonadFresh (MonadFreshStateT m) where
+  freshLoc = MonadFreshState $ do 
+    i <- get 
+    put (i + 1)
+    return i
+--Zadanie 3 
+type instance Loc (MonadHeapMapT m) = Integer
+
+newtype MonadHeapMapT m a = MonadHeapMap (StateT (Map.Map (Loc (MonadHeapMapT m)) (Value (MonadHeapMapT m))) m a)
+  deriving (Functor, Applicative, Monad)
+
+instance Monad m => MonadHeap (MonadHeapMapT m) where 
+    heapGet l = MonadHeapMap $ do  
+        map <- get
+        return $ map Map.! l
+    heapSet l v = MonadHeapMap $ do 
+        map <- get 
+        put $ Map.insert l v map
+        return ()
+
+
+
 
 type Env m = Map.Map String (Value m)
 
@@ -77,7 +120,35 @@ eval env (Seq e1 e2) = do
   eval env e1
   eval env e2
 eval env (Num n) = return $ VNum n
-eval env Inp = fail "input is not implemented"
+eval env Inp = do 
+   i <- inp ()
+   return $ VNum i
 eval env (Out e) = do
   v <- eval env e
-  fail "output is not implemented"
+  case v of 
+    VNum i -> do 
+      out i
+      return v 
+    _ -> fail "Expresion dont evaluate to integer"
+
+
+
+class Monad m => MonadOI m where 
+  inp :: () -> m Integer
+  out :: Integer -> m ()
+
+instance Monad m => MonadOI m where 
+  inp () = return 5
+  out i = return ()
+
+
+instance Monad IO m => MonadOI m where 
+  inp () = do 
+    s <- getLine
+    return (read s :: Integer)
+  out i = do 
+    putStr (show i)
+    return i
+--Zadanie 5
+
+type EvalMonad a =  MonadHeapMapT (MonadFreshStateT (IO ))

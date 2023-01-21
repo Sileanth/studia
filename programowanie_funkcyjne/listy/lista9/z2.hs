@@ -28,7 +28,7 @@ class Monad m => MonadHeap m where
 newtype MonadFreshStateT m a = MonadFreshState (StateT Integer m a)
   deriving (Functor, Applicative, Monad)
 
-type instance Loc (ST s) = STRef s (Value (ST s))
+
 
 type instance Loc (MonadFreshStateT m) = Integer
 
@@ -37,3 +37,23 @@ instance Monad m => MonadFresh (MonadFreshStateT m) where
     i <- get 
     put (i + 1)
     return i
+
+type instance Loc (MonadHeapMapT m) = Integer
+
+
+newtype MonadHeapMapT m a = MonadHeapMap (StateT (Map (Loc (MonadHeapMapT m)) (Value (MonadHeapMapT m))) m a)
+  deriving (Functor, Applicative, Monad)
+
+instance Monad m => MonadHeap (MonadHeapMapT m) where 
+    heapGet l = MonadHeapMap $ do  
+        map <- get
+        return $ map ! l
+    heapSet l v = MonadHeapMap $ do 
+        map <- get 
+        put $ insert l v map
+        return ()
+
+instance Monad m => MonadFail m where 
+    fail s = error s
+
+
