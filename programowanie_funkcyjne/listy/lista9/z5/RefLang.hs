@@ -1,14 +1,12 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE UndecidableInstances #-}
 module RefLang where
-import System.IO
+
 import Control.Monad.ST
 import Data.STRef
 import Control.Monad.Trans.State.Lazy
-import Control.Monad.Fail 
 import qualified Data.Map as Map
-
+import System.IO
 type Var = String
 
 data Expr
@@ -32,6 +30,9 @@ data Value m
   | VFun (Value m -> m (Value m))
   | VLoc (Loc m)
 
+
+
+
 class Monad m => MonadFresh m where
   -- Tworzy świeżą lokację na stercie. Nowej lokacji nie muszą być
   -- przypisane żadne dane.
@@ -42,36 +43,6 @@ class Monad m => MonadHeap m where
   heapGet :: Loc m -> m (Value m)
   -- Ustawia wartość na stercie pod podaną lokacją
   heapSet :: Loc m -> Value m -> m ()
-
-
---Zadanie 2
-type instance Loc (MonadFreshStateT m) = Integer
-
-newtype MonadFreshStateT m a = MonadFreshState (StateT Integer m a)
-  deriving (Functor, Applicative, Monad)
-
-instance Monad m => MonadFresh (MonadFreshStateT m) where
-  freshLoc = MonadFreshState $ do 
-    i <- get 
-    put (i + 1)
-    return i
---Zadanie 3 
-type instance Loc (MonadHeapMapT m) = Integer
-
-newtype MonadHeapMapT m a = MonadHeapMap (StateT (Map.Map (Loc (MonadHeapMapT m)) (Value (MonadHeapMapT m))) m a)
-  deriving (Functor, Applicative, Monad)
-
-instance Monad m => MonadHeap (MonadHeapMapT m) where 
-    heapGet l = MonadHeapMap $ do  
-        map <- get
-        return $ map Map.! l
-    heapSet l v = MonadHeapMap $ do 
-        map <- get 
-        put $ Map.insert l v map
-        return ()
-
-
-
 
 type Env m = Map.Map String (Value m)
 
@@ -113,41 +84,83 @@ eval env (Seq e1 e2) = do
   eval env e2
 eval env (Num n) = return $ VNum n
 eval env Inp = do 
-   i <- inp ()
-   return $ VNum i
+  i <- inp ()
+  return $ VNum i 
 eval env (Out e) = do
   v <- eval env e
   case v of 
-    VNum i -> do 
-      out i
-      return v 
-    _ -> fail "Expresion dont evaluate to integer"
+    VNum v -> out v
+    _ -> fail "not an integer"
 
+
+type instance Loc (MonadHeapMapT m) = Integer
+
+newtype MonadHeapMapT m a = MonadHeapMapT (StateT (Map.Map (Loc (MonadHeapMapT m)) (Value (MonadHeapMapT m))) m a)
+  deriving (Functor, Applicative, Monad)
+
+instance Monad m => MonadHeap (MonadHeapMapT m) where 
+    heapGet l = MonadHeapMapT $ do  
+        map <- get
+        return $ map Map.! l
+    heapSet l v = MonadHeapMapT $ do 
+        map <- get 
+        put $ Map.insert l v map
+        return ()
+
+newtype MonadFreshStateT m a = MonadFreshStateT (StateT Integer m a)
+  deriving (Functor, Applicative, Monad)
+
+type instance Loc (MonadFreshStateT m) = Integer
+
+instance Monad m => MonadFresh (MonadFreshStateT m) where
+  freshLoc = MonadFreshStateT $ do 
+    i <- get 
+    put (i + 1)
+    return i
+
+class MonadTrans t where
+  lift :: Monad m => m a -> t m a
+
+instance MonadTrans (MonadFreshStateT) where
+  -- lift :: Monad m => m a -> EitherT e m a
+  lift action = lift action
+
+instance MonadTrans (MonadHeapMapT) where
+  -- lift :: Monad m => m a -> EitherT e m a
+  lift action = lift action
 
 
 class Monad m => MonadOI m where 
-  inp :: () -> m Integer
-  out :: Integer -> m ()
-
-
-
-
-
---Zadanie 5
+  inp :: () -> m Integer 
+  out :: Integer -> m (Value a)
 
 instance MonadOI IO where 
   inp () = do 
-    s <- getLine
-    return (read s :: Integer)
-  out i = do 
-    putStr (show i)
-    return ()
+    x <- getLine 
+    return (read x:: Integer)
+  out (i :: Integer) = do 
+    print i 
+    return $ VNum i
+
+instance (MonadFail EvalMonad) where
+  fail str = lift $ lift $ fail str
+
+instance (MonadFresh EvalMonad) where 
+  freshLoc = lift $ freshLoc
+
+instance (MonadOI (MonadFreshStateT IO)) where 
+  inp () = lift $ inp ()
+  out i = lift $ out i
+
+instance (MonadOI EvalMonad) where 
+  inp () = lift $ inp ()
+  out i = lift $ out i
 
 
 
-type EvalMonad a =  MonadHeapMapT (MonadFreshStateT ( IO  ))
+type EvalMonad = MonadHeapMapT (MonadFreshStateT IO)
 
-main :: EvalMonad a ()
-main = do 
-  eval Map.empty (Out (Num 5))
-  return ()
+
+main :: EvalMonad  (Value EvalMonad )
+main = eval Map.empty (Out Inp)
+

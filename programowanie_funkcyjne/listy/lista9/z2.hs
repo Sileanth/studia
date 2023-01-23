@@ -28,8 +28,6 @@ class Monad m => MonadHeap m where
 newtype MonadFreshStateT m a = MonadFreshState (StateT Integer m a)
   deriving (Functor, Applicative, Monad)
 
-
-
 type instance Loc (MonadFreshStateT m) = Integer
 
 instance Monad m => MonadFresh (MonadFreshStateT m) where
