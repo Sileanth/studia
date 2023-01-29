@@ -1,0 +1,126 @@
+effect Reader X =
+  { ask : Unit => Option X
+  }
+
+effect Tape X = 
+    { 
+        left : Unit => Unit; 
+        right : Unit => Unit;
+        put   : X => Unit; 
+        get   : Unit => X
+    }
+effect Writer X = 
+{
+    write : X => Unit
+}
+
+
+let hReadString str c =
+  handle c () with
+  | ask () => fn pos =>
+    if pos >= String.length str then
+      resume None pos
+    else
+      resume (Some (String.get pos str)) (pos+1)
+  | return  x => fn _ => x
+  end 0
+
+data rec BF =
+| MoveR
+| MoveL
+| Inc
+| Dec
+| Output
+| Input
+| While of List BF
+
+let parse str =
+  let rec parse () =
+    match ask () with
+    | None   => []
+    | Some c =>
+      if   Char.equal c '>' then MoveR  :: parse ()
+      elif Char.equal c '<' then MoveL  :: parse ()
+      elif Char.equal c '+' then Inc    :: parse ()
+      elif Char.equal c '-' then Dec    :: parse ()
+      elif Char.equal c '.' then Output :: parse ()
+      elif Char.equal c ',' then Input  :: parse ()
+      elif Char.equal c '[' then
+        begin let body = parse () in
+          While body :: parse ()
+        end
+      elif Char.equal c ']' then []
+      else parse ()
+    end
+  in
+  handle parse () with hReadString str
+
+(** Odczytanie pojedynczego znaku ze standardowego wejścia *)
+let tryReadChar () =
+  let str = input stdin 1 in
+  if String.length str = 1 then
+    Some (String.get 0 str)
+  else None
+
+(** Wypisanie pojedynczego znaku na standardowe wyjście *)
+let printChar c =
+  outputString stdout (String.repeat 1 c)
+
+(* Do konwersji pomiędzy typami Char i Int możesz użyć funkcji
+* Char.chr oraz Char.code *)
+
+
+let rec eval exps = 
+    match exps with 
+    | []               => ()
+    | MoveR :: exps    => right (); eval exps
+    | MoveL :: exps    => left (); eval exps
+    | Inc :: exps      => put (get () + 1); eval exps
+    | Dec :: exps      => put (get () - 1); eval exps
+    | Output :: exps   => write (Char.chr(get ())); eval exps
+    | Input :: exps    => match ask () with
+        | None => ()
+        | Some x => put (Char.code x); eval exps
+        end
+    | While bfs :: exps => match get () = 0 with 
+        | True  => eval exps
+        | False => eval bfs; eval (While bfs :: exps)
+        end
+    end
+
+let hReader f = 
+    handle f () with 
+    | ask () => resume (tryReadChar ())
+    end
+
+let hWriter f = 
+    handle f () with 
+    | write x => printChar x; resume ()
+    end 
+
+let hTape f = 
+    handle f () with
+    | return x => fn st => x
+    | left () => fn st => match st with 
+        | (ls, x, r :: rs) => resume () (x :: ls, r, rs)
+        | (ls, x, [])      => resume () (x :: ls, 0, [])
+        end
+    | right () => fn st => match st with 
+        | (l :: ls, x,  rs) => resume () (ls, l, x:: rs)
+        | ([], x, rs)      => resume () ([], 0, x :: rs)
+        end
+    | get () => fn st => match st with 
+        | (_, x, _) => resume x st
+        end
+    | put x => fn st => match st with 
+        | (l, _, r) => resume () (l, x, r)
+        end
+    end ([], 0, [])
+
+
+
+let hEval exps = 
+   handle (handle (handle eval exps with hTape) with hReader) with hWriter
+    
+let run str = 
+    hEval (parse str)
