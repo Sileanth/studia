@@ -1,0 +1,44 @@
+module Set =
+  functor (X : sig
+    type this
+    val equal : this -> this -> Bool
+  end) :
+sig
+  type this
+  val empty : this
+  val add   : X -> this -> this
+  val mem   : X -> this -> Bool
+end => struct
+  data rec this = [] | (::) of X, this
+
+  let empty = []
+  let rec add z xs =
+    match xs with
+    | []      => z :: []
+    | x :: xs =>
+      match X.equal z x with
+      | True  => x :: xs
+      | False => x :: add z xs
+      end
+    end
+  let rec mem z xs =
+    match xs with
+    | []      => False
+    | x :: xs =>
+      match X.equal z x with
+      | True  => True
+      | False => mem z xs
+      end
+    end
+end
+
+module AB = struct
+  data this = A | B
+  let equal x y =
+    match x, y with
+    | A, A => True
+    | B, B => True
+    | _    => False
+    end
+end
+module M1 = Set(AB)

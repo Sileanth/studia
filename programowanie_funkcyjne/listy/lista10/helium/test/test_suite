@@ -1,0 +1,87 @@
+
+function simple_run_tests {
+	simple_test "test/arrays.he"
+	simple_test "test/exTypes.he"
+	simple_test "test/firstClassHandlers.he"
+	simple_test "test/functorApp.he"
+	simple_test "test/higherOrderFunctor.he"
+	simple_test "test/ifStatement.he"
+	simple_test "test/includeModule.he"
+	simple_test "test/LAT_swap.he"
+	simple_test "test/localState.he"
+	simple_test "test/patternMatch2.he"
+	simple_test "test/polymorphicEffect.he"
+  simple_test "test/recFun.he"
+  simple_test "test/repackModule.he"
+  simple_test "test/shiftReset.he"
+  simple_test "test/triples.he"
+  simple_test "test/unify_fail.he"
+}
+
+run_with_flags simple_run_tests "-eval-am"
+run_with_flags simple_run_tests "-eval-ucps"
+
+function typecheck_tests {
+	simple_test "test/arith.he"
+	simple_test "test/compose.he"
+	simple_test "test/exTypes.he"
+	simple_test "test/ifStatement.he"
+	simple_test "test/intState.he"
+	simple_test "test/firstClassHandlers.he"
+	simple_test "test/fixType.he"
+	simple_test "test/functor.he"
+	simple_test "test/functorApp.he"
+	simple_test "test/higherOrderFunctor.he"
+	simple_test "test/includeModule.he"
+	simple_test "test/libTest.he"
+	simple_test "test/lists.he"
+	simple_test "test/localEffect.he"
+	simple_test "test/localState.he"
+	simple_test "test/moduleAnnot.he"
+	simple_test "test/namespaces.he"
+	simple_test "test/patternMatch.he"
+	simple_test "test/patternMatch2.he"
+	simple_test "test/polymorphicEffect.he"
+	simple_test "test/polymorphicFields.he"
+	simple_test "test/polymorphicRecursion.he"
+	simple_test "test/recEffect.he"
+	simple_test "test/recFun.he"
+	simple_test "test/records.he"
+	simple_test "test/repackModule.he"
+	simple_test "test/signatures.he"
+	simple_test "test/structures.he"
+	simple_test "test/synonymParams.he"
+	simple_test "test/thisTypes.he"
+	simple_test "test/typesAsNamespaces.he"
+	simple_test "test/LAT_datatypes.he"
+}
+
+run_with_flags typecheck_tests "-simpl-schemes -explicit -typecheck"
+run_with_flags typecheck_tests "-simpl-schemes -core -typecheck"
+run_with_flags typecheck_tests "-no-simpl-schemes -explicit -typecheck"
+run_with_flags typecheck_tests "-no-simpl-schemes -core -typecheck"
+
+function auto_lift_tests {
+	simple_test "test/autoLift1.he"
+	simple_test "test/LAT_swap.he"
+	simple_test "test/unify_fail.he"
+}
+
+run_with_flags auto_lift_tests "-auto-lift -explicit -typecheck"
+run_with_flags auto_lift_tests "-auto-lift -core -typecheck"
+
+function example_tests {
+	simple_test "examples/ParserGen/hpg.he"
+	simple_test "examples/RegExpr/RegExpr.he"
+	simple_test "examples/Unification/Infer.he"
+	simple_test "examples/Unification/UnifyTest.he"
+}
+
+run_with_flags example_tests "-simpl-schemes -explicit -typecheck"
+run_with_flags example_tests "-simpl-schemes -core -typecheck"
+
+function typechecker_issues {
+	exit_code_test 1 "test/autoLift.he"
+}
+
+run_with_flags typechecker_issues "-auto-lift -core -typecheck"

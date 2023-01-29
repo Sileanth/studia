@@ -1,0 +1,32 @@
+effect BT =
+  { amb  : Unit => Bool
+  ; fail : Unit => a
+  }
+
+let handleBT =
+  handle
+  | amb  () => resume True; resume False
+  | fail () => ()
+  end
+
+let rec pickNat n =
+  if n < 1 then fail ()
+  elif amb () then pickNat (n - 1)
+  else n
+
+let maxNat = 13
+
+let printTripple a b c =
+  printStr ("a = " ++ stringOfInt a
+    ++ " b = " ++ stringOfInt b
+    ++ " c = " ++ stringOfInt c ++ "\n")
+
+let _ =
+  handle
+    let a = pickNat maxNat
+    let b = pickNat maxNat
+    let c = pickNat maxNat
+    in
+    if a*a + b*b <> c*c then fail ();
+    printTripple a b c
+  with handleBT

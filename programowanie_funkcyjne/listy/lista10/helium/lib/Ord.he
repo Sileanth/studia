@@ -1,0 +1,16 @@
+include Datatypes.Ord
+
+let pair cmp1 cmp2 (a1, a2) (b1, b2) =
+  match cmp1 a1 b1 with
+  | LT => LT
+  | GT => GT
+  | EQ => cmp2 a2 b2
+  end
+
+let rec list cmp xs ys =
+  match xs, ys with
+  | [],      []      => EQ
+  | [],      _ :: _  => LT
+  | _ :: _,  []      => GT
+  | x :: xs, y :: ys => pair cmp (list cmp) (x, xs) (y, ys)
+  end

@@ -1,0 +1,20 @@
+data rec Term Sig X =
+| Var of X
+| Sym of Sig (Term Sig X)
+
+let rec map fmap f tm =
+  match tm with
+  | Var x => Var (f x)
+  | Sym s => Sym (fmap (map fmap f) s)
+  end
+
+(* Type synonyms may have parameters *)
+type Arrow A E B = A ->[E] B
+
+let arrow_map f (m : Arrow _ _ _) : Arrow _ _ _ =
+  fn x => f (m x)
+
+(* type synonyms are reduced very early, so in extreme cases heavy type
+  annotations are needed *)
+let arrow_term_map f tm =
+  (map arrow_map f : Term (Arrow _ _) _ -> Term (Arrow _ _) _) tm

@@ -1,0 +1,3 @@
+
+(** Prints generated code to stdout *)
+val printCode : LR0Automaton ->[IO,Errors] Unit

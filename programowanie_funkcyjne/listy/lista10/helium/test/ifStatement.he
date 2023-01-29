@@ -1,0 +1,10 @@
+let _ = if 2 > 3 then printInt 42
+let foo b1 b2 =
+  if b1 then
+    if b2 then printInt 0
+    else printInt 1
+let _ =
+  foo True True;
+  foo True False;
+  printInt (if True then 42 else 21);
+  foo False

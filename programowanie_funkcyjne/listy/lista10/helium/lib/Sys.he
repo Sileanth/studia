@@ -1,0 +1,4 @@
+
+let args = (extern "helium_getArgs" : Unit ->[IO] List String) ()
+
+let exit (type T) = extern "helium_exit" : Int ->[IO] T

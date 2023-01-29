@@ -1,0 +1,8 @@
+
+module Test = struct
+  data this X = Pack of X
+
+  let unpack (Pack x) = x
+end
+
+let repack (type A) (x : Test A) = Test.Pack (Test.unpack x)

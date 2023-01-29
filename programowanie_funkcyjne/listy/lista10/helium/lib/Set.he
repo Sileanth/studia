@@ -1,0 +1,342 @@
+(* Finite sets based on 2-3 trees *)
+
+module this(Elt :
+  sig
+    type this
+    val compare : this -> this -> Ord
+  end) :
+sig
+  type this
+
+  val empty     : this
+  val singleton : Elt -> this
+  val add       : Elt -> this -> this
+  val remove    : Elt -> this -> this
+  val mem       : Elt -> this -> Bool
+  val iter      : (Elt ->[|r] Unit) -> this ->[|r] Unit
+  val size      : this -> Int
+  val toList    : this -> List Elt
+end = struct
+  data rec Tree =
+  | Leaf
+  | Node2 of Tree, Elt, Tree
+  | Node3 of Tree, Elt, Tree, Elt, Tree
+
+  data this =
+    { size : Int
+    ; tree : Tree
+    }
+
+  data ATree =
+  | ADone  of Tree
+  | ANode2 of Tree, Elt, Tree
+  
+  data RTree =
+  | RDone  of Tree
+  | RRem   of Tree (* depth of tree was decreased *)
+  
+  data LPart =
+  | LPart2 of Tree, Elt
+  | LPart3 of Tree, Elt, Tree, Elt
+  
+  data RPart =
+  | RPart2 of Elt, Tree
+  | RPart3 of Elt, Tree, Elt, Tree
+
+  effect TreeSize =
+    { inc_size : Unit => Unit
+    ; dec_size : Unit => Unit
+    }
+
+  let withSize m f =
+    handle f () with
+    | return tree => fn size => { size = size; tree = tree }
+    | inc_size () => fn size => resume () (size + 1)
+    | dec_size () => fn size => resume () (size - 1)
+    end m.size
+  
+  let ofATree t =
+    match t with
+    | ADone  t     => t
+    | ANode2 l x r => Node2 l x r
+    end
+  
+  let ofRTree t =
+    match t with
+    | RDone t => t
+    | RRem  t => t
+    end
+
+  let aNode2_AT l k r =
+    match l with
+    | ADone  l        => Node2 l k r
+    | ANode2 ll lk lr => Node3 ll lk lr k r
+    end
+
+  let aNode2_TA l k r =
+    match r with
+    | ADone  r        => Node2 l k r
+    | ANode2 rl rk rr => Node3 l k rl rk rr
+    end
+
+  let aNode3_ATT l k1 m k2 r =
+    match l with
+    | ADone  l        => ADone  (Node3 l k1 m k2 r)
+    | ANode2 ll lk lr => ANode2 (Node2 ll lk lr) k1 (Node2 m k2 r)
+    end
+
+  let aNode3_TAT l k1 m k2 r =
+    match m with
+    | ADone  m        => ADone  (Node3 l k1 m k2 r)
+    | ANode2 ml mk mr => ANode2 (Node2 l k1 ml) mk (Node2 mr k2 r)
+    end
+
+  let aNode3_TTA l k1 m k2 r =
+    match r with
+    | ADone  r        => ADone  (Node3 l k1 m k2 r)
+    | ANode2 rl rk rr => ANode2 (Node2 l k1 m) k2 (Node2 rl rk rr)
+    end
+
+  let rNode2_RT l k r =
+    match l with
+    | RDone l => RDone (Node2 l k r)
+    | RRem  l =>
+      match r with
+      | Leaf           => RRem (Node2 l k Leaf)  (* Impossible case *)
+      | Node2 rl rk rr => RRem (Node3 l k rl rk rr)
+      | Node3 rl rk1 rm rk2 rr =>
+        RDone (Node2 (Node2 l k rl) rk1 (Node2 rm rk2 rr))
+      end
+    end
+
+  let rNode2_TR l k r =
+    match r with
+    | RDone r => RDone (Node2 l k r)
+    | RRem  r =>
+      match l with
+      | Leaf           => RRem (Node2 Leaf k r)  (* Impossible case *)
+      | Node2 ll lk lr => RRem (Node3 l lk lr k r)
+      | Node3 ll lk1 lm lk2 lr =>
+        RDone (Node2 (Node2 ll lk1 lm) lk2 (Node2 lr k r))
+      end
+    end
+
+  let rNode3_RTT l k1 m k2 r =
+    match l with
+    | RDone l => RDone (Node3 l k1 m k2 r)
+    | RRem  l =>
+      match m with
+      | Leaf           => RRem (Node3 l k1 Leaf k2 r) (* Impossible case *)
+      | Node2 ml mk mr => RDone (Node2 (Node3 l k1 ml mk mr) k2 r)
+      | Node3 ml mk1 mm mk2 mr =>
+        RDone (Node3 (Node2 l k1 ml) mk1 (Node2 mm mk2 mr) k2 r)
+      end
+    end
+
+  let rNode3_TRT l k1 m k2 r =
+    match m with
+    | RDone m => RDone (Node3 l k1 m k2 r)
+    | RRem  m =>
+      match l with
+      | Leaf           => RRem (Node3 Leaf k1 m k2 r) (* Impossible case *)
+      | Node2 ll lk lr => RDone (Node2 (Node3 ll lk lr k1 m) k2 r)
+      | Node3 ll lk1 lm lk2 lr =>
+        RDone (Node3 (Node2 ll lk1 lm) lk2 (Node2 lr k1 m) k2 r)
+      end
+    end
+
+  let rNode3_TTR l k1 m k2 r =
+    match r with
+    | RDone r => RDone (Node3 l k1 m k2 r)
+    | RRem  r =>
+      match m with
+      | Leaf           => RRem (Node3 l k1 Leaf k2 r) (* Impossible case *)
+      | Node2 ml mk mr => RDone (Node2 l k1 (Node3 ml mk mr k2 r))
+      | Node3 ml mk1 mm mk2 mr =>
+        RDone (Node3 l k1 (Node2 ml mk1 mm) mk2 (Node2 mr k2 r))
+      end
+    end
+
+  let remA t =
+    match t with
+    | ADone  t     => RRem t
+    | ANode2 l k r => RDone (Node2 l k r)
+    end
+
+  let rightSubtree t =
+    match t with
+    | Leaf              => None
+    | Node2 l k r       => Some (LPart2 l k, r)
+    | Node3 l k1 m k2 r => Some (LPart3 l k1 m k2, r)
+    end
+
+  let leftSubtree t =
+    match t with
+    | Leaf              => None
+    | Node2 l k r       => Some (l, RPart2 k r)
+    | Node3 l k1 m k2 r => Some (l, RPart3 k1 m k2 r)
+    end
+
+  let fillRPart l rp =
+    match rp with
+    | RPart2 k r       => Node2 l k r
+    | RPart3 k1 m k2 r => Node3 l k1 m k2 r
+    end
+
+  let fillLPart lp r =
+    match lp with
+    | LPart2 l k       => Node2 l k r
+    | LPart3 l k1 m k2 => Node3 l k1 m k2 r
+    end
+
+  let joinParts lp m rp =
+    match lp with
+    | LPart2 l k1 =>
+      match rp with
+      | RPart2 k2 r       => ADone (Node3 l k1 m k2 r)
+      | RPart3 k2 rm k3 r => ANode2 (Node2 l k1 m) k2 (Node2 rm k3 r)
+      end
+    | LPart3 l k1 lm k2 => ANode2 (Node2 l k1 lm) k2 (fillRPart m rp)
+    end
+
+  let treeAdd k t =
+    let rec add t =
+      match t with
+      | Leaf =>
+        inc_size ();
+        ANode2 Leaf k Leaf
+      | Node2 t1 k1 t2 =>
+        match Elt.compare k k1 with
+        | LT => ADone (aNode2_AT (add t1) k1 t2)
+        | EQ => ADone (Node2 t1 k t2)
+        | GT => ADone (aNode2_TA t1 k1 (add t2))
+        end
+      | Node3 t1 k1 t2 k2 t3 =>
+        match Elt.compare k k1 with
+        | LT => aNode3_ATT (add t1) k1 t2 k2 t3
+        | EQ => ADone (Node3 t1 k t2 k2 t3)
+        | GT =>
+          match Elt.compare k k2 with
+          | LT => aNode3_TAT t1 k1 (add t2) k2 t3
+          | EQ => ADone (Node3 t1 k1 t2 k t3)
+          | GT => aNode3_TTA t1 k1 t2 k2 (add t3)
+          end
+        end
+      end
+    in add t
+
+  let rec treeMerge l r =
+    match rightSubtree l with
+    | None => ADone r
+    | Some (p1, ls) =>
+      match leftSubtree r with
+      | None => ADone l
+      | Some (rs, p2) =>
+        match treeMerge ls rs with
+        | ADone m         => joinParts p1 m p2
+        | ANode2 ml mk mr =>
+          ANode2 (fillLPart p1 ml) mk (fillRPart mr p2)
+        end
+      end
+    end
+
+  let treeRemove k t =
+    let rec remove t =
+      match t with
+      | Leaf           => RDone Leaf
+      | Node2 t1 k1 t2 =>
+        match Elt.compare k k1 with
+        | LT => rNode2_RT (remove t1) k1 t2
+        | EQ =>
+          dec_size ();
+          remA (treeMerge t1 t2)
+        | GT => rNode2_TR t1 k1 (remove t2)
+        end
+      | Node3 t1 k1 t2 k2 t3 =>
+        match Elt.compare k k1 with
+        | LT => rNode3_RTT (remove t1) k1 t2 k2 t3
+        | EQ =>
+          dec_size ();
+          RDone (aNode2_AT (treeMerge t1 t2) k2 t3)
+        | GT =>
+          match Elt.compare k k2 with
+          | LT => rNode3_TRT t1 k1 (remove t2) k2 t3
+          | EQ =>
+            dec_size ();
+            RDone (aNode2_TA t1 k1 (treeMerge t2 t3))
+          | GT => rNode3_TTR t1 k1 t2 k2 (remove t3)
+          end
+        end
+      end
+    in remove t
+
+  let mem k s =
+    let rec mem t =
+      match t with
+      | Leaf => False
+      | Node2 t1 k1 t2 =>
+        match Elt.compare k k1 with
+        | LT => mem t1
+        | EQ => True
+        | GT => mem t2
+        end
+      | Node3 t1 k1 t2 k2 t3 =>
+        match Elt.compare k k1 with
+        | LT => mem t1
+        | EQ => True
+        | GT =>
+          match Elt.compare k k2 with
+          | LT => mem t2
+          | EQ => True
+          | GT => mem t3
+          end
+        end
+      end
+    in mem s.tree
+
+  let rec treeIter f t =
+    match t with
+    | Leaf => ()
+    | Node2 t1 k1 t2 =>
+      treeIter f t1;
+      f k1;
+      treeIter f t2
+    | Node3 t1 k1 t2 k2 t3 =>
+      treeIter f t1;
+      f k1;
+      treeIter f t2;
+      f k2;
+      treeIter f t3
+    end
+
+  let rec treeToList t acc =
+    match t with
+    | Leaf => acc
+    | Node2 t1 k1 t2 =>
+      treeToList t1 (k1 :: treeToList t2 acc)
+    | Node3 t1 k1 t2 k2 t3 =>
+      treeToList t1 (k1 :: treeToList t2 (k2 :: treeToList t3 acc))
+    end
+
+  let empty = 
+    { size = 0
+    ; tree = Leaf
+    }
+
+  let singleton k =
+    { size = 0
+    ; tree = Node2 Leaf k Leaf
+    }
+
+  let add k s =
+    handle ofATree (treeAdd k s.tree) with withSize s
+
+  let remove k s =
+    handle ofRTree (treeRemove k s.tree) with withSize s
+
+  let iter f s = treeIter f s.tree
+
+  let size s = s.size
+
+  let toList s = treeToList s.tree []
+end

@@ -1,0 +1,65 @@
+
+let rec nth xs n =
+  match xs with
+  | []      => runtimeError "Unknown index"
+  | x :: xs =>
+    if n = 0 then x else nth xs (n-1)
+  end
+
+let rec updateList xs n v =
+  match xs with
+  | []      => []
+  | x :: xs =>
+    if n = 0 then v :: xs
+    else x :: updateList xs (n-1) v
+  end
+
+data Set T = T of Int
+
+let insEnd e =
+  let rec aux acc xs cont =
+    match xs with
+    | []      => cont acc (e :: [])
+    | x :: xs => aux (acc + 1) xs (fn n ys => cont n (x :: ys))
+    end
+  in aux 0
+
+effect UF T =
+  { new    : T    => Int
+  ; lookup : Int  => Either Int T
+  ; update : Int, (Either Int T) => Unit
+  }
+
+let rec findInt x =
+  match lookup x with
+  | Right t => (x, t)
+  | Left y  =>
+    let (y, t) = findInt y in
+    update x (Left y);
+    (y, t)
+  end
+
+let rec find x =
+  let (T x) = x in
+  let (_, t) = findInt x in
+  t
+
+let union f x y =
+  let (T x) = x
+  let (T y) = y
+  let (x, t1) = findInt x
+  let (y, t2) = findInt y in
+  if not (x = y)
+  then
+    (update x (Right (f t1 t2));
+    update y (Left x))
+
+let withUF f =
+  handle f () with
+  | return b   => fn _ => b
+  | new e      => fn l => insEnd (Right e) l resume
+  | lookup x   => fn l => resume (nth l x) l
+  | update x v => fn l => resume () (updateList l x v)
+  end []
+
+let new x = T (new x)

@@ -1,0 +1,198 @@
+open Unify
+
+module S =
+struct
+  type this = String
+  module SS = List.Search(String)
+  let assocH (type E1 E2 V X) (c : Unit -> [Assoc this E1 V, E1, E2] X) =
+  handle c () with
+  | assoc x new / r => fn xs =>
+    handle SS.assoc x xs with
+    | not_found () =>
+      let v = new ()
+      in r v ((x, v) :: xs)
+    | return v => r v xs
+    end
+  | return v => fn xs => v, xs
+  end []
+  let print s = s
+end
+
+data rec Expr A  = Expr of EData A, A
+and data EData A = EVar of String | EApp of Expr A, Expr A | EFun of String, String, Expr A
+                 | ETrue | EFalse | EIf of Expr A, Expr A, Expr A
+                 | EThrow of Expr A, Expr A | ECallCC of String, Expr A
+
+module TypS =
+struct
+
+  data this T = TArr of T, T | TBool | TCont of T
+
+  let print t p =
+    match t with
+    | TArr t1 t2 => "(" ++ p t1 ++ " -> " ++ p t2 ++ ")"
+    | TCont t => "⟨" ++ p t ++ "⟩"
+    | TBool => "bool"
+    end
+
+  let fmap f t =
+    match t with
+    | TArr t1 t2 => TArr (f t1) (f t2)
+    | TCont t    => TCont (f t)
+    | TBool      => TBool
+    end
+
+  let zipWith f t u =
+    match t, u with
+    | TArr t1 t2, TArr u1 u2 => TArr (f t1 u1) (f t2 u2)
+    | TArr _ _, _            => error (t, u)
+    | TCont t, TCont u       => TCont (f t u)
+    | TCont _, _             => error (t, u)
+    | TBool, TBool           => TBool
+    | TBool, _               => error (t, u)
+    end
+
+end
+
+let rec printT t =
+  match t with
+  | Term f => TypS.print f printT
+  | Var s  => s
+  end
+
+open Env
+module U = Unify(TypS)(S)
+module E = EnvEq(String)
+
+data TCError = TCENotFound of String | TCEMismatch of String, String | TCECirc
+
+module Infer =
+struct
+  open Fresh
+  open type TypS
+
+  let fresh_tvar () = Var (fresh "t")
+
+  let rec infer e =
+    match e with
+    | EVar x => EVar x, get x
+    | EApp e1 e2 =>
+      let t1 = fresh_tvar () in
+      let t2 = fresh_tvar () in
+      let t  = Term (TArr t1 t2) in
+      EApp (check e1 t) (check e2 t1), t2
+    | EFun f x e =>
+      let t1 = fresh_tvar () in
+      let t2 = fresh_tvar () in
+      let t  = Term (TArr t1 t2) in
+      handle
+        EFun f x (check e t2), t
+      with E.extend [(f, t), (x, t1)]
+    | ETrue  => ETrue,  Term TBool
+    | EFalse => EFalse, Term TBool
+    | EIf ep et ef =>
+      let t = fresh_tvar () in
+      EIf (check ep (Term TBool)) (check et t) (check ef t), t
+    | EThrow ec ev =>
+      let t  = fresh_tvar ()
+      let tc = Term (TCont t)
+      let tr = fresh_tvar () in
+      EThrow (check ec tc) (check ev t), tr
+    | ECallCC x e =>
+      let t  = fresh_tvar ()
+      let tc = Term (TCont t) in
+      handle
+        ECallCC x (check e t), t
+      with E.extend [(x, tc)]
+    end
+
+  and check (Expr e ()) t =
+    let (e, t') = infer e in
+    let t  = U.convert t  in
+    let t' = U.convert t' in
+    U.unify t t';
+    Expr e t
+
+  let rec projD e =
+    match e with
+    | EVar x => EVar x
+    | EApp e1 e2 =>
+      EApp (projE e1) (projE e2)
+    | EFun f x e =>
+      EFun f x (projE e)
+    | ETrue  => ETrue
+    | EFalse => EFalse
+    | EIf ep et ef =>
+      EIf (projE ep) (projE et) (projE ef)
+    | EThrow ec ev =>
+      EThrow (projE ec) (projE ev)
+    | ECallCC x e =>
+      ECallCC x (projE e)
+    end
+  and projE (Expr e t) =
+    Expr (projD e) (U.project t)
+
+  let typecheck e =
+    handle
+      let ue =
+        handle check e (fresh_tvar ())
+        with
+          E.withEnv E.emptyEnv $>
+          handle
+          | error s => error (TCENotFound s)
+          end $>
+          U.sealH $>
+          assertNoError "Enforced as invariant by inference."
+      in projE ue
+    with
+      U.unifyH $>
+      handle
+      | error m =>
+        error
+        match m with
+        | UECirc => TCECirc
+        | UEMismatch t1 t2 => TCEMismatch (TypS.print t1 (fn _ => "?")) (TypS.print t2 (fn _ => "?"))
+        end
+      end $>
+      freshStr
+
+end :
+sig
+
+  val typecheck : Expr Unit ->[IO, Error TCError] Expr (Term TypS String)
+
+end
+
+let chckNPrint e =
+  handle
+    let Expr e t = Infer.typecheck e
+    in printStr (printT t ++ "\n")
+  with
+  | error e =>
+    match e with
+    | TCENotFound x => printStr ("Variable not found: " ++ x ++ "\n")
+    | TCEMismatch x1 x2 => printStr ("Type mismatch: " ++ x1 ++ " and " ++ x2 ++ "\n")
+    | TCECirc => printStr ("Circularity in type constraints\n")
+    end
+  end
+
+let fun f x e = Expr (EFun f x e) ()
+let var x = Expr (EVar x) ()
+let app e1 e2 = Expr (EApp e1 e2) ()
+let callcc x e = Expr (ECallCC x e) ()
+let throw e1 e2 = Expr (EThrow e1 e2) ()
+let etrue  = Expr ETrue  ()
+let efalse = Expr EFalse ()
+let eif e1 e2 e3 = Expr (EIf e1 e2 e3) ()
+
+let e1 = fun "id" "x" (var "x")
+let e2 = fun "id" "x" (app (var "x") (var "x"))
+let e3 = fun "f" "x" (callcc "y" (eif (var "x") (throw (var "y") efalse) (var "f")))
+let e4 = fun "f" "x" (app (var "f") (var "x"))
+let e5 = fun "f" "x" (app (var "f") (var "y"))
+
+let _ = printStr "e1: "; chckNPrint e1
+let _ = printStr "e2: "; chckNPrint e2
+let _ = printStr "e3: "; chckNPrint e3
+let _ = printStr "e4: "; chckNPrint e4
+let _ = printStr "e5: "; chckNPrint e5

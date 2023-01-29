@@ -1,0 +1,19 @@
+
+data this =
+  { source : String
+  }
+
+effect Setter =
+  { set_source : String => Unit
+  }
+
+let setterHandler f =
+  handle f () with
+  | return () => fn settings => settings
+  | set_source fname => fn settings =>
+    resume ()
+      { source = fname
+      }
+  end
+    { source = "<notset>"
+    }

@@ -1,0 +1,19 @@
+data rec List A = Nil | Cons of A, List A
+
+data Option A = None | Some of A
+
+let map_opt f l =
+  effect Stop X = { stop : Unit => X } in
+  let rec loop xs =
+    match xs with
+    | Nil       => Nil
+    | Cons x xs =>
+      match f x with
+      | None   => stop ()
+      | Some y => Cons y (loop xs)
+      end
+    end in
+  handle loop l with
+  | stop ()  => None
+  | return l => Some l
+  end

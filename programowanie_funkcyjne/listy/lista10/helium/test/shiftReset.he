@@ -1,0 +1,149 @@
+(* An implementation of shift0 and shift. *)
+
+effect Ctrl O R =
+  { shift0 : type A. ((A ->[|R] O) ->[|R] O) => A }
+
+let reset c =
+  handle c () with
+    | return v => v
+    | shift0 v => v resume
+  end
+
+let _ = printInt (100 + reset (fn () => 10 + shift0 (fn k => k (k 1))))
+let _ = printInt (reset (fn () => 100 + (reset (fn () => 10 + shift0 (fn _ => shift0 (fn _ => 1))))))
+
+(**********)
+
+let copy xs =
+  let rec visit xs =
+    match xs with
+    | [] => []
+    | x :: xs => visit (shift0 (fn k => x :: (k xs)))
+    end
+  in reset (fn () => visit xs)
+
+let stringOfIntList xs =
+  let rec loop xs =
+    match xs with
+    | [] => ""
+    | x :: xs => ", " ++ stringOfInt x ++ loop xs
+    end
+  in match xs with
+     | [] => "[]"
+     | x :: xs => "[" ++ stringOfInt x ++ loop xs ++ "]"
+     end
+
+let _ = printStr (stringOfIntList (copy [1,2,3]) ++ "\n")
+
+let rev xs =
+  let rec visit (type R) xs : _ / [Ctrl _ R |R]  =
+    match xs with
+    | [] => []
+    | x :: xs => shift0 (fn k => reset (fn () => x :: k (visit xs)))
+    end
+  in reset (fn () => visit xs)
+
+let _ = printStr (stringOfIntList (rev [1,2,3]) ++ "\n")
+
+(* The following two examples do not type check due to the lack
+of answer-type modification in the type system. *)
+
+(*
+let prefixes xs =
+  let rec visit lst =
+    match xs with
+    | [] => shift0 (fn _ => [])
+    | x :: xs => x :: shift0 (fn k => (k []) :: reset (fn () => k (visit xs)))
+    end
+  in reset (fn () => visit xs)
+*)
+
+(*
+let rec app xs =
+  match xs with
+  | [] => shift0 (fn k => k)
+  | x :: xs => x :: app xs
+  end
+*)
+
+(**********)
+
+let amb () = shift0 (fn k => k True; k False)
+let fail () = shift0 (fn _ => ())
+
+let _ = reset (fn () => printInt (if amb () then 1 else 2))
+
+data Triple = T of Int, Int, Int
+
+let stringOfTriple t =
+  match t with
+  | T i j k => "(" ++ stringOfInt i ++ ", " ++ stringOfInt j ++ ", " ++ stringOfInt k ++ ")"
+  end
+
+let printTriple t =
+    printStr (stringOfTriple t ++ "\n")
+
+let rec choice n =
+  if n > 0
+  then if amb ()
+       then choice (n - 1)
+       else n
+  else fail ()
+
+let triple n s =
+  let i = choice n
+  in let j = choice (i - 1)
+     in let k = choice (j - 1)
+	in if i + j + k = s
+	   then T i j k
+	   else fail ()
+
+let triples_9_15 = reset (fn () => printTriple (triple 9 15))
+
+(**********)
+
+let shift v =
+  shift0 (fn k => reset (fn () => v k))
+
+let _ = printInt (100 + reset (fn () => 10 + shift (fn k => k (k 1))))
+let _ = printInt (reset (fn () => 100 + (reset (fn () => 10 + shift (fn _ => shift (fn _ => 1))))))
+
+
+let copy' xs =
+  let rec visit (type R) xs : _ / [Ctrl _ R |R] =
+    match xs with
+    | [] => []
+    | x :: xs => visit (shift (fn k => x :: (k xs)))
+    end
+  in reset (fn () => visit xs)
+
+let rev' xs =
+  let rec visit (type R) xs : _ / [Ctrl _ R |R]  =
+    match xs with
+    | [] => []
+    | x :: xs => shift (fn k => reset (fn () => x :: k (visit xs)))
+    end
+  in reset (fn () => visit xs)
+
+
+let amb' (type R) = fn () => shift (fn k => (k True) : _ / [Ctrl _ R |R]; k False)
+let fail' () = shift (fn _ => ())
+
+let rec choice' n =
+  if n > 0
+  then if amb' ()
+       then choice' (n - 1)
+       else n
+  else fail' ()
+
+let triple' n s =
+  let i = choice' n
+  in let j = choice' (i - 1)
+     in let k = choice' (j - 1)
+	in if i + j + k = s
+	   then T i j k
+	   else fail' ()
+
+let triples_9_15' = reset (fn () => printTriple (triple' 9 15))
+
+(* EoF *)

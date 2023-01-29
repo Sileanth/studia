@@ -1,0 +1,9 @@
+let rec loop n =
+  printInt n;
+  let x = readInt () in
+  match x < n with
+  | True  => ()
+  | False => loop (-(n - x))
+  end
+
+let _ = loop 0

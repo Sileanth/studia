@@ -1,0 +1,23 @@
+effect Gen X = { yield : X => Unit }
+data Generator X =
+| Generator of (Unit ->[Gen X] Unit)
+
+
+let iter f (Generator g) = 
+    handle g () with 
+    | yield a => f a; resume ()
+    end
+
+let toList (Generator g) =
+    handle g () with 
+    | return () => []
+    | yield x   => x :: resume ()
+    end 
+
+let rec take n (Generator g) =
+    handle g () with 
+    | return () => fn _ => []
+    | yield x   => fn n => if n = 0 then [] else (x :: (resume () (n-1)))
+    end n
+
+let g = Generator (fn () => yield 1; yield 2; yield 3; yield 4; yield 5)
