@@ -21,6 +21,6 @@ let hFreeST f =
 let rec runFreeST fst = 
     match fst with
     | Return a => a 
-    | Put x f => put x; runFreeST (f ())
+    | Put x f  => put x; runFreeST (f ())
     | Get f    => runFreeST (f (get ()))
     end

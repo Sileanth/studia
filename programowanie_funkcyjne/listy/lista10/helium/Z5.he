@@ -19,7 +19,7 @@ let rec append nx xs =
 
 let rec hLWT q f =
     handle f () with 
-    | return x => fn q => () 
+    | return () => fn q => ()
     | yield x  => fn thrq =>
         match thrq with 
         | ThrQueue []                => resume () thrq

@@ -1,0 +1,28 @@
+type TID = Int // Identyfikator wątku
+
+
+effect rec LWT Msg E =
+{   spawn : (Unit ->[LWT Msg E,E] Unit) => TID // Teraz zwraca TID nowego wątku
+    ; yield : Unit => Unit
+    ; exit : Unit => Unit
+    ; send : TID, Msg => Unit
+    ; recv : Unit => Pair TID Msg
+    ; tid : Unit => TID
+}
+
+
+
+
+data rec Tree X =
+| Leaf
+| Node of Children X
+and data Children X =
+| Child of Tree X
+| Cons  of Tree X, X, Children X
+
+data rec Thr E =
+| Thr of (Unit -> ThrQueue E ->[E] Unit)
+and data ThrQueue E =
+| ThrData of List (Thr E), TID
+
+

@@ -1,5 +1,5 @@
-type 'a nlist =
-| Nil
+type 'a nlist = 
+| Nil 
 | Zero of ('a * 'a) nlist
 | One  of 'a * ('a * 'a) nlist
 
