@@ -159,3 +159,27 @@ let _ = assert (eq_formula form5_4d form5_4d)
 let _ = assert (not (eq_formula form5_4a form5_4b))
 let _ = assert (not (eq_formula form5_4a form5_4c))
 let _ = assert (not (eq_formula form5_4a form5_4d))
+
+
+(* string of term *) 
+
+let map = [(0, "a"); (1, "b"); (2, "c"); (3, "d")] |> List.to_seq |> VarMap.of_seq
+
+let term6_1 = Sym ("abc", [Var 2; Var 3; Sym ("cda", [Var 0; Var 1])])
+
+let _ = assert ( string_of_term map term6_1 = "abc(c, d, cda(a, b))")
+
+(* string of formula *) 
+
+let _ = assert (string_of_formula map Neg =  "⊥")
+let _ = assert (string_of_formula map Top =  "⊤")
+
+let form7_1 = Or (Rel ("x", [Var 2; Var 3]), And (Rel ("y", [Var 0; Var 2]), Top)) 
+let _ = assert (string_of_formula map form7_1 = "(x(c, d) ∨ (y(a, c) ∧ ⊤))") 
+
+let form7_2 = Imp (Rel ("s", [Var 0; Var 1]), All ("x", Rel ("d", [Var 0; Var 1; Var 2]))) 
+let _ = assert (string_of_formula map form7_2 = "(s(a, b) -> ∀x.d(x, a, b))")
+
+
+let form7_3 = Imp (Rel ("s", [Var 0; Var 1]), Ex ("x", Rel ("d", [Var 0; Var 1; Var 2]))) 
+let _ = assert (string_of_formula map form7_3 = "(s(a, b) -> ∃x.d(x, a, b))")

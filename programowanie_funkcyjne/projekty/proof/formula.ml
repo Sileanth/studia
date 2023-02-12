@@ -17,6 +17,8 @@ and formula =
   | Ex  of string * formula
 
 
+
+
 module OrderedVar: sig
   type t = var 
   val compare : t -> t -> int
@@ -28,6 +30,38 @@ end = struct
     else 1
 end
 module VarMap = Map.Make(OrderedVar)
+
+let rec string_of_term (map : string VarMap.t) (t : term) : string =
+        match t with
+        | Var x       -> VarMap.find x map
+        | Sym (s, ts) -> 
+                        if ts <> [] then 
+                                let string_terms_list = List.map (string_of_term map) ts in
+                                let string_terms = List.fold_right (fun t a -> t ^ ", " ^ a) string_terms_list ""
+                                in let cleaned_string = String.sub string_terms 0 (String.length string_terms - 2)
+                                in s ^ "(" ^ cleaned_string ^ ")"
+                        else
+                                s ^ "()"
+
+
+let rec string_of_formula (map : string VarMap.t) (f : formula) : string = 
+        let bin name a b =
+                "(" ^ string_of_formula map a ^ " " ^ name ^ " " ^ string_of_formula map b ^ ")" 
+        in let kwant sym name f =
+                let increased_map = map |> VarMap.to_seq |> Seq.map (fun (k, v) -> (k+1, v)) |> VarMap.of_seq
+                in let map_with_new_key = VarMap.add 0 name increased_map 
+                in sym ^ name ^ "." ^ string_of_formula map_with_new_key f
+        in let rel name ts = 
+                string_of_term map (Sym (name, ts)) 
+        in match f with 
+        | Neg            -> "⊥"
+        | Top            -> "⊤"
+        | Imp (a, b)     -> bin "->" a b 
+        | Or (a, b)      -> bin "∨" a b
+        | And (a, b)     -> bin "∧" a b
+        | Rel (name, ts) -> rel name ts
+        | All (name, f)  -> kwant "∀" name f
+        | Ex (name, f)   -> kwant "∃" name f
 
 
 let rec max_free_var_in_term (t : term) =

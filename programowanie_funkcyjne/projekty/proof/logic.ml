@@ -7,7 +7,9 @@ module type Theory = sig
 end
 
 module Make(T : Theory) : sig
-  type theorem 
+  type theorem
+
+  type ax
 
   val axiom : T.axiom -> theorem
 

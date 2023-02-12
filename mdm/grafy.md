@@ -124,3 +124,14 @@ $$\Chi'(G) \leq deg(G) + 1$$
 
 ## Tw koniga 
 Graf dwudzielny implukje $$ \Chi'(G) = deg(G)$$
+
+
+##  Tw koniga-egrevage
+W grafie dwudzielnym największe skojarzenie ma moc równą najmniejszemu pokryciu wierzchołkowemu
+
+### Pokrycie wierzchołowe
+Zbiór wierzchołków pokrywające wszystkei krawędzie
+
+
+## Tw brooka
+Keśli $$\chi(x) = d +1$$ to G jest kliką lub cyklem nieparzystej długości
