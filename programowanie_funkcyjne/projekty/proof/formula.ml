@@ -13,9 +13,6 @@ and formula =
   | And of formula * formula
   | Or  of formula * formula
   | Rel of rel * term list
-  | RelVar of rel_var * term list
-  | RelAll of string * int * formula
-  | RelExists of string * int * formula
   | All of string * formula
   | Ex  of string * formula
 
@@ -32,17 +29,6 @@ end = struct
 end
 module VarMap = Map.Make(OrderedVar)
 
-module OrderedRelVar: sig
-  type t = rel_var 
-  val compare : t -> t -> int
-end = struct
-  type t = rel_var 
-  let compare a b =
-    if a = b then 0
-    else if a < b then -1
-    else 1
-end
-module RelVarMap = Map.Make(OrderedRelVar)
 
 let rec max_free_var_in_term (t : term) =
   match t with
@@ -51,9 +37,9 @@ let rec max_free_var_in_term (t : term) =
 
 let rec max_free_var_in_formula (f : formula) = 
   let bin a b =
-    max (max_free_var_in_formula a) (max_free_var_in_formula a) 
+    max (max_free_var_in_formula a) (max_free_var_in_formula b) 
   in let kwant f =
-    (max_free_var_in_formula f) - 1 
+    max ((max_free_var_in_formula f) - 1) 0
   in match f with
   | Neg                 -> 0
   | Top                 -> 0
@@ -63,9 +49,6 @@ let rec max_free_var_in_formula (f : formula) =
   | Rel (_, st)         -> List.fold_left max (0) (List.map max_free_var_in_term st)
   | All (_, f)          -> kwant f 
   | Ex  (_, f)          -> kwant f
-  | RelVar (_ st)       -> List.fold_left max (0) (List.map max_free_var_in_term st)
-  | RelAll (_, _, f)    -> kwant f
-  | RelExists (_, _, f) -> kwant f
  
 
 let gen_free_var_in_term t =
@@ -81,9 +64,9 @@ let rec free_in_term (v : var) (t : term) =
   | Sym (_, ts) -> List.exists (free_in_term v) ts 
 and free_in_formula (v : var) ( f : formula) =
   let zero =
-    true
+    false
   in let bin a b = 
-    free_in_formula v a || free_in_formula v a
+    free_in_formula v a || free_in_formula v b
   in let kwant f = 
     free_in_formula (v+1) f
   in match f with
@@ -109,12 +92,12 @@ let rec apply_inc_in_formula (inc : int) (f : formula) : formula=
   | And (a, b)  -> And (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
   | Or  (a, b)  -> Or  (apply_inc_in_formula inc a, apply_inc_in_formula inc b)
   | All (s, f)  -> All (s, apply_inc_in_formula inc f)
-  | Ex  (s, f)  -> All (s, apply_inc_in_formula inc f)
+  | Ex  (s, f)  -> Ex (s, apply_inc_in_formula inc f)
   | Rel (s, ts) -> Rel (s, List.map (apply_inc_in_term inc) ts)
 
 let rec psubt_in_term_helper (inc : int) (map : term VarMap.t) (t : term) : term =
     match t with
-    | Var v -> begin match (VarMap.find_opt v map) with
+    | Var v -> begin match (VarMap.find_opt (v - inc) map) with
       | None   -> Var v
       | Some t -> apply_inc_in_term inc t 
     end
@@ -140,7 +123,7 @@ let rec psub_in_formula_helper (inc : int) (map : term VarMap.t) (f : formula) :
 let psub_in_formula = psub_in_formula_helper 0
 
 let subst_in_term x s t = psubt_in_term (VarMap.singleton x s) t
-let subst_in_formula x s t = psub_in_formula (VarMap.singleton x s) t
+let subst_in_formula x s f = psub_in_formula (VarMap.singleton x s) f
 
 
 
@@ -154,7 +137,7 @@ let rec eq_formula a b =
     eq_formula a c && eq_formula b d
   in match (a, b) with
   | All (_, a) , All (_, b)  -> kwant a b 
-  | Ex  (_, a) , All (_, b)  -> kwant a b 
+  | Ex  (_, a) , Ex (_, b)   -> kwant a b 
   | Imp (a,b), Imp (c, d)    -> bin a b c d 
   | And (a,b), And (c, d)    -> bin a b c d 
   | Or (a,b), Or (c, d)      -> bin a b c d 
