@@ -94,3 +94,33 @@ droga przechodząca przez każdy wierzchołek dokładnie raz
 
 ## cykl hamiltona
 to co wyżej tylko cykl
+
+
+# Grafy planarne
+
+## $K_5$ nie jest planarne
+
+## $K_{3,3}$ nie jest planarne
+
+## Tw Kuratowaskiogo
+Graf jest planarny równoważne temu że nie zawiera podgrafu homeomorficznego z $K_5$ lub $K_{3,3}$
+
+## Wzór Eulera
+G - grał płaski spójny, n - wierzchołki, m - krawędzie, f - ściany
+$$ n - m + f = 2$$
+
+## Planarne można pkolorować 5 kolorami
+
+## Skojarzenie $\equiv$ Zbiór kraœedzi o rozłącznych krawędziach $\equiv$ podgraf o maksymalnym stopnia wierzchołka 1
+
+## Tw Halla
+Istnieję możliwość małżeństw gdy każdy podzbiór k dziewczny zna co najmniej k chłopców
+
+## Kolorowanie krawędzi grafu
+$$\Chi'(G) \geq deg(G)$$
+
+## Tw Viziniga
+$$\Chi'(G) \leq deg(G) + 1$$
+
+## Tw koniga 
+Graf dwudzielny implukje $$ \Chi'(G) = deg(G)$$

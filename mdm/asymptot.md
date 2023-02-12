@@ -128,6 +128,25 @@ $$(a+b)^n = {n \choose 0} a^n + {n \choose 1} a^{n-1} b + \ldots + {n \choose n}
 $$ |A \cup B| = |A| + |B| - |A \cap B|$$
 $$ | \bigcup_{i=1}^k A_k| = \sum_{i_1 \ldots i_s \leq k+1 } (-1)^{S+1}|A_{i-1} \cap \ldots \cap A_{i_S}|$$
 
+# Grupy
 
+## Tw Lagrange
+Moc grupy to liczba warst razy moc warstwy
+$$|G| = [G : X] * |H| $$
 
+## Orbita
+$$|O_x| =\{ y : \exists g \in G , y = g(x)  \}$$
+
+## Stabilizator
+
+$$G_x = \{  g \in G : g(x) = x  \}$$
+
+## Lemacik
+$$|G| = |G_x| * |O_x|$$
+
+## Lemat burnsida
+$$|orbit| = \frac{1}{|G|} \sum_{x \in X} |G_x| = \frac1{G} \sum_{g \in G} |Fix(g)|$$
+gdzie 
+$$Fix(g) = \{ x \in X : g(x) = x \}$$
  
+

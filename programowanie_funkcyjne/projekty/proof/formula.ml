@@ -1,5 +1,6 @@
 
 type var = int 
+type rel_var = int
 type sym = string 
 type rel = string 
 type term =
@@ -12,6 +13,9 @@ and formula =
   | And of formula * formula
   | Or  of formula * formula
   | Rel of rel * term list
+  | RelVar of rel_var * term list
+  | RelAll of string * int * formula
+  | RelExists of string * int * formula
   | All of string * formula
   | Ex  of string * formula
 
@@ -28,6 +32,17 @@ end = struct
 end
 module VarMap = Map.Make(OrderedVar)
 
+module OrderedRelVar: sig
+  type t = rel_var 
+  val compare : t -> t -> int
+end = struct
+  type t = rel_var 
+  let compare a b =
+    if a = b then 0
+    else if a < b then -1
+    else 1
+end
+module RelVarMap = Map.Make(OrderedRelVar)
 
 let rec max_free_var_in_term (t : term) =
   match t with
@@ -40,14 +55,18 @@ let rec max_free_var_in_formula (f : formula) =
   in let kwant f =
     (max_free_var_in_formula f) - 1 
   in match f with
-  | Neg -> 0
-  | Top -> 0
-  | Imp (a, b)  -> bin a b
-  | And (a, b)  -> bin a b
-  | Or  (a, b)  -> bin a b 
-  | Rel (_, st) -> List.fold_left max (0) (List.map max_free_var_in_term st)
-  | All (_, f)  -> kwant f 
-  | Ex  (_, f)  -> kwant f 
+  | Neg                 -> 0
+  | Top                 -> 0
+  | Imp (a, b)          -> bin a b
+  | And (a, b)          -> bin a b
+  | Or  (a, b)          -> bin a b 
+  | Rel (_, st)         -> List.fold_left max (0) (List.map max_free_var_in_term st)
+  | All (_, f)          -> kwant f 
+  | Ex  (_, f)          -> kwant f
+  | RelVar (_ st)       -> List.fold_left max (0) (List.map max_free_var_in_term st)
+  | RelAll (_, _, f)    -> kwant f
+  | RelExists (_, _, f) -> kwant f
+ 
 
 let gen_free_var_in_term t =
   max_free_var_in_term t + 1
