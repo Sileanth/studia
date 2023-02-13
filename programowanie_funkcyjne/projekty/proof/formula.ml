@@ -33,7 +33,10 @@ module VarMap = Map.Make(OrderedVar)
 
 let rec string_of_term (map : string VarMap.t) (t : term) : string =
         match t with
-        | Var x       -> VarMap.find x map
+        | Var x       -> begin match VarMap.find_opt x map with 
+                | Some s -> s
+                | None   -> string_of_int x 
+        end
         | Sym (s, ts) -> 
                         if ts <> [] then 
                                 let string_terms_list = List.map (string_of_term map) ts in

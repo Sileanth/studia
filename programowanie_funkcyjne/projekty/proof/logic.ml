@@ -1,5 +1,6 @@
 open Formula
 open NewVar
+exception Failure of string
 
 module type Theory = sig 
   type axiom 
@@ -9,7 +10,6 @@ end
 module Make(T : Theory) : sig
   type theorem
 
-  type ax
 
   val axiom : T.axiom -> theorem
 
@@ -59,7 +59,7 @@ let assumptions (env, _) = env
 let rec rem xs f = 
   match xs with
   | [] -> []
-  | (x :: xs) when eq_formula x f -> xs
+  | (x :: xs) when eq_formula x f -> rem xs f
   | (x :: xs) -> x :: rem xs f
 
 
@@ -80,13 +80,13 @@ let imp_i f (env, form) =
 let imp_e (env1, imp) (env2, pimp) =
   sum env1 env2, match imp with 
     | Imp (a, b) when eq_formula pimp a -> b
-    | _  -> failwith "wrong usage of implication elimination"
+    | _  -> print_endline (string_of_formula VarMap.empty imp );raise (Failure "wrong usage of implication elimination")
 
 
 (* Bot *) 
 let bot_e (env, neg) f =
   if eq_formula neg Neg then (env, f)
-  else failwith "wrong usage of bottom elimination"
+  else raise(Failure "wrong usage of bottom elimination")
 
   (* Top *)
 let top_i = ([], Top)
@@ -98,8 +98,8 @@ let all_i (env, f) =
 
 let all_e (env, all) t =
   env, match all with
-    | All (_, f) -> subst_in_formula 0 t (apply_inc_in_formula (-1) f)
-    | _          -> failwith "wrong usage of for_all elimination"
+    | All (_, f) -> subst_in_formula 0 t f
+    | _          -> raise (Failure "wrong usage of for_all elimination")
 
 
     (* Exists *)
@@ -107,12 +107,12 @@ let all_e (env, all) t =
 let ex_i (env, sf) x t f : theorem = 
   if eq_formula sf (subst_in_formula x t f) 
   then env ,Ex ((new_var ()), f)  
-  else failwith "wrong usage of exist introduction"
+  else raise (Failure "wrong usage of exist introduction")
 
 let ex_e (env1, e) (env2, f2) =
   match e with
   | Ex (_, f1) -> sum env1 (rem env2 f1), f2
-  | _          -> failwith "wrong usage of exists elimination rule"
+  | _          -> raise (Failure "wrong usage of exists elimination rule")
 
     (* And *)
 let and_i (e1, f1) (e2, f2) =
@@ -121,12 +121,12 @@ let and_i (e1, f1) (e2, f2) =
 let and_e1 (env, f) =
   match f with
   | And (f, _) -> (env, f)
-  | _          -> failwith "wrong usage of and elim1"
+  | _          -> raise (Failure "wrong usage of and elim1")
 
 let and_e2 (env, f) =
   match f with
   | And (_, s) -> (env, s)
-  | _          -> failwith "wrong usage of and elim1"
+  | _          -> raise (Failure "wrong usage of and elim1")
 
 
   (* Or *)
@@ -139,19 +139,19 @@ let or_i2 (env, b) a =
 let or_e (env, f_or) (env1, a) (env2, b) =
   if not (eq_formula a b) 
   then 
-    failwith "a and b not equal in or elimination" 
+    raise (Failure "a and b not equal in or elimination") 
   else match f_or with
   | Or (o1, o2) -> sum (sum (rem env1 o1) (rem env2 o2)) env, a
-  | _           -> failwith "wrong usage of or elimination"
+  | _           -> raise (Failure "wrong usage of or elimination")
   
   (* Renaming *)
 let equiv (env, form) f =
   if eq_formula form f then (env, f)
-  else failwith "formulas in equiv are not equal"
+  else raise (Failure "formulas in equiv are not equal")
 
 let ren (env, form) x y =
   if not (free_in_formula y form) && not (List.exists (free_in_formula y) env) 
     then (List.map (subst_in_formula x (Var y)) env, subst_in_formula x (Var y) form)
-    else failwith "var y is free"
+    else raise (Failure "var y is free")
 
 end

@@ -19,7 +19,9 @@ module Make(T : Theory) = struct
   type node = formula * assump * free_binding
   type goal = formula * assump * free_binding
 
-  
+  let get_free_binding (_, _, fb) : free_binding =
+          fb
+ 
   module ProofTree : sig 
     type all_elim_info = term
     type ex_intro_info = var * term * formula
@@ -236,15 +238,36 @@ module Make(T : Theory) = struct
     | CRen    of context * node * ren_info
 
   type proof =
-    | Complete of theorem
+    | Complete of theorem * free_binding
     | Sketch of goal * context
 
   let qed = function
-  | Complete th -> th
+  | Complete (th, fb) -> th, fb
   | Sketch _    -> failwith "proof is incomplete"
 
   let proof form assum bind =
     Sketch ((form, assum, bind), CRoot)
+
+
+  let string_theorem bind (th : theorem) =
+          let f = AxiomLogic.consequnce th in
+          let assu = AxiomLogic.assumptions th in
+          let f_string = string_of_formula bind f in
+          let assu_string = 
+                  List.fold_right (fun ass acc -> acc ^ " | " ^ string_of_formula bind ass) assu "" in
+          assu_string ^ " ⊢ " ^ f_string
+
+  let proof_string (p : proof) =
+          match p with
+          | Complete (th, (_, bind)) -> "Complete Proof: " ^ string_theorem bind th
+          | Sketch ((f, assump, (_, bind)), ctx) ->
+                          let assump_list = assump |> StringMap.to_seq |> List.of_seq in
+                          let assump_string = List.fold_right 
+                                (fun (name, f) acc -> 
+                                        acc ^ " | " ^ name ^ " : " ^ string_of_formula bind f)
+                                assump_list ""
+                          in "Sketch Proof: " ^ assump_string ^  " ⊢ " ^ string_of_formula bind f
+                
 
   let up_proof_tree (pf : proof_tree) (ctx : context) : (proof_tree * context) = 
       match ctx with
@@ -272,8 +295,8 @@ module Make(T : Theory) = struct
   (* ignores lemat nodes *)
   let down_left_tree (pf : proof_tree) (ctx : context) : (proof_tree * context) =
     match view pf with
-      | VGoal (g)                -> failwith "you are on the bottom of tree"
-      | VLemat (th)              -> failwith "you are on the bottom of tree"
+      | VGoal (g)                -> pf, ctx
+      | VLemat (th)              -> pf, ctx 
       | VAndI (n, pf1, pf2)      -> 
         begin match view pf1 with
           | VLemat _ -> pf2, CAndIR (ctx, n, pf1)
@@ -312,31 +335,31 @@ module Make(T : Theory) = struct
       | VGoal (g) -> goal g, ctx
       | VLemat th -> lemat th, ctx
       | _         -> let npf, nctx = down_left_tree pf ctx in to_the_left_bottom npf nctx
+
   let rec rek (pf : proof_tree) (ctx : context) : (proof_tree * context) =
     let up () = let npf, nctx = up_proof_tree pf ctx in 
       rek npf nctx
     in match ctx with 
-      | CRoot  -> let npf, nctx = up_proof_tree pf ctx in 
-        to_the_left_bottom npf nctx 
+      | CRoot  -> to_the_left_bottom pf ctx 
       | CAndIL (ctx, n, r) -> 
           to_the_left_bottom r (CAndIL (ctx, n, pf)) 
-      | CImpeEL (c, n, r) ->
+      | CImpeEL (ctx, n, r) ->
         begin match view r with 
           | VLemat _ -> up ()
           | _        -> to_the_left_bottom r (CImpeER (ctx, n, pf))  
         end
-      | CExEL (c, n, r) ->
+      | CExEL (ctx, n, r) ->
         begin match view r with 
           | VLemat _ -> up ()
           | _        ->  to_the_left_bottom r (CExER (ctx, n, pf)) 
         end
-      | COrEL (c, n, m, r) -> 
+      | COrEL (ctx, n, m, r) -> 
         begin match view m, view r with 
           | VLemat _, VLemat _ -> up () 
           | VLemat _, _        -> to_the_left_bottom r (COrER (ctx, n, pf, m))  
           | _, _               -> to_the_left_bottom m (COrEM (ctx, n, pf, r))  
         end
-      | COrEM (c, n, l, r) -> 
+      | COrEM (ctx, n, l, r) -> 
         begin match view r with 
           | VLemat _ -> up () 
           | _        -> to_the_left_bottom r (COrER (ctx, n, l, pf))  
@@ -345,13 +368,20 @@ module Make(T : Theory) = struct
 
   let next_goal (p : proof) : proof =
     match p with
-    | Complete th     -> failwith "dowód jest skończony"
+    | Complete _     -> failwith "dowód jest skończony"
     | Sketch (g, ctx) -> 
         let pf, ctx  = rek (goal g) ctx in 
         begin match view pf with 
-          | VGoal g -> Sketch (g, ctx)
-          | _       -> failwith "brak niedokończonego celu"
+          | VGoal g   -> Sketch (g, ctx)
+          | VLemat th -> Complete (th, get_free_binding g) 
+          | _       -> failwith "nieoczekiwany błąd"
         end
+
+  let proof_tree_to_proof pf ctx =
+          match view pf with
+          | VGoal g   -> Sketch (g, ctx)
+          | VLemat th -> Complete (th, (StringMap.empty, VarMap.empty))
+          | _         -> failwith "ojoj"
 
 
   let intro name = function 
@@ -362,10 +392,60 @@ module Make(T : Theory) = struct
           then failwith "nazwa jest zajęta"
           else 
             let (ng : goal) = r, (StringMap.add name l a), (sb, bs) 
-            in let parent = CimpI (ctx, (f, a, (sb, bs))) 
+            in let parent = CimpI (ctx, (l, a, (sb, bs))) 
             in Sketch (ng,parent) 
         end
       | _ -> failwith "nie jest to implikacja"
+
+  let apply_assumption name = function
+    | Complete _ -> failwith "dowód jest skończony"
+    | Sketch ((f, assump, (sb,bs)), ctx) -> let a = StringMap.find name assump in
+        assert (f = a);
+        let pft = ProofTree.lemat (AxiomLogic.by_assumption f) in
+        let npft, nctx = rek pft ctx in
+        (proof_tree_to_proof npft nctx)
+
+  let apply_theorem (th : theorem) = function
+          | Complete _ -> failwith "dowód jest skończony"
+          | Sketch ((f, assump, bind), ctx) ->
+                          let _ = AxiomLogic.consequnce th in
+                          let _ = AxiomLogic.assumptions th in
+                          let pft = ProofTree.lemat th in
+                          let npft, nctx = rek pft ctx in
+                          (proof_tree_to_proof npft nctx)
+
+  let rec imp_chain goal = function
+          | f when eq_formula f goal -> []
+          | Imp (a, b)      -> List.append (imp_chain goal b) [a]
+          | _               -> failwith "not implication and not end goal"
+
+  let rec imp_chain_proof_tree parent_ctx imp assumption bind (xs : formula list) =
+          match xs with
+          | []  -> failwith "pusty łańcuch implikacji"
+          | [x] -> 
+                let goal = (Imp (x, imp), assumption, bind) in
+                let left_goal = ProofTree.goal (x, assumption, bind) in
+                let ctx = CImpeEL (parent_ctx, (imp, assumption, bind), left_goal) in
+                Sketch (goal, ctx)
+          | x :: xs -> 
+                let left_goal = ProofTree.goal (x, assumption, bind) in
+                let ctx = CImpeEL (parent_ctx, (imp, assumption, bind), left_goal) in
+                imp_chain_proof_tree ctx (Imp (x, imp)) assumption bind xs
+
+                
+  let apply_implication imp = function
+    | Complete _ -> failwith "dowód jest skończony"
+    | Sketch ((f, assump, (sb,bs)), ctx) ->
+        let (imps : formula list) = imp_chain f imp in
+        imp_chain_proof_tree ctx f assump (sb,bs) imps
+
+  let exfalso = function
+    | Complete _ -> failwith "dowód jest skończony"
+    | Sketch ((f, assump, bind), ctx) ->
+                    let goal = (Neg, assump, bind) in
+                    let nctx = CBotE (ctx, (f, assump, bind)) in
+                    Sketch (goal, nctx)
+
 
   let and_construct = function 
     | Complete _ -> failwith "dowód jest skończony" 
@@ -413,22 +493,28 @@ module Make(T : Theory) = struct
       | Complete _ -> failwith "dowód jest skończony"
       | Sketch ((f, a, fb), ctx) -> match f with 
         | All (name, nf) -> 
-          let ng = (apply_inc_in_formula (-1) nf), a, fb in 
+          let ng = nf, a, fb in 
           let parent = CAllI (ctx, (f, a, fb)) in 
           Sketch (ng, parent)
         | _ -> failwith "f <> forall"
 
     let forall_exlim form name (t : term) = function 
       | Complete _ -> failwith "dowód nie jest skończony"
-      | Sketch ((f, a, fb), ctx) ->
+      | Sketch ((f, a, (x, fb)), ctx) ->
           let all = All (name, form) in
           if eq_formula f (subst_in_formula 0 t form) 
-          then 
-            let ng = all, a, fb in  
-            let parent = CAllE (ctx, (f, a, fb), t)
+          then
+            let nfb = VarMap.add 0 name fb in
+            let ng = all, a, (x, nfb) in  
+            let parent = CAllE (ctx, (f, a, (x, fb)), t)
             in Sketch (ng, parent) 
-          else 
-            failwith "niepoprawna formuła i term" 
+          else
+           ( 
+                   (*
+           (print_endline (string_of_formula VarMap.empty form)); 
+           (Sketch ((f, a, (x, fb)), ctx)) *)
+           failwith "niepoprawna formuła i term"
+           )
     
     let rename_kwant name = function 
       | Complete _ -> failwith "dowód jest skończony" 
