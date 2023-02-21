@@ -1,52 +1,65 @@
-//
-// Created by lukas on 21.02.2023.
-//
-#include <stdio.h>
 
+#include <stdio.h>
+#include <stdbool.h>
+#define ui uint32_t
 //zad 3
-int zero(int x, int k) {
-    x
+ui zero(ui x, ui k) {
+    return x - ((1 << k) & x);
 }
 
-int light(int x, int k) {
-    return x & (1 << k);
+ui light(ui x, ui k) {
+    return x | (1 << k);
+}
+
+ui switch(ui x, ui k) {
+    return x ^ (1 << k);
 }
 
 //zad 4
-int f1(int x, int y) {
+ui f1(ui x, ui y) {
     return x << y;
 }
 
-int f2(int x, int y) {
+ui f2(ui x, ui y) {
     return x >> y;
 }
 
-int f3(int x, int y) {
+ui f3(ui x, ui y) {
     return x & ((1 << y) - 1) ;
 }
 
-int f4(int x, int y) {
-    int z = x >> y;
-
+ui f4(ui x, ui y) {
+    
 }
 
 // zad 5
-#include <stdio.h>
-
-int reverse(int a) {
-    int x = 2147483647;
-    int y = x + 1;
-    int min_one = x + y;
-    return a * min_one;
+int minus(int x)
+{
+    return ~x + 1;
 }
 
 
 //zad 6
-int swap8(int a, int b) {
-    int c = f3(a, 8) ^ f3(b, 8);
-    
+void swap8(ui a, ui b) {
+    ui c = a & 255;
+    a = f1(f2(a, 8),8) | (b & 255);
+    b = f1(f2(b, 8, 8) | c;   
+}
+//zad 7
+ui pot(ui x) {
+    return ((x-1) & x) | ((x-1) & (1 << 31));
 }
 
-int main() {
+// zad 8
+
+ui convert(ui x) {
+    int s1 = (255 & x) << 24;
+    int s2 = s1 | (((255 << 8) & x) << 8);
+    int s3 = s2 | (((255 << 16) & x) >> 8);
+    int s4 = s3 | (((255 << 24) & x) >> 24);
+    return s4;
+}
+
+ui main() {
 
 }
