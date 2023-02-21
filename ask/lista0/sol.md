@@ -1,7 +1,4 @@
-ASCII - system kodowanmia znaków,przyjmuje 128 wartości z czego tylko 95 jest printowalnych a pozostałe to instrukcje sterujące
-
-
-Kody sterujące nie odpowiadają żadnemu drukowalnemy znakowi, tylko służą do sterowania urządzeniem.
+ASCII - system kodowanmia znaków,przyjmuje 128 wartości z czego tylko 95 jest printowalnych a pozostałe to instrukcje sterujące które nie drukują a robią fajne cosie 
 
 Kody sterujące ASCII:
 
