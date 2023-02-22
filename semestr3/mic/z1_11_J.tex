@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Zadanie 1.11.J}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+\section*{Treść}
+Skonstruować zbiór Benrsteina $Z \subseteq [0,1]$, czyli taki zbiór że \[Z \cap P \neq \emptyset, P / Z \neq \emptyset\]
+Dla dowolnoego zbioru domkniętego nieprzeliczalnego $P \subseteq [0,1]$. Zauważyć że Z nie jest mierzalny. a nawet $\lambda^{*}(Z) = \lambda^{*}([0,1] / Z) = 1$.
+
+
+\section*{Konstrukcja}
+
+Ustawmy wszystkie nasze P w ciąg pozaskończony $ \{ P_{\alpha} : \alpha < 2^{\aleph_0} \}$ Jest to możliwe gdyż $|Bor(\mathbb{R})| = 2^{\aleph_0}$. Na podstawie tego ciągu możemy stworzyć dwa rozłączne ciągi $a_{\alpha}, b_{\alpha}$. Definiujemy je w następujący sposób: dla każdego $\alpha < 2^{\aleph_0}$
+$a_{\alpha}, b_{\alpha} \in P_{\alpha} / \{a_{\gamma}, b_{\gamma} : \gamma < \alpha \} $. Oaz $a_{\alpha} \neq b_{\alpha}$. Pokażmy że skonstruowaliśmy 2 zbiory spełniające warunki zadania. 
+\subsection*{Warunek 1}
+Ustalmy dowolne P, Istnieje wtedy $\alpha < 2^{\aleph_0}, P = P_\alpha$. Wtedy 
+\[ \{ a_{\alpha} \} \subseteq  A \cap P \]
+Oraz
+\[ \{ b_{\alpha} \} \subseteq  B \cap P \]
+\subsection*{Warunek 2}
+Ustalmy dowolne P, Istnieje wtedy $\alpha < 2^{\aleph_0}, P = P_\alpha$. Wtedy 
+\[ \{ a_{\alpha} \} \subseteq  P / B \]
+Oraz
+\[ \{ b_{\alpha} \} \subseteq  P / A \]
+
+\section*{Mierzalność}
+
+
+Ustalmy teraz dowolne dowolny ciąg przedziałów $l_i, r_i$ taki że $A \subseteq \bigcup [l_i, r_i)$ = C.
+Załóżmy niewprost że $\lambda(C) \leq \lambda^*(A) < 1$.
+Teraz rozważmy jego dopełnienie na przedziale $[0.1]$ nazwijmy je D. $\lambda(D) > 0$. Jako że jego miara jest dodatnia to istnieje domknięty, nieprzeliczalny podzbiór. Nazwijmy go P. Z tego że A jest zbiorem Benrsteina, wiemy że przekrój A oraz P jest niepusty. Co oznacza sprzeczność. 
+
+
+Z tej sprzeczności wynika że $\lambda^*(A) \geq 1$ oraz że $\lambda(D) = 0$.  Dodatkowo jako że A jest podzbiorem przedziału $[0,1]$ to $\lambda^*(A) \leq 1$. Czyli $\lambda^*(A) = 1$. Analogiczny dowód można przeprowadzić dla B.
+
+
+W takim razie 
+\[
+  1 = \lambda^{*}(B) \leq  \lambda^{*}(D) = 0  
+\]
+Czyli A,B nie mogą być mierzalne.
+
+
+\end{document}

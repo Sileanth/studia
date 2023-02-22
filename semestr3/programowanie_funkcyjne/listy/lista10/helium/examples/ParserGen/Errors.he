@@ -1,0 +1,9 @@
+
+effect this =
+  { symbol_not_defined  : String => a
+  ; symbol_redefinition : String => a
+  ; eof_in_code         : Unit   => a
+  ; eof_in_comment      : Unit   => a
+  ; invalid_char        : Char   => a
+  ; assertion_failed    : String => a
+  }

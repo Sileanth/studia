@@ -1,0 +1,16 @@
+effect GetPoly =
+  { get_poly : type E. Unit => (Unit ->[|E] Int) ->[|E] Int
+  }
+
+let with_poly f =
+  handle f () with
+  | get_poly () => resume (fn g => g ())
+  end
+
+let run_with_reader () =
+  effect Reader X = { ask : Unit => X } in
+  handle get_poly () ask with
+  | ask () => resume 42
+  end
+
+let _ = with_poly run_with_reader

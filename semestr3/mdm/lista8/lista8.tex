@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{forloop}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Lista 8}
+\author{Łukasz Magnuszewski}
+\date{\vspace{-5ex}}
+%\date{} 
+\begin{document}
+
+\maketitle
+\section*{Zadanie 1}
+Oblicz sumę $\sum 2^{-k}$ braną po wszystkich takich $k \in \mathbb{N}$, że 2,3,5,7 nie dzielą k.
+
+
+Z zasady włączeń i wyłączeń, ta suma wynosi:
+\begin{equation}
+    \begin{split}
+  \sum 2^{-k} - \sum 2^{-k *2} - \sum 2^{-k* 3} - \sum 2^{-k *5} - \sum 2^{-k *7} +\sum 2^{-k * 2 *5} +\sum 2^{-k *2 *3} \\ +\sum 2^{-k *2 *7} + \sum 2^{-k* 3* 5} + \sum 2^{-k* 3* 7} + \sum 2^{-k *5 *7} -   \sum 2^{-k *2 *3 * 5} - \sum 2^{-k *2 *3 *7} -\\ \sum 2^{-k *3 *5 * 7} + \sum 2^{-k *2 *3 *5 *7}
+\end{split}
+\end{equation}
+Żeby policzyć taką sumę możemy w każdej sumie przeprowadzić następującą operację, z wzoru na szereg geometryczny
+\[ \sum 2^{-k * a} = \sum (2^{-a})^k = \frac{1}{1-2^{-n}} =\frac{2^n}{2^n - 1} \]
+Podstawiając do wcześniej wyznaczonej sumy wychodzi
+\begin{equation}
+    \begin{split}
+  \frac{2^{1}}{2^{1}-1} - \frac{2^{2}}{2^{2}-1}- \frac{2^{3}}{2^{3}-1}- \frac{2^{5}}{2^{5}-1} - \frac{2^{7}}{2^{7}-1} +  \frac{2^{2*3}}{2^{2*3}-1} + \\ \frac{2^{2*5}}{2^{2*5}-1} +  \frac{2^{2*7}}{2^{2*7}-1} +  \frac{2^{5*3}}{2^{5*3}-1} +  \frac{2^{7*3}}{2^{7*3}-1} +  \frac{2^{5*7}}{2^{5*7}-1} - \\ \frac{2^{2*3*5}}{2^{2*3*5}-1} -  \frac{2^{2*3*7}}{2^{2*3*7}-1} -  \frac{2^{2*7*5}}{2^{2*7*5}-1} -  \frac{2^{3*7*5}}{2^{7*3*5}-1} +   \frac{2^{2*3*5*7}}{2^{2*3*5*7}-1}
+\end{split}
+\end{equation}
+
+\section*{Zadanie 4}
+Użyjmy wzoru taylora dla funkcji $x^{\alpha}$ w punkcie 1
+\[ (x+1)^{\alpha} = \sum^{\inf}_{n=0} \frac{f^{(n)}(1)}{k!} * (x)^n
+\]
+Wzór na n-tą pochodną $x^{\alpha}$ policzoną w punkcie 1 wynosi
+\[
+  \alpha * (\alpha - 1) * (\alpha -2) \dots (\alpha - n + 1) 
+\]
+Podstawiając do wzoru taylora wychodzi wzór dany w zadaniu
+
+\section*{Zadanie 12}
+Na wykładzie były podane wzory na $P(x)$ oraz $R(x)$.
+\[
+  P(x) = \sum_{i=1}^{\infty} \frac{1}{1 - x^i}  
+\]
+\[
+    R(x) = \sum_{i=1}^{\infty} 1 + x^i
+\]
+Korzystając z tego otrzymujemy
+\[
+    R(x) * P(x^2) = \sum_{i=1}^{\infty} \frac{ 1 + x^i}{1 - x^{2i}} 
+\]
+Korzystając z wzorów skróconego mnożenia wychodzi
+\[
+    R(x) * P(x^2) = \sum_{i=1}^{\infty} \frac{ 1 + x^i}{(1+x^i)(1-x^i)}
+\]
+Skracając wychodzi nam $P(x)$
+\[
+    R(x) * P(x^2) = \sum_{i=1}^{\infty} \frac{ 1 }{(1-x^i)}=P(x)
+\]
+\section*{Zadanie 6}
+Wartość d dla jedynki wynosi 0, bo jedyna permutacja jednoelementowa nie jest nieporządkiem. Zaś zbiór pusty dokładnie na jeden sposób można pomieszać, nie robiąc nic. stad $d_0 = 1$. Teraz pokażmy następujący wzór
+\[
+    d_{n+1} = n (d_n + d_{n-1})    
+\]
+Najpierw wybieramy który element pójdzie na n+1-szą pozycję, stąd razy n.
+Potem rozpatrujemy 2 niezależne możliwości, albo n+1 liczba pozostanie na miejscu wybranej liczby, i pozostałe elementy poszuflujemy, stąd wychodzi $d_{n-1}$. Albo n+1 wyraz też poszuflujemy stąd $d_n$.
+
+
+
+Indukcyjnie udowodnijmy następujący wzór. 
+\[
+  d_n = n d_{n-1} + (-1)^n  
+\]
+\subsection*{Baza}
+\[
+  d_2 = 2 * 0 + 1 = 1 (1 + 0)
+\]
+
+\subsection*{Krok indukcyjny}
+\begin{equation}
+    \begin{split}
+    d_{n+1} = n (d_n  + d_{n-1}) = n(n d_{n-1} + (-1)^n + d_{n-1})  \\
+    = n ((n+1) d_{n-1} +(-1)^n) = n^2 d_{n-1} + n(-1)^n - n d_{n-1} - (-1)^n \\
+    = (n+1) d_n + (-1)^n
+\end{split}
+\end{equation}
+
+
+
+\section*{Zadanie 10}
+Sprawdźmy najpierw czy zgadza się dla $n = 0$. Wtedy $C_0 = 1$ bo mamy dokładnie jeden sposób by połączyć 0 punktów przy pomocy 0 lini.
+Teraz rozpatrzmy pozostałe przypadki $n > 0$.
+Najpierw dla pierwszego punktu wybieramy z którym punktem go połączymy. Jako że mają to być nieprzecinające się linie, to to cięcie podzieli nam problem na 2 mniejsze niezależne problemy. Jednak wybór punktu nie jest dowolny, jeśli pod problemy będą miały nieparzystą liczbę punktów, to by otrzymać $2n$ liń, to musiałaby by istnień linia przecinająca tą właśnie wybraną. Skrajne podziały to $2n -2, 0$ oraz $0, 2n-2$ Czyli przecięcia z sąsiednimi punktami. Dochodzą dodatkowo wszystkie pośrednie podziały przeskakujące o 2. Czyli jest ich $n$. Po podzieleniu na pod problemy możemy skorzystać z wyników dla mniejszej liczby punktów. I jako że pod problemy są niezależne to wystarczy pomnożyć oba wyniki. Czyli ostatecznie wychodzi
+\[
+  \sum_{i=0}^{n-1} C_{j} C_{n-j-1}
+\] 
+
+\section*{Zadanie 14}
+\[
+    [n,k] = (n-1) [n-1, l] + [n-1, k-1]
+\]
+\[
+  [n,n] = 1  
+\]
+\[
+  [n,0] =0  
+\]
+\[
+ [0,0] =1   
+\]
+Oraz gdy $k>n$ to liczba sterlinga wynosi 0. Przeprowadźmy indukcję po n
+\subsection*{Baza}
+Rozważmy $n=1$, Wtedy
+\[
+  \overline{x} = 1 = [0, 0] = \sum^{\infty}_{k=0} [0,k] x^k   
+\]
+
+\subsection*{Krok indukcyjny}
+\begin{equation}
+    \begin{split}
+       x^{\overline{n}} = x(x+1) \dots (x+n-1) = x^{\overline{n-1}} * (x+n-1) =
+       \sum^{\infty}_{k=0} [n-1, k] x^k * (x+n-1) = \\ \sum^{\infty}_{k=0} [n-1, k] x^{k+1} + \sum^{\infty}_{k=0} [n-1, k] x^{k} * (n -1) =  \sum^{\infty}_{k=1} [n-1, k] x^{k} + \sum^{\infty}_{k=1} [n-1, k] x^{k} * (n -1) + [n-1, k] \\
+        = \sum^{\infty}_{k=1} x^k ([n-1, k-1] + [n-1,k] (n-1)) = 
+        \sum^{\infty}_{k=1} x^k [n, k] + [n, 0] x^0 = \sum^{\infty}_{k=1} x^k [n, k]
+    \end{split}
+\end{equation}
+
+
+
+\section*{Zadanie 7}
+\begin{equation}
+    \begin{split}
+        D'(x) = \sum^{\infty}_{n=0} (\frac{d_n x^n}{n!})' = \sum^{\infty}_{n=0} \frac{n d_n x^{n-1}}{n!} = \sum^{\infty}_{n=2} \frac{d_n x^{n-1}}{(n-1)!} = \sum^{\infty}_{n=0} \frac{d_{n+2} x^{n+1}}{(n+1)!} \\
+        = \sum^{\infty}_{n=0} \frac{(n+1) d_{n+1} x^{n+1}}{(n+1)!} + \sum^{\infty}_{n=0} \frac{(n+1) d_{n} x^{n+1}}{(n+1)!} = x \sum^{\infty}_{n=0} \frac{(n+1) d_{n+1} x^{n}}{(n+1)!} + x \sum^{\infty}_{n=0} \frac{(n+1) d_{n} x^{n}}{(n+1)!} \\ = x D'(x) + xD(x)
+    \end{split}
+\end{equation}
+
+\[
+  \frac{x}{1-x} = \frac{D'(x)}{D(x)} = (\ln D(x))'  
+\]
+
+\[
+ \ln D(x) = \int^{x}_0 \frac{z}{1-z} dz  = - \ln |x-1| - x
+\]
+\[
+ D(x) = e^{- \ln |x-1| -x} = \frac{e^{-x}}{|x-1|}   
+\]
+
+\section*{Zadanie 3}
+Oblicz $a_n = \sum^n_{i=1}F_i F_{n-i}$
+\begin{equation}
+    \begin{split}
+        a_n = \sum^n_{i=1}F_i F_{n-i} = \sum^{n-2}_{i=1}F_i (F_{n-i-1} + F_{n-2-i}) + F_{n-1} * 1 + F_n * 0 \\ = \sum^{n-2}_{i=1}F_i F_{n-i-1} + \sum^{n-2}_{i=1}F_i F_{n-2-i} + F_{n-1} = \\ (a_{n-1} - F_{n-1} F_0) + a_{n-2} + F_{n-1} =
+        a_{n-1} + a_{n-2} + F_{n-1} = a_n
+    \end{split}
+\end{equation}
+
+\[
+  (E^2 - E - 1) \langle a_{n-2} \rangle = \langle F_{n-1} \rangle  
+\]
+\end{document}
+
+
+

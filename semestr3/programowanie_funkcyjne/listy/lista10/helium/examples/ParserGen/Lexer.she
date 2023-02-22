@@ -1,0 +1,2 @@
+
+val getToken : Unit ->[CharStream,Errors] Token

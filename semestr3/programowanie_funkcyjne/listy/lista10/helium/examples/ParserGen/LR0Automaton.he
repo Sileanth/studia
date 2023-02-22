@@ -1,0 +1,105 @@
+module IntMap = Map(Int)
+
+(** Name of token *)
+type TokName = String
+
+(** Non-terminals *)
+type NTerm = String
+
+(** ID of production *)
+type ProductId = Int
+
+(** ID of state *)
+type StateId = Int
+
+(** Formal argument for state *)
+module Arg = struct
+  data this =
+  | AnonToken of TokName
+  | ArgToken  of TokName
+  | NTerm     of NTerm
+
+  let compare a1 a2 =
+    match a1, a2 with
+    | AnonToken n1, AnonToken n2 => String.compare n1 n2
+    | AnonToken _,  _            => LT
+    | _,            AnonToken _  => GT
+    | ArgToken  n1, ArgToken  n2 => String.compare n1 n2
+    | ArgToken  _,  _            => LT
+    | _,            ArgToken  _  => GT
+    | NTerm     n1, NTerm     n2 => String.compare n1 n2
+    end
+
+  let equal a1 a2 =
+    match compare a1 a2 with
+    | EQ => True
+    | _  => False
+    end
+end
+include type Arg
+module ArgMap = Map(Arg)
+
+(** Productions *)
+data Product =
+  { pId    : ProductId
+  ; pNTerm : NTerm
+  ; pIndex : Int
+  ; pArgs  : List Grammar.Arg
+  ; pCode  : String
+  }
+
+(** Tail of production in item *)
+data ItemProduct =
+  { ipArgs    : List Arg
+  ; ipProduct : ProductId
+  }
+
+(** Blocks of productions (items) *)
+data ItemBlock =
+  { ibNTerm    : NTerm (** non-terminal *)
+  ; ibPos      : Int   (** how many arguments are already taken *)
+  ; ibProducts : List ItemProduct
+  }
+
+(** Reduce rules *)
+data ReduceRule =
+  { rrProduct : ProductId
+  ; rrCont    : Int       (** Index of continuation *)
+  ; rrArgN    : Int       (** Number of arguments   *)
+  }
+
+(** Transitions *)
+data Link =
+  { lConts : List Int (** indices of continuations *)
+  ; lState : StateId  (** target state             *)
+  ; lArgN  : Int      (** Number of arguments      *)
+  }
+
+(** State of automaton *)
+(** Each state depends on n1 kernel continuations (one for each kernel block)
+  and depends on n2 closure continuations (one continuation for each closure
+  non-terminal). Continuation are numbered as follows: i-th continuation is
+  i-th kernel continuation if i < n1. Otherwise is (i - n1)-th closure
+  continuation. *)
+data State =
+  { sId          : StateId         (** ID of state            *)
+  ; sArgs        : List Arg        (** State arguments        *)
+  ; sKernel      : List ItemBlock  (** Kernel blocks of items *)
+  ; sClosure     : List NTerm      (** Closure non-terminals  *)
+  ; sReduceRules : List ReduceRule (** Possible reductions    *)
+  ; sLinks       : ArgMap Link     (** Transitions            *)
+  }
+
+(** Initial states *)
+data InitState =
+  { isNTerm : NTerm
+  ; isState : StateId
+  }
+
+(** Automaton *)
+data this =
+  { preambleCode : String
+  ; products     : IntMap Product
+  ; states       : IntMap State
+  ; initStates   : List InitState
+  }

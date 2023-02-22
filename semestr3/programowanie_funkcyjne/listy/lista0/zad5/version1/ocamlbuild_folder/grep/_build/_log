@@ -1,0 +1,18 @@
+### Starting build.
+# Target: grep.ml.depends, tags: { extension:ml, file:grep.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules grep.ml > grep.ml.depends
+# Target: matcher.mli.depends, tags: { extension:mli, file:matcher.mli, ocaml, ocamldep, quiet }
+ocamldep.opt -modules matcher.mli > matcher.mli.depends
+# Target: matcher.cmi, tags: { byte, compile, extension:mli, file:matcher.mli, interf, ocaml, quiet }
+ocamlc.opt -c -o matcher.cmi matcher.mli
+# Target: grep.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:grep.cmo, file:grep.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o grep.cmo grep.ml
+# Target: matcher.ml.depends, tags: { extension:ml, file:matcher.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules matcher.ml > matcher.ml.depends
+# Target: matcher.cmx, tags: { compile, extension:cmx, extension:ml, file:matcher.cmx, file:matcher.ml, implem, native, ocaml, quiet }
+ocamlopt.opt -c -o matcher.cmx matcher.ml
+# Target: grep.cmx, tags: { compile, extension:cmx, extension:ml, file:grep.cmx, file:grep.ml, implem, native, ocaml, quiet }
+ocamlopt.opt -c -o grep.cmx grep.ml
+# Target: grep.native, tags: { dont_link_with, extension:native, file:grep.native, link, native, ocaml, program, quiet }
+ocamlopt.opt matcher.cmx grep.cmx -o grep.native
+# Compilation successful.

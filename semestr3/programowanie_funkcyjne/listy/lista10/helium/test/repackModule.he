@@ -1,0 +1,18 @@
+
+module F = functor(X : sig type this end) :
+sig
+  type this
+  val pack   : X -> this
+  val unpack : this -> X
+end => struct
+  data this = Pack of X
+  let pack = Pack
+  let unpack (Pack x) = x
+end
+
+module BoolPack = F(Bool) :
+  sig
+    type this
+    val pack   : Bool -> this
+    val unpack : this -> Bool
+  end

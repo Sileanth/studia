@@ -1,0 +1,16 @@
+data L3 =
+| Top
+| Bot
+| Mid
+
+data L3Pair =
+| L3Pair of L3, L3
+
+let max x1 x2 =
+  match L3Pair x1 x2 with
+  | L3Pair Top _   => Top
+  | L3Pair _   Top => Top
+  | L3Pair Bot y   => y
+  | L3Pair y   Bot => y
+  | _              => Mid 
+  end

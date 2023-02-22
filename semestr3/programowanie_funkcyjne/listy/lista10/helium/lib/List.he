@@ -1,0 +1,107 @@
+include Datatypes.List
+
+let rec map f xs =
+  match xs with
+  | []      => []
+  | x :: xs => f x :: map f xs
+  end
+
+let mapi f xs =
+  let rec loop i xs =
+    match xs with
+    | []      => []
+    | x :: xs => f i x :: loop (i+1) xs
+    end
+  in loop 0 xs
+
+let rec iter f xs =
+  match xs with
+  | []      => ()
+  | x :: xs => f x; iter f xs
+  end
+
+let iteri f xs =
+  let rec loop i xs =
+    match xs with
+    | []      => ()
+    | x :: xs => f i x; loop (i+1) xs
+    end
+  in loop 0 xs
+
+let rec exists f xs =
+  match xs with
+  | [] => False
+  | x :: xs =>
+    if f x then True
+    else exists f xs
+  end
+
+let rec forAll f xs =
+  match xs with
+  | [] => True
+  | x :: xs =>
+    if f x then forAll f xs
+    else False
+  end
+
+let rec foldl f s xs =
+  match xs with
+  | []      => s
+  | x :: xs => foldl f (f s x) xs
+  end
+
+let rec revAppend xs ys =
+  match xs with
+  | []      => ys
+  | x :: xs => revAppend xs (x :: ys)
+  end
+
+let rev xs = revAppend xs []
+
+let rec take n xs =
+  if n <= 0 then []
+  else
+    match xs with
+    | []      => []
+    | x :: xs => x :: take (n-1) xs
+    end
+
+let rec drop n xs =
+  if n <= 0 then xs
+  else
+    match xs with
+    | []      => []
+    | x :: xs => drop (n-1) xs
+    end
+
+let length xs =
+  let rec loop n xs =
+    match xs with
+    | []      => n
+    | _ :: xs => loop (n + 1) xs
+    end
+  in loop 0 xs
+
+module Search =
+functor
+  (X : sig
+    type this
+    val  equal : this -> this -> Bool
+  end) :
+sig
+  val member : X -> Datatypes.List X -> Bool
+  val assoc  : type V. X -> Datatypes.List (Pair X V) ->[NotFound] V
+end =>
+struct
+  let rec member x xs =
+    match xs with
+    | [] => False
+    | x' :: xs => X.equal x x' || member x xs
+    end
+
+  let rec assoc x xs =
+    match xs with
+    | [] => not_found ()
+    | (x', y) :: xs => if X.equal x x' then y else assoc x xs
+    end
+end

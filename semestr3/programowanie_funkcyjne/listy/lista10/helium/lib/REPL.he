@@ -1,0 +1,117 @@
+(* Types and functions used by REPL *)
+
+data Printer X = Printer of Int -> X -> String
+pragma type "PrinterType": Printer
+
+let print (Printer p) v = p 31 v
+pragma val "InterpretPrinter": print
+
+let defaultPrinter = Printer (fn _ _ => "<abstr>")
+pragma val "DefaultPrinter": defaultPrinter
+
+let printer_func = Printer (fn _ (f : _ ->[| _ ] _) => "<func>")
+pragma val "Printer": printer_func
+
+let printer_Int  = Printer (fn _ n  => stringOfInt n)
+let printer_Unit = Printer (fn _ () => "()")
+let printer_Bool = Printer (fn _ b => if b then "True" else "False")
+
+pragma val "Printer": printer_Int
+pragma val "Printer": printer_Unit
+pragma val "Printer": printer_Bool
+
+let printer_String = Printer (fn _ s => "\"" ++ s ++ "\"")
+pragma val "Printer": printer_String
+
+let printer_Option (Printer p) =
+  Printer (fn prec opt =>
+    match opt with
+    | None   => "None"
+    | Some x =>
+      let res = "Some " ++ p 201 x in
+      if prec > 200 then "(" ++ res ++ ")"
+      else res
+    end)
+
+let printer_Pair (Printer p1) (Printer p2) =
+  Printer (fn prec (x, y) =>
+    let res = p1 30 x ++ ", " ++ p2 31 y in
+    if prec > 30 then "(" ++ res ++ ")"
+    else res)
+
+let printer_Either (Printer p1) (Printer p2) =
+  Printer (fn prec e =>
+    let res =
+      match e with
+      | Left  x => "Left " ++ p1 201 x
+      | Right y => "Right " ++ p2 201 y
+      end in
+    if prec > 200 then "(" ++ res ++ ")"
+    else res)
+
+let printer_List (Printer p) =
+  Printer (fn prec xs =>
+    match xs with
+    | []      => "[]"
+    | x :: xs =>
+      List.foldl (fn s x => s ++ "," ++ p 0 x) ("[" ++ p 0 x) xs ++ "]"
+    end)
+
+let printer_Ord =
+  Printer (fn _ ord =>
+    match ord with
+    | LT => "LT"
+    | EQ => "EQ"
+    | GT => "GT"
+    end)
+
+pragma val "Printer": printer_Option
+pragma val "Printer": printer_Pair
+pragma val "Printer": printer_Either
+pragma val "Printer": printer_List
+pragma val "Printer": printer_Ord
+
+module Instances
+  (Name : sig type this val compare : this -> this -> Ord end) :
+sig
+  effect this
+  (** Save current REPL instance under given name *)
+  val save   : Name ->[this] Unit
+  (** Switch to another REPL instance (returns True on success) *)
+  val switch : Name ->[this] Bool
+  (** Drop given REPL instance *)
+  val drop   : Name ->[this] Unit
+  (** Name of current REPL instance *)
+  val name   : Unit ->[this] Name
+
+  val h : Name -> (Unit ->[this,e] a) ->[e] a
+end = struct
+  effect this =
+    { save   : Name => Unit
+    ; switch : Name => Bool
+    ; drop   : Name => Unit
+    ; name   : Unit => Name
+    }
+
+  let h (type E A) default (f : Unit ->[this,E] A) : A / E =
+    module NameMap = Map(Name)
+    data rec Cont = Cont of (Bool ->[E] Name ->[E] NameMap Cont ->[E] A)
+    in
+    handle f () with
+    | return x     => fn _   _ => x
+    | save   n / r => fn cur m =>
+      r () cur (NameMap.add n (Cont (fn _ => r ())) m)
+    | switch n / r => fn cur m =>
+      handle NameMap.find n m with
+      | return (Cont r') => r' True n (NameMap.add cur (Cont r) m)
+      | Map.not_found _  => r False cur m
+      end
+    | drop   n / r => fn cur m =>
+      r () cur (NameMap.remove n m)
+    | name _   / r => fn cur m =>
+      r cur cur m
+    end default NameMap.empty
+end
+
+include Instances(String)
+let handle h "default"

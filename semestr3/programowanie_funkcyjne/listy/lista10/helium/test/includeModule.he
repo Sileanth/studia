@@ -1,0 +1,14 @@
+module M1 = struct
+  data this = A | B
+  let elem = A
+end
+
+module M2 = struct
+  include M1
+  let elem2 = (B : this)
+end
+
+module M3 = struct
+  include M2 : sig type this val elem : this end
+  let elem3 = elem
+end

@@ -1,0 +1,140 @@
+include type Datatypes.Unit
+include type Datatypes.Bool
+include type Datatypes.Option
+include type Datatypes.Pair
+include type Datatypes.Either
+include type Datatypes.List
+include type Datatypes.Ord
+
+(* Runtime errors *)
+include RuntimeError
+
+let handle printAndExit
+
+module Unit   = Datatypes.Unit
+module Bool   = Datatypes.Bool
+module Pair   = Datatypes.Pair
+module Either = Datatypes.Either
+
+(** Error thrown in `ofString' functions *)
+effect ParseError =
+  { parse_error : Unit => a }
+
+(** A generic error / checked exception *)
+effect Error A  = {error : type T. A => T}
+effect NotFound = {not_found : type T. Unit => T}
+
+(* Arithmetics *)
+let ( =  ) = extern "helium_eqInt"  : Int -> Int -> Bool
+let ( <> ) = extern "helium_neqInt" : Int -> Int -> Bool
+let ( <  ) = extern "helium_ltInt"  : Int -> Int -> Bool
+let ( >  ) = extern "helium_gtInt"  : Int -> Int -> Bool
+let ( <= ) = extern "helium_leInt"  : Int -> Int -> Bool
+let ( >= ) = extern "helium_geInt"  : Int -> Int -> Bool
+
+let ( + ) = extern "helium_addInt" : Int -> Int -> Int
+let ( - ) = extern "helium_subInt" : Int -> Int -> Int
+let ( * ) = extern "helium_mulInt" : Int -> Int -> Int
+let ( / ) =
+  let div = extern "helium_divInt" : Int -> Int -> Int
+  in fn m n =>
+  if n = 0 then runtimeError "division by zero"
+  else div m n
+let ( % ) =
+  let mod = extern "helium_modInt" : Int -> Int -> Int
+  in fn m n =>
+  if n = 0 then runtimeError "division by zero"
+  else mod m n
+
+let ( - _ ) = extern "helium_negInt" : Int -> Int
+let ( + _ ) (x : Int) = x
+
+(* Bitwise operations *)
+let (&&&) = extern "helium_andInt" : Int -> Int -> Int
+let (|||) = extern "helium_orInt"  : Int -> Int -> Int
+let (^^^) = extern "helium_xorInt" : Int -> Int -> Int
+let (<<)  = extern "helium_lslInt" : Int -> Int -> Int
+let (>>)  = extern "helium_lsrInt" : Int -> Int -> Int
+let (>>>) = extern "helium_asrInt" : Int -> Int -> Int
+
+let lnot = extern "helium_notInt" : Int -> Int
+
+(* Operations on strings *)
+let stringOfInt = extern "helium_string_of_int" : Int -> String
+
+let ( ++ ) = extern "helium_appendStr" : String -> String -> String
+
+(* Operations on pairs and lists *)
+let fst (x, _) = x
+let snd (_, x) = x
+
+let ( @ ) xs ys =
+  let rec app xs =
+    match xs with
+    | []      => ys
+    | x :: xs => x :: app xs
+    end
+  in app xs
+
+(* Sequence *)
+let ( ; ) () x = x
+
+(* Ignoring the result *)
+
+let ignore _ = ()
+
+(* Handler sequencing *)
+
+let ($>) f g c =
+  handle
+    handle c ()
+    with f
+  with g
+
+(* Boolean operations *)
+let not b =
+  if b then False else True
+
+let ( && ) b1 b2 =
+  if b1 then b2 else False
+
+let ( || ) b1 b2 =
+  if b1 then True else b2
+
+(* Basic IO *)
+let readInt  = extern "helium_readInt"  : Unit ->[IO] Int
+let printInt = extern "helium_printInt" : Int ->[IO] Unit
+
+let readLine = extern "helium_readLine" : Unit ->[IO] String
+let printStr = extern "helium_printStr" : String ->[IO] Unit
+
+(* Input streams *)
+type InChannel
+
+let stdin = extern "helium_stdin" : InChannel
+
+let openIn  = extern "helium_openIn"  : String ->[IO] InChannel
+let closeIn = extern "helium_closeIn" : InChannel ->[IO] Unit
+
+(** input channel n reads at most n bytes from channel and stores
+  result in string which length indicates number of read bytes.
+  Zero-length string means end of file. *)
+let input = extern "helium_input" : InChannel -> Int ->[IO] String
+
+(* Output streams *)
+type OutChannel
+
+let stdout = extern "helium_stdout" : OutChannel
+let stderr = extern "helium_stderr" : OutChannel
+
+let openOut  = extern "helium_openOut"  : String ->[IO] OutChannel
+let closeOut = extern "helium_closeOut" : OutChannel ->[IO] Unit
+
+let outputString =
+  extern "helium_outputString" : OutChannel -> String ->[IO] Unit
+
+(* Simple assert *)
+let assertFalse (type T) = extern "helium_assertFalse" : String -> T
+let assert msg cond =
+  if not cond then 
+    assertFalse msg

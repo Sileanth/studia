@@ -1,0 +1,35 @@
+module SymMap = Map(String)
+
+(** Name of token *)
+type TokName = String
+
+(** Name of non-terminal *)
+type NTerm = String
+
+(** Name of formal argument *)
+type ArgName = String
+
+(** Symbols with formal arguments for semantic actions *)
+data Arg =
+| AnonToken of TokName
+| ArgToken  of ArgName, TokName
+| NTerm     of ArgName, NTerm
+
+(** Production *)
+data Product =
+  { pArgs : List Arg
+  ; pCode : String
+  }
+
+(** Symbol *)
+data Symbol =
+  { sName     : String
+  ; sInit     : Bool
+  ; sProducts : List Product
+  }
+
+(** Grammar file *)
+data this =
+  { preambleCode : String
+  ; symbols      : SymMap Symbol
+  }

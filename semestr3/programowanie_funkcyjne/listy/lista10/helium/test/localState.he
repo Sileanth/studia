@@ -1,0 +1,38 @@
+
+data LSComp Ref X R Ans =
+  { run : type E. Ref X E ->[E|R] Ans }
+
+data LocalStateImpl Ref =
+  { alloc : type X R Ans. X -> LSComp Ref X R Ans ->[|R] Ans
+  ; get   : type X E. Ref X E ->[E] X
+  ; put   : type X E. Ref X E -> X ->[E] Unit
+  }
+
+data LocalStateSig =
+  LocalState of type Ref. LocalStateImpl Ref
+
+let LocalState (type Ref)
+  { alloc = alloc
+  ; get   = get
+  ; put   = put
+  } =
+  data Ref X E =
+    { rget : Unit ->[E] X
+    ; rput : X ->[E] Unit
+    }
+  effect St X =
+    { get : Unit => X
+    ; put : X => Unit
+    }
+  in
+  let alloc x lsc =
+    handle lsc.run { rget = get; rput = put } with
+    | return x => fn _ => x
+    | get ()   => fn s => resume s  s
+    | put s    => fn _ => resume () s
+    end x in
+  LocalState
+  { alloc = alloc
+  ; get   = fn l => l.rget ()
+  ; put   = fn l => l.rput
+  }

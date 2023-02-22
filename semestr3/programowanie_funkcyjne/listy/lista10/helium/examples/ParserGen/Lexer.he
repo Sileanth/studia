@@ -1,0 +1,144 @@
+
+let isSpace c =
+  Char.equal c ' ' || Char.equal c '\n' || Char.equal c '\r'
+  || Char.equal c '\t'
+
+let isUIdStart c =
+  Char.code c >= Char.code 'A' && Char.code c <= Char.code 'Z'
+
+let isLIdStart c =
+  (Char.code c >= Char.code 'a' && Char.code c <= Char.code 'z')
+  || Char.equal c '_'
+
+let isIdentChar c =
+  isUIdStart c || isLIdStart c || Char.isDigit c || Char.equal c '\''
+
+let buildToken c f =
+  let buf =
+    match c with
+    | None   => StringBuf.empty
+    | Some c => StringBuf.addChar StringBuf.empty c
+    end
+  in
+  handle f () with
+  | return ()   => fn buf => StringBuf.contents buf
+  | CharStream.get_char () => fn buf =>
+    match CharStream.get_char () with
+    | None   => resume None     buf
+    | Some c => resume (Some c) (StringBuf.addChar buf c)
+    end
+  | CharStream.lookahead_char () =>
+    resume (CharStream.lookahead_char ())
+  end buf
+
+let rec skipIdent () =
+  match CharStream.lookahead_char () with
+  | None   => ()
+  | Some c =>
+    if isIdentChar c then begin
+      let _ = CharStream.get_char () in
+      skipIdent ()
+    end
+  end
+
+let rec skipLine () =
+  match CharStream.get_char () with
+  | None   => ()
+  | Some c =>
+    if Char.equal c '\n' then ()
+    else skipLine ()
+  end
+
+let rec skipBlockComment depth =
+  match CharStream.get_char () with
+  | None   => Errors.eof_in_comment ()
+  | Some c =>
+    if Char.equal c '*' then
+      match CharStream.lookahead_char () with
+      | None   => Errors.eof_in_comment ()
+      | Some c =>
+        if Char.equal c ')' then begin
+          let _ = CharStream.get_char () in
+          if depth = 0 then ()
+          else skipBlockComment (depth - 1)
+        end else
+          skipBlockComment depth
+      end
+    elif Char.equal c '(' then 
+      match CharStream.lookahead_char () with
+      | None   => Errors.eof_in_comment ()
+      | Some c =>
+        if Char.equal c '*' then begin
+          let _ = CharStream.get_char () in
+          skipBlockComment (depth + 1)
+        end else
+          skipBlockComment depth
+      end
+    elif Char.equal c '/' then
+      match CharStream.lookahead_char () with
+      | None   => Errors.eof_in_comment ()
+      | Some c =>
+        if Char.equal c '/' then begin
+          skipLine ();
+          skipBlockComment depth
+        end else
+          skipBlockComment depth
+      end
+    else
+      skipBlockComment depth
+  end
+
+(* TODO: string and comment support *)
+let rec skipCode depth =
+  match CharStream.lookahead_char () with
+  | None   => Errors.eof_in_code ()
+  | Some c =>
+    if not (Char.equal c '}' && depth = 0) then begin
+      let _ = CharStream.get_char () in
+      if Char.equal   c '{' then skipCode (depth + 1)
+      elif Char.equal c '}' then skipCode (depth - 1)
+      else skipCode depth
+    end
+  end
+
+let rec getToken () =
+  match CharStream.get_char () with
+  | None   => Token.EOF
+  | Some c =>
+    if isSpace c then getToken ()
+    elif Char.equal c '!' then Token.BANG
+    elif Char.equal c '|' then Token.BAR
+    elif Char.equal c ':' then Token.COLON
+    elif Char.equal c ';' then Token.SEMICOLON
+    elif isUIdStart c     then Token.UID (buildToken (Some c) skipIdent)
+    elif isLIdStart c     then Token.LID (buildToken (Some c) skipIdent)
+    elif Char.equal c '{' then begin
+      let code = buildToken None (fn () => skipCode 0)
+      let _ = CharStream.get_char () (* Remove closing brace *)
+      in
+      Token.CODE code
+    end elif Char.equal c '(' then
+      match CharStream.lookahead_char () with
+      | Some c2 =>
+        if Char.equal c2 '*' then begin
+          let _ = CharStream.get_char ()
+          let _ = skipBlockComment 0
+          in getToken ()
+        end else
+          Errors.invalid_char c
+      | None => Errors.invalid_char c
+      end
+    elif Char.equal c '/' then begin
+      match CharStream.lookahead_char () with
+      | Some c2 =>
+        if Char.equal c2 '/' then begin
+          let _ = CharStream.get_char ()
+          let _ = skipLine ()
+          in getToken ()
+        end else
+          Errors.invalid_char c
+      | None => Errors.invalid_char c
+      end
+    end else
+      Errors.invalid_char c
+  end

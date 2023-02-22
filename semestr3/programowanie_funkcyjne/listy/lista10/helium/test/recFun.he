@@ -1,0 +1,14 @@
+data rec Nat = O | S of Nat
+
+let rec odd n =
+  match n with
+  | O   => 1
+  | S m => even m
+  end
+and even n =
+  match n with
+  | O   => 0
+  | S m => odd m
+  end
+
+let _ = printInt (odd (S (S (S (S (S (S O)))))))
