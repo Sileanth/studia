@@ -1,14 +1,67 @@
 
 \documentclass{article}
 
-\usepackage{tpjp}
+\usepackage{./../../latex_template/tpjp}
 
-\title{Tytuł}
+\title{Lista 1}
 \author{Łukasz Magnuszewski}
 
 \begin{document}
 
 \maketitle
-abc
 
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c | c | c | }
+        \hline
+    
+        1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+
+        \hline
+
+        - & - & + & - & - & - & + \\
+    
+        \hline
+    \end{tabular}
+\end{center}
+
+\section*{Zadanie 1}
+
+\section*{Zadanie 3}
+Wprowadźmy następujące oznaczenia:
+
+$p \mdef$ oskarżony jest winny
+
+$q \mdef$ oskarżony miał wspólnika
+
+Wtedy wypowiedź oskarżyciela można zapisać jako 
+\[ p \impl q \]
+zaś obrońcy jako 
+\[ \neg (p \impl q) \]
+ co jest równoważne 
+\[p \land \neg q\] 
+Czyli twierdzi on że oskarżony jest winny, oraz nie miał wspólnika. 
+Co raczej nie zapowiada zbyt krótkiego wyroku. $\coffee$
+
+\section*{Zadanie 7}  
+Niech $\alpha$ będzie formułą rachunku zdać. Niech $L(\alpha)$ i $P(\alpha)$ oznaczają odpowiednio liczbę lewych i prawych nawiasów w formule $\alpha$. Udownijmy że dla każdej formuły zdaniowej $L(\alpha) = P(\alpha)$.
+
+Przeprowadźmy dowód przez indukcję strukturalną:
+
+\subsection*{1. Zmienne zdaniowe}
+Ustalmy dowolną zmienną zdaniową $p$, wtedy $L(p) = 0 = P(p)$.
+
+\subsection*{2. $\top, \bot$}
+$L(\bot) = 0 = P(\bot)$ oraz $L(\top) = 0 = P(\top)$
+
+\subsection*{3. Negacja}
+Ustalmy dowolną formułę $\alpha$ taką że $P(\alpha) = L(\alpha)$, wtedy
+\[P( (\neg \alpha ) ) = P(\alpha) + 1 \ind L(\alpha) + 1 = L( (\neg \alpha ) )\]
+
+
+\subsection*{4. Koniunkcja}
+
+Ustalmy dowolne formuły $\alpha, \beta$ takie że $P(\alpha) = L(\alpha)$ oraz $P(\beta) = L(\beta)$, wtedy
+\[P( ( \alpha \land \beta  ) ) = P(\alpha) + P(\beta) + 1  \ind L(\alpha) + L(\beta) + 1 = L( ( \alpha \land \beta  ) )\]
+
+Dowód dla pozostałych przypadków(impikacja, alternatywa, równoważność) analogiczny do tego dla koniunkcji $\coffee$
 \end{document}
