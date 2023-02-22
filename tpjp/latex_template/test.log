@@ -1,0 +1,379 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/nixos.org) (preloaded format=pdflatex 1980.1.1)  22 FEB 2023 19:12
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/sileanth/studia/tpjp/latex_template/test.tex
+(/home/sileanth/studia/tpjp/latex_template/test.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2022-12-17> (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (./tpjp.sty
+Package: tpjp 
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/bussproofs/bussproofs.sty
+Proof Tree (bussproofs) style macros. Version 1.1.
+\theLevel=\count193
+\myMaxLevel=\count194
+\myBoxA=\box51
+\myBoxB=\box52
+\myBoxC=\box53
+\myBoxD=\box54
+\myBoxLL=\box55
+\myBoxRL=\box56
+\thisAboveSkip=\dimen141
+\thisBelowSkip=\dimen142
+\newScoreStart=\dimen143
+\newScoreEnd=\dimen144
+\newCenter=\dimen145
+\displace=\dimen146
+\leftLowerAmt=\dimen147
+\rightLowerAmt=\dimen148
+\scoreHeight=\dimen149
+\scoreDepth=\dimen150
+\htLbox=\dimen151
+\htRbox=\dimen152
+\htRRbox=\dimen153
+\htRRRbox=\dimen154
+\htAbox=\dimen155
+\htCbox=\dimen156
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2022/12/26 3.84 The Babel package
+\babel@savecnt=\count195
+\U@D=\dimen157
+\l@unhyphenated=\language87
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count196
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language21). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language21). Reported on input line 108.
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel-polish/polish.ldf
+Language: polish 2022/03/12 1.3 Babel support for Polish
+Package babel Info: Making " an active character on input line 101.
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel/locale/pl/babel-polish.tex
+Package babel Info: Importing font and identification data for polish
+(babel)             from babel-pl.ini. Reported on input line 11.
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/babel/locale/en/babel-english.tex
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 11.
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/tikzducks/tikzducks.sty
+Package: tikzducks 2020/06/30 version v1.5 Draw rubber ducks in TikZ
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/l3kernel/expl3.sty
+Package: expl3 2022-12-17 L3 programming layer (loader) 
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count197
+\l__pdf_internal_box=\box57
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/frontendlayer/tikz.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/basiclayer/pgf.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks18
+\pgfutil@tempdima=\dimen158
+\pgfutil@tempdimb=\dimen159
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box58
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfrcs.code.tex (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/basiclayer/pgfcore.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/systemlayer/pgfsys.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks20
+\pgfkeys@temptoks=\toks21
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks22
+))
+\pgf@x=\dimen162
+\pgf@y=\dimen163
+\pgf@xa=\dimen164
+\pgf@ya=\dimen165
+\pgf@xb=\dimen166
+\pgf@yb=\dimen167
+\pgf@xc=\dimen168
+\pgf@yc=\dimen169
+\pgf@xd=\dimen170
+\pgf@yd=\dimen171
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count198
+\c@pgf@countb=\count199
+\c@pgf@countc=\count266
+\c@pgf@countd=\count267
+\t@pgf@toka=\toks23
+\t@pgf@tokb=\toks24
+\t@pgf@tokc=\toks25
+\pgf@sys@id@count=\count268
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+))) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count269
+\pgfsyssoftpath@bigbuffer@items=\count270
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmath.code.tex (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathcalc.code.tex (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen172
+\pgfmath@count=\count271
+\pgfmath@box=\box59
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count272
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfint.code.tex) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen173
+\pgf@picmaxx=\dimen174
+\pgf@picminy=\dimen175
+\pgf@picmaxy=\dimen176
+\pgf@pathminx=\dimen177
+\pgf@pathmaxx=\dimen178
+\pgf@pathminy=\dimen179
+\pgf@pathmaxy=\dimen180
+\pgf@xx=\dimen181
+\pgf@xy=\dimen182
+\pgf@yx=\dimen183
+\pgf@yy=\dimen184
+\pgf@zx=\dimen185
+\pgf@zy=\dimen186
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen187
+\pgf@path@lasty=\dimen188
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen189
+\pgf@shorten@start@additional=\dimen190
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box60
+\pgf@hbox=\box61
+\pgf@layerbox@main=\box62
+\pgf@picture@serial@count=\count273
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen191
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen192
+\pgf@pt@y=\dimen193
+\pgf@pt@temp=\dimen194
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen195
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen196
+\pgf@sys@shading@range@num=\count274
+\pgf@shadingcount=\count275
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box63
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box64
+)
+(/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen197
+\pgf@nodesepend=\dimen198
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/utilities/pgffor.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/pgf/math/pgfmath.sty (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmath.code.tex)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen199
+\pgffor@skip=\dimen256
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count276
+\pgfplotmarksize=\dimen257
+)
+\tikz@lastx=\dimen258
+\tikz@lasty=\dimen259
+\tikz@lastxsaved=\dimen260
+\tikz@lastysaved=\dimen261
+\tikz@lastmovetox=\dimen262
+\tikz@lastmovetoy=\dimen263
+\tikzleveldistance=\dimen264
+\tikzsiblingdistance=\dimen265
+\tikz@figbox=\box65
+\tikz@figbox@bg=\box66
+\tikz@tempbox=\box67
+\tikz@tempbox@bg=\box68
+\tikztreelevel=\count277
+\tikznumberofchildren=\count278
+\tikznumberofcurrentchild=\count279
+\tikz@fig@count=\count280
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count281
+\pgfmatrixcurrentcolumn=\count282
+\pgf@matrix@numberofcolumns=\count283
+)
+\tikz@expandcount=\count284
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypatterns.code.tex
+File: tikzlibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/libraries/pgflibrarypatterns.code.tex
+File: pgflibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/generic/tikzducks/tikzducks-generic.tex)) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/marvosym/marvosym.sty
+Package: marvosym 2011/07/20 v2.2 Martin Vogel's Symbols font definitions
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/phaistos/phaistos.sty
+File: phaistos.sty 2004/04/23 v1.0 Package `phaistos.sty'
+Now handling font encoding LPH ...
+... no UTF-8 mapping file for font encoding LPH
+)) (./test.aux)
+\openout1 = `test.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for LPH/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count285
+\scratchdimen=\dimen266
+\scratchbox=\box69
+\nofMPsegments=\count286
+\nofMParguments=\count287
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen267
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
+\everyMPtoPDFconversion=\toks32
+) (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 11.
+ [1
+
+{/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./test.aux) ) 
+Here is how much of TeX's memory you used:
+ 14913 strings out of 476093
+ 316282 string characters out of 5763139
+ 1849793 words of memory out of 5000000
+ 35047 multiletter control sequences out of 15000+600000
+ 517318 words of font info for 44 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 130i,6n,132p,7196b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
+Output written on test.pdf (1 page, 33586 bytes).
+PDF statistics:
+ 27 PDF objects out of 1000 (max. 8388607)
+ 17 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

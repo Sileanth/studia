@@ -1,0 +1,33 @@
+\documentclass[a4paper,10pt]{article}
+\pagestyle{plain}
+% http://www.logicmatters.net/latex-for-logicians/  punkt 3. Natural deduction proofs.
+\usepackage{bussproofs}
+\newcommand*{\impl}{\mathbin{\to}}
+
+\begin{document}
+Prawo importacji: $\vdash(\varphi\to\psi\to\rho)\to(\varphi\land\psi\to\rho)$
+
+\begin{prooftree}
+\AxiomC{}  \RightLabel{\scriptsize$(Ass)$} 
+\UnaryInfC{$p\to q\to r\vdash p\to q\to r$}
+	\AxiomC{}  \RightLabel{\scriptsize$(Ass)$} 
+	\UnaryInfC{$p\land q\vdash p\land q$}
+	\RightLabel{\scriptsize$(\land E)$}
+	\UnaryInfC{$p\land q\vdash p$}
+\RightLabel{\scriptsize$(\impl E)$}
+\BinaryInfC{$p\to q\to r,p\land q\vdash q\to r$}
+	\AxiomC{}  \RightLabel{\scriptsize$(Ass)$} 
+	\UnaryInfC{$p\land q\vdash p\land q$}
+	\RightLabel{\scriptsize$(\land E)$}
+	\UnaryInfC{$p\land q\vdash q$}
+\RightLabel{\scriptsize$(\impl E)$}
+\BinaryInfC{$p\to q\to r, p\land q\vdash r$}	
+\RightLabel{\scriptsize$(\impl I)$}	
+\UnaryInfC{$p\to q\to r\vdash p\land q\to r$}
+\RightLabel{\scriptsize$(\impl I)$}	
+\UnaryInfC{$\vdash(p\to q\to r)\to(p\land q\to r)$}
+\end{prooftree}
+
+\end{document}
+
+

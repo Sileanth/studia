@@ -1,0 +1,26 @@
+\ProvidesPackage{tpjp}
+
+
+% logic packages
+\usepackage{bussproofs}
+\newcommand*{\impl}{\mathbin{\to}}
+
+
+% Language packages
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+
+
+\RequirePackage{tikzducks}
+\definecolor{ducky-yellow}{HTML}{f2ca63}
+\newcommand{\proofend}{\begin{flushright}\emph{\scriptsize\color{orange}i śmiga}\\ \begin{tikzpicture}\duck[body=ducky-yellow, bill=red,scale=0.36, bowtie, devil=red];\end{tikzpicture}\end{flushright}}
+\RequirePackage{marvosym}
+\RequirePackage{phaistos}
+
+\newcommand{\coffee}{\text{\color{def}\large\Coffeecup}}
+\newcommand{\bat}{\text{\color{acc}\large\Bat}}
+
+\newcommand{\cat}{\text{\PHcat}}
+\newcommand{\sheep}{\text{\PHram}}
+\newcommand{\flower}{\text{\PHrosette}}
