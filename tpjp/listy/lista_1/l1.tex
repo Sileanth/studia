@@ -26,6 +26,27 @@
 
 \section*{Zadanie 1}
 
+Zbiór spójników $\{ \land, \neg \}$ jest funkcjonalnie pełny, więc wystarczy przedstawić te spójniki przy pomocy kreski Sheffera.
+\[ \neg \alpha \mdef \alpha | \alpha \]
+Teraz używając negacji
+\[
+    \alpha \land \beta \mdef \neg (\alpha | \beta)   
+\]
+
+\section*{Zadanie 2}
+Mamy następujący zbiór aksjomatów 
+\[ \{ p \impl q \lor r, \neg q \impl s, s \land p \impl \neg r \} \]
+A naszym celem jest $r \impl \neg s \lor \neg p$
+
+\begin{prooftree}
+
+    \AxiomC{$r \vdash r$} \RightLabel{\scriptsize$(\impl I)$}
+    \UnaryInfC{$\vdash, r \impl  \neg s \lor \neg p$}  
+    \UnaryInfC{$\bot$} \RightLabel{\scriptsize$(\bot E)$} 
+    \UnaryInfC{$\vdash  r \impl \neg s \lor \neg p$} 
+\end{prooftree}
+
+
 \section*{Zadanie 3}
 Wprowadźmy następujące oznaczenia:
 

@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1677092205 "/home/sileanth/studia/tpjp/listy/lista_1/l1.tex" "l1.pdf" "l1" 1677092205 0
+["pdflatex"] 1677164114 "/home/sileanth/studia/tpjp/listy/lista_1/l1.tex" "l1.pdf" "l1" 1677164115 0
   "../../latex_template/tpjp.sty" 1677091873 1275 da495297e5decfd0f519e47737760f13 ""
-  "/home/sileanth/studia/tpjp/listy/lista_1/l1.tex" 1677092205 1891 c871e28518fa836d57bee1b6bc0c6d8e ""
+  "/home/sileanth/studia/tpjp/listy/lista_1/l1.tex" 1677164114 2601 33f696a76149781712a68da49520667b ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1 4623453 0790e41d8975ca8031e9ae45c900c29e ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1 7875648 e1c81889f4eef3bc783c33205ccdb065 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -33,8 +33,11 @@
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/tfm/public/marvosym/umvs.tfm" 1 1772 135d23849cb646acc6bb1ae8d73e3f78 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1 36741 fa121aac0049305630cf160b86157ee4 ""
+  "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1 36281 c355509802a035cadc5f15869451dcee ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1 32716 08e384dc442464e7285e891af9f45947 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb" 1 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb" 1 136101 f533469f523533d38317ab5729d00c8a ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb" 1 131438 3aa300b3e40e5c8ba7b4e5c6cebc5dd6 ""
@@ -73,8 +76,8 @@
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/sectsty/sectsty.sty" 1 22423 d476012cd03f82f9475ad54ba6cd3267 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/tex/latex/xcolor/xcolor.sty" 1 56148 51a9a8571c07b9921892ae11063ae853 ""
   "/nix/store/v00q1nzjd2wfwar8yf2vl5aic7gq6qzi-texlive-combined-full-2022.20221227/share/texmf/web2c/texmf.cnf" 1 42136 20b6cfbe739ef5ca1258d41a581172f8 ""
-  "l1.aux" 1677092205 131 8de0ab829e238d6de93b37da35a5dec1 "pdflatex"
-  "l1.tex" 1677092205 1891 c871e28518fa836d57bee1b6bc0c6d8e ""
+  "l1.aux" 1677164115 131 8de0ab829e238d6de93b37da35a5dec1 "pdflatex"
+  "l1.tex" 1677164114 2601 33f696a76149781712a68da49520667b ""
   (generated)
   "l1.aux"
   "l1.log"
