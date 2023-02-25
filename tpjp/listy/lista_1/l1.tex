@@ -39,16 +39,23 @@ Mamy następujący zbiór aksjomatów
 A naszym celem jest $r \impl \neg s \lor \neg p$
 
 \begin{prooftree}
-
-    \AxiomC{$r \vdash r$} \RightLabel{\scriptsize$(\impl I)$}
-    \UnaryInfC{$\vdash, r \impl  \neg s \lor \neg p$}  
-    \UnaryInfC{$\bot$} \RightLabel{\scriptsize$(\bot E)$} 
-    \UnaryInfC{$\vdash  r \impl \neg s \lor \neg p$} 
+    \AxiomC{$$}  
+    \RightLabel{\scriptsize{(Ass)}} \UnaryInfC{$\neg (\neg s \lor \neg p ) \vdash \neg (\neg s \lor \neg p )$}
+    \RightLabel{\scriptsize{(De Morgan)}} \UnaryInfC{$\neg (\neg s \lor \neg p) \vdash s \land p $}
+    \AxiomC{} 
+    \RightLabel{\scriptsize{(Ax)}} \UnaryInfC{$s \land p \impl \neg r$}
+    \RightLabel{\scriptsize{$(\impl E)$}} \BinaryInfC{$\neg (\neg s \lor \neg p) \vdash \neg  r$} 
+    \AxiomC{} 
+    \RightLabel{\scriptsize{(Ass)}} \UnaryInfC{$r \vdash r$}
+    \RightLabel{\scriptsize{($\neg E$)}} \BinaryInfC{$r, \neg (\neg s \lor \neg p) \vdash \bot$} 
+    \RightLabel{\scriptsize{(RAA)}}  \UnaryInfC{$r \vdash \neg s \lor \neg p$}
+    \RightLabel{\scriptsize$(\impl I)$} \UnaryInfC{$\vdash  r \impl \neg s \lor \neg p$} 
 \end{prooftree}
 
 
 \section*{Zadanie 3}
 Wprowadźmy następujące oznaczenia:
+
 
 $p \mdef$ oskarżony jest winny
 
