@@ -36,8 +36,7 @@ Teraz używając negacji
 \section*{Zadanie 2}
 Mamy następujący zbiór aksjomatów 
 \[ \{ p \impl q \lor r, \neg q \impl s, s \land p \impl \neg r \} \]
-A naszym celem jest $r \impl \neg s \lor \neg p$
-
+A naszym celem jest $r \impl \neg s \lor \neg p$. Poniżej jest dowód w notacji sekwentowej
 \begin{prooftree}
     \AxiomC{$$}  
     \RightLabel{\scriptsize{(Ass)}} \UnaryInfC{$\neg (\neg s \lor \neg p ) \vdash \neg (\neg s \lor \neg p )$}
@@ -46,6 +45,7 @@ A naszym celem jest $r \impl \neg s \lor \neg p$
     \RightLabel{\scriptsize{(Ax)}} \UnaryInfC{$s \land p \impl \neg r$}
     \RightLabel{\scriptsize{$(\impl E)$}} \BinaryInfC{$\neg (\neg s \lor \neg p) \vdash \neg  r$} 
     \AxiomC{} 
+
     \RightLabel{\scriptsize{(Ass)}} \UnaryInfC{$r \vdash r$}
     \RightLabel{\scriptsize{($\neg E$)}} \BinaryInfC{$r, \neg (\neg s \lor \neg p) \vdash \bot$} 
     \RightLabel{\scriptsize{(RAA)}}  \UnaryInfC{$r \vdash \neg s \lor \neg p$}
@@ -70,6 +70,55 @@ zaś obrońcy jako
 Czyli twierdzi on że oskarżony jest winny, oraz nie miał wspólnika. 
 Co raczej nie zapowiada zbyt krótkiego wyroku. $\coffee$
 
+
+\section*{Zadanie 4}
+\subsection*{A)}
+
+\begin{prooftree}
+      
+
+            \AxiomC{}
+            \RightLabel{\scriptsize$(Ass)$}
+            \UnaryInfC{$\alpha \land \psi \vdash \alpha \land \psi$}
+            \RightLabel{\scriptsize$(\land E_2)$}
+            \UnaryInfC{$\alpha \land \psi \vdash \psi $}
+
+            \AxiomC{}
+            \RightLabel{\scriptsize$(Ass)$}
+            \UnaryInfC{$\alpha \land \psi \vdash \alpha \land \psi$}
+            \RightLabel{\scriptsize$(\land E_1)$}
+            \UnaryInfC{$\alpha \land \psi \vdash \alpha $}
+        \RightLabel{\scriptsize$(\land I)$}
+        \BinaryInfC{$\alpha \land \psi \vdash \psi \land \alpha$}
+
+            \AxiomC{}
+            \RightLabel{\scriptsize$(Ass)$}
+            \UnaryInfC{$\psi \land \alpha \vdash \psi \land \alpha$}
+            \UnaryInfC{$\psi \land \alpha \vdash \alpha $}
+
+            \AxiomC{}
+            \RightLabel{\scriptsize$(Ass)$}
+            \UnaryInfC{$\psi \land \alpha \vdash \psi \land \alpha$}
+            \RightLabel{\scriptsize$(\land E_1)$}
+            \UnaryInfC{$\psi \land \alpha \vdash \psi $}
+        \RightLabel{\scriptsize$(\land I)$}
+        \BinaryInfC{$\psi \land \alpha \vdash \alpha \land \psi$}
+    \RightLabel{\scriptsize$(\iff I)$}
+    \BinaryInfC{$\alpha \land \psi \iff \psi \land \alpha$}
+\end{prooftree}
+
+\subsection*{B)}
+
+\begin{prooftree}
+    
+
+        \AxiomC{}
+        \AxiomC{}
+    \RightLabel{\scriptsize$(\iff I)$}
+    \BinaryInfC{$(\alpha \land \psi) \land \sigma \iff \alpha \land (\psi \land \sigma)$}
+\end{prooftree}
+
+
 \section*{Zadanie 7}  
 Niech $\alpha$ będzie formułą rachunku zdać. Niech $L(\alpha)$ i $P(\alpha)$ oznaczają odpowiednio liczbę lewych i prawych nawiasów w formule $\alpha$. Udownijmy że dla każdej formuły zdaniowej $L(\alpha) = P(\alpha)$.
 
@@ -92,4 +141,40 @@ Ustalmy dowolne formuły $\alpha, \beta$ takie że $P(\alpha) = L(\alpha)$ oraz 
 \[P( ( \alpha \land \beta  ) ) = P(\alpha) + P(\beta) + 1  \ind L(\alpha) + L(\beta) + 1 = L( ( \alpha \land \beta  ) )\]
 
 Dowód dla pozostałych przypadków(impikacja, alternatywa, równoważność) analogiczny do tego dla koniunkcji $\coffee$
+
+
+
+
+
+\section*{Zadanie 5}
+\subsection*{$(RAA) \impl (\neg \neg)$}
+By to pokazać nastepującą formułe $\neg \neg \alpha \impl \alpha$
+
+\begin{prooftree}
+    \AxiomC{} \RightLabel{\scriptsize$(Ass)$} \UnaryInfC{$\neg \alpha \vdash  \neg \alpha$}
+    \AxiomC{} \RightLabel{\scriptsize$(Ass)$} \UnaryInfC{$\neg \neg \alpha \vdash \neg \neg \alpha$}
+    \RightLabel{\scriptsize$(\neg E)$} \BinaryInfC{$\neg \alpha, \neg \neg \alpha \vdash \bot$}
+    \RightLabel{\scriptsize$RAA$} \UnaryInfC{$\neg \neg \alpha \vdash \alpha$} 
+    \RightLabel{\scriptsize$(\impl I)$} \UnaryInfC{$\neg \neg \alpha \impl \alpha$}    
+\end{prooftree}
+
+\subsection*{$(\neg \neg ) \impl (TND)$}
+\begin{prooftree}
+        \AxiomC{} 
+        \RightLabel{\scriptsize$(Ass)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \neg (\alpha \lor \neg \alpha) $}
+        \RightLabel{\scriptsize$(De Morgan)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \neg \alpha \land  \alpha$}
+        \RightLabel{\scriptsize$(\land E_1)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \neg \alpha$}
+
+        \AxiomC{} 
+        \RightLabel{\scriptsize$(Ass)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \neg (\alpha \lor \neg \alpha) $}
+        \RightLabel{\scriptsize$(De Morgan)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \neg \alpha \land  \alpha$}
+        \RightLabel{\scriptsize$(\land E_2)$} \UnaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \alpha$}
+
+    \RightLabel{\scriptsize$(\neg E)$} \BinaryInfC{$\neg (\alpha \lor \neg \alpha) \vdash \bot$}
+
+    \RightLabel{\scriptsize$(\neg I)$} \UnaryInfC{$\neg \neg (\alpha \lor \neg \alpha
+    )$}
+
+    \RightLabel{\scriptsize$(\neg \neg)$} \UnaryInfC{$\alpha \lor \neg \alpha$}
+\end{prooftree}
 \end{document}
