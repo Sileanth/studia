@@ -24,7 +24,8 @@
 			devShells = forAllSystems ({pkgs}: {
 				default = pkgs.mkShell {
 					packages = with pkgs; [
-						coursier
+						scala-cli
+						dotty					        
 						sbt
 						jdk11
 					];
