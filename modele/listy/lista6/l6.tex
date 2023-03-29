@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{./../../modele}
+
+\title{List 6}
+\author{Łukasz Magnuszewski}
+
+
+\usepackage{yfonts}
+\newcommand{\G}[1]{\textfrak{#1}}
+\newcommand{\ga}{\textfrak{A}}
+\newcommand{\gb}{\textfrak{B}}
+
+\begin{document}
+\maketitle
+\section*{6.1 Operations on structures}
+
+
+
+\subsection*{Exercise 6.1}
+Given two $\tau$-structures \G{A}, \G{B}, their Cartesian product $\ga \times \gb$ is a $\tau$-structure whose universe is $\ga \times \gb$, 
+each constant symbol $c \in \tau$ is inerpreted as $(c^\ga, c^\gb)$,
+and every k-ary predicate R is interpreted as 
+$\{((a_1,b_1), \ldots, (a_k, b_k)) | (a_1, \ldots, a_k) \in R^\ga, (b_1, \ldots, b_k) \in R^\gb \}$ 
+
+Assuming that $\ga_1 \equiv_m \gb_1$ and $\ga_2 \equiv_m \gb_2$ hold, 
+show that $\ga_1 \times \gb_1 \equiv_m \ga_2 \times \gb_2$.
+
+\subsubsection*{solution}
+
+We know that $\ga_1 \equiv_m \gb_1$ and $\ga_2 \equiv_m \gb_2$ hold, so there is winning strategy
+for duplicator in m-round Ehrenfeucht-Fraiisse game on structures $\ga_1, \gb_1$ and $\ga_2, \gb_2$. 
+
+To show that $\ga_1 \times \gb_1 \equiv_m \ga_2 \times \gb_2$ we will play m-round game as duplicator. Our strategy is following:
+ 
+
+  If spoiler picks elements  $(a_1,b_1) \in \ga_1 \times \gb_1$ then we can with tuple $(a_2, b_2)$
+  where is $a_2$ is duplicator answer for spoiler play $a_1$ in game on $\ga_1, \gb_1$, and $b_2$ is decided in the same way
+
+The same happens when spoiler picks $(a_2, b_2) \in \ga_2 \times \gb_2$
+
+
+\subsection*{Exercise 6.2}
+Fix a finite purely-relational signature $\tau$, a $\tau$-strucutre \ga, and a non empty set of indices $I$.
+We define the structure $\ga \times I$ as follows: the domain of $\ga \times I$ is $A \times I$,
+and for each k-ary relational symbol $R$ we put 
+$((a_1,i_1), \ldots, (a_k, i_k)) \in R^{\ga \times I} $
+if and only if $(a_1, \ldots, a_k) \in R^\ga$ holds.
+Show by structural induction that for all eqaulity-free $FO[\tau]$-formulae $\psi(x_1, \ldots, x_k)$,
+all tuples $\bar{a} \in A^k$ and $\bar{i} \in I^k$ we have 
+$\ga \times I \vdash \psi[(a_1, i_1), \ldots, (a_k, i_k)]$ if and only if $\ga \vdash \psi[a_1, \ldots a_k]$
+
+
+\subsection*{Exercise 6.3}
+Let \ga, \gb be countably-infinite structures  that are $\omega$-elementary equivalent(i.e. duplicator can surwive $\omega$ rounds in any E-F game on $\ga$ and \gb). Show that $\ga \cong \gb$.
+
+
+During the game all elements of structure a and b can be selected, and duplicator surived so there is a isomorphism beetwen all elements of \ga and all elements of \gb. Which means that these structures are isomorphic.
+
+\end{document}
