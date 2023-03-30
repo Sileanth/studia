@@ -1,0 +1,29 @@
+
+\documentclass{article}
+\usepackage{templatka}
+\author{Łukasz Magnuszewski}
+
+\title{Example}
+
+\begin{document}
+\maketitle
+
+
+\begin{tikzpicture} [node distance = 2cm, on grid, auto]
+
+
+  \node[state, initial, accepting, initial text =] (q_0) {$q_0$};
+  \node[state] (q_1) [above right=of q_0] {$q_1$};
+
+
+  \path[-stealth, thick] (q_0) 
+    (q_1) edge [loop right] node {a} () 
+    (q_0) edge [bend left] node {0} (q_1);
+\end{tikzpicture}
+
+
+\coffee
+\bat
+
+\end{document}
+

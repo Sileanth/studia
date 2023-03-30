@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/nixos.org) (preloaded format=pdflatex 1980.1.1)  29 MAR 2023 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/nixos.org) (preloaded format=pdflatex 1980.1.1)  29 MAR 2023 13:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -153,17 +153,6 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
-) (/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/sectsty/sectsty.sty
-Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading styles
-
-
-LaTeX Warning: Command \underbar  has changed.
-               Check if current package is valid.
-
-
-LaTeX Warning: Command \underline  has changed.
-               Check if current package is valid.
-
 ) (/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/marvosym/marvosym.sty
 Package: marvosym 2011/07/20 v2.2 Martin Vogel's Symbols font definitions
 ) (/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/phaistos/phaistos.sty
@@ -221,10 +210,6 @@ LaTeX Font Info:    ... okay on input line 14.
 \MPnumerator=\count278
 \makeMPintoPDFobject=\count279
 \everyMPtoPDFconversion=\toks25
-)
-LaTeX Font Info:    Trying to load font information for T1+PTMono-TLF on input line 16.
- (/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/paratype/T1PTMono-TLF.fd
-File: T1PTMono-TLF.fd 2014/02/02 Font definitions for T1/PTMono-TLF.
 ) [1
 
 {/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./l6.aux)
@@ -234,18 +219,18 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 4463 strings out of 476024
- 72200 string characters out of 5764566
- 1860388 words of memory out of 5000000
- 24857 multiletter control sequences out of 15000+600000
- 591762 words of font info for 66 fonts, out of 8000000 for 9000
+ 4318 strings out of 476024
+ 69330 string characters out of 5764566
+ 1861388 words of memory out of 5000000
+ 24721 multiletter control sequences out of 15000+600000
+ 583776 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,8n,76p,291b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/enc/dvips/paratype/ptsans_t1.enc}{/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/enc/dvips/paratype/ptmono_t1.enc}</nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/paratype/ptmono/PTM75F.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/paratype/ptsans/PTS55F.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/paratype/ptsans/PTS75F.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/yfonts-t1/yfrak.pfb>
-Output written on l6.pdf (2 pages, 90939 bytes).
+{/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/enc/dvips/paratype/ptsans_t1.enc}</nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/paratype/ptsans/PTS55F.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/paratype/ptsans/PTS75F.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/yfonts-t1/yfrak.pfb>
+Output written on l6.pdf (2 pages, 86779 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
