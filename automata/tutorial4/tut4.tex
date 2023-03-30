@@ -1,0 +1,63 @@
+
+\documentclass{article}
+\usepackage{./../../templatka}
+\author{Łukasz Magnuszewski}
+
+\title{Tutorial 4}
+
+\begin{document}
+\maketitle
+
+
+\section{Exercise 1}
+Show that if $r$ and $s$ are two series recognisable by weighted automata, then their sum $r +s$, defined by $(r+s)(w) = r(w) + s(w)$ for every $w \in \Sigma^*$, also is.
+
+$r,s$ are recognised are regular, so they have corensponding automata $A_r, A_s$. We can just make single automaton which containts both automata. and beetwen these two subautomatas there is no edge with weight diffrent than 0.
+
+
+\section{Exercise 2}
+We need to take smart product of both automatas
+
+
+\section{Exercise 3}
+Consider the following two famous De Morgan's laws:
+\subsection{$\neg(\alpha \lor \psi) \equiv \neg \alpha \land \neg \psi$}
+
+The law dont work if there are two non zero elements which sum to 0. Example of such case is any ring.
+Suppose we have such elements $x,y$(Note that is possible that $x=y$).
+
+Then take $\alpha = x$ and $\psi = y$. Left side evaluates to 1. And right side evaluates to 0\coffee.
+
+
+\subsection{$\neg(\alpha \land \psi) \equiv \neg \alpha \lor \neg \psi$}
+Consider $\Z$ as our semiring.
+Suppose that $\alpha = \psi = 0 $. Then left side evaluates to 1. And right side evaluates to 2 \coffee.   
+
+\section{Exercise 4}
+Construct a weighted automaton over $\Sigma = \{0,1\}$ and $\langle \N, +, *, 0, 1 \rangle$ recognising the series $s_bin$ sending a word $w$ over $\Sigma$ to the number it represents in binary.
+
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm, on grid, auto]
+
+  \node (q0) [state, initial, initial text = 1] {$q_0$};
+  \node (q1) [state, accepting, accepting right, accepting text = 1,
+    right = of q0,
+    ] {$q_1$};
+
+  \path [=stealth, thick]
+    (q0) edge [loop above] node {$2$} ()
+    (q1) edge [loop above] node {$1$} ()
+    (q0) edge node {1:1} (q1);
+
+\end{tikzpicture}
+\end{center}
+There is only one decision in this automata, and is when to cross to accepting state. We can cross between $q_0$ and $q_1$ only when our letter is one. So the weight of run in which we crossed is $2^k$, where k is number of times we looped before crossing.  
+
+
+\section{Exercise 6}
+What is the series defined by the $wMSO$ formula $\forall x. \exists y. 1$? Can you construct a weighted automaton recognising this series?
+
+There are no free formulas in every subformula, so we don't need to take care of substitution.
+The evaluation of this formula is $\prod_{w \in \Sigma^*} \sum_{v \in \Sigma^*} 1$. Which is equal to $|\Sigma^*|^{|\Sigma^*|}$. And there is no such weighted automaton(Tutorial 5, Exercise 6). 
+
+\end{document}
