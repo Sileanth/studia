@@ -1,6 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1680172270 "tut3.tex" "tut3.pdf" "tut3" 1680172271 0
-  "../../templatka.sty" 1680169829 778 70627bf7eb121cb330f7b7a9284454d0 ""
+["pdflatex"] 1680503071 "/home/sileanth/studia/automata/tutorial3/tut3.tex" "tut3.pdf" "tut3" 1680503072 0
+  "../../templatka.sty" 1680177183 834 0a1605111fdd2604aa4c7589f34afe73 ""
+  "/home/sileanth/studia/automata/tutorial3/tut3.tex" 1680503071 4921 eb458966b8a29bccf0ea1048a187219d ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/enc/dvips/paratype/ptsans_t1.enc" 1 2581 aa32af98902e3c55fcf7bccadd42cf8a ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/map/fontname/texfonts.map" 1 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
@@ -155,8 +156,8 @@
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1 4623479 2e91168e61067cdc2ca4e743752661e4 ""
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1 7884465 3a8dbb0067ae5b091df1da0684ddd82f ""
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/texmf.cnf" 1 42255 d4881597e297c26f1d0316e7fc126d35 ""
-  "tut3.aux" 1680172271 1769 6d4b662e9ba45a1122720add6b23e835 "pdflatex"
-  "tut3.tex" 1680172269 3759 fdef396cafe7b979f14773940ffe4c0a ""
+  "tut3.aux" 1680503071 1769 92c5716baaf8550945aa4f67f1eabb55 "pdflatex"
+  "tut3.tex" 1680503071 4921 eb458966b8a29bccf0ea1048a187219d ""
   (generated)
   "tut3.aux"
   "tut3.log"

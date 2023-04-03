@@ -1,7 +1,7 @@
 PWD /home/sileanth/studia/automata/tutorial3
 INPUT /nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/texmf.cnf
 INPUT /nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT tut3.tex
+INPUT /home/sileanth/studia/automata/tutorial3/tut3.tex
 OUTPUT tut3.log
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/base/article.cls
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/base/article.cls

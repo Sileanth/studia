@@ -1,6 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1680177493 "tut4.tex" "tut4.pdf" "tut4" 1680177494 0
+["pdflatex"] 1680502088 "/home/sileanth/studia/automata/tutorial4/tut4.tex" "tut4.pdf" "tut4" 1680502089 0
   "../../templatka.sty" 1680177183 834 0a1605111fdd2604aa4c7589f34afe73 ""
+  "/home/sileanth/studia/automata/tutorial4/tut4.tex" 1680502088 3090 cceca5367ecfc5022849b83d4080bda3 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/enc/dvips/paratype/ptsans_t1.enc" 1 2581 aa32af98902e3c55fcf7bccadd42cf8a ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/map/fontname/texfonts.map" 1 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
@@ -32,6 +33,7 @@
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1 36741 fa121aac0049305630cf160b86157ee4 ""
+  "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1 37912 77d683123f92148345f3fc36a38d9ab1 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1 36281 c355509802a035cadc5f15869451dcee ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1 35752 024fb6c41858982481f6968b5fc26508 ""
   "/nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1 32722 d7379af29a190c3f453aba36302ff5a9 ""
@@ -154,8 +156,8 @@
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1 4623479 2e91168e61067cdc2ca4e743752661e4 ""
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1 7884465 3a8dbb0067ae5b091df1da0684ddd82f ""
   "/nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/texmf.cnf" 1 42255 d4881597e297c26f1d0316e7fc126d35 ""
-  "tut4.aux" 1680177494 931 7e6c35842e42ac701ff47bfb6534b21e "pdflatex"
-  "tut4.tex" 1680177493 2621 1d6b026e55d118b710316a137bafd747 ""
+  "tut4.aux" 1680502088 931 c1f2b0f2c55a487441b1221006f27bb5 "pdflatex"
+  "tut4.tex" 1680502088 3090 cceca5367ecfc5022849b83d4080bda3 ""
   (generated)
   "tut4.aux"
   "tut4.log"

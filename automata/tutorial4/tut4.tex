@@ -17,7 +17,16 @@ $r,s$ are recognised are regular, so they have corensponding automata $A_r, A_s$
 
 \section{Exercise 2}
 We need to take smart product of both automatas
+\[ Q = Q_a \times Q_b\] 
+\[ \lambda ((x,y))  = \lambda_a(x) * \lambda_b(y) \]
+\[ \mu ((x,y))  = \mu_a(x) * \lambda_b(y) \]
+\[  \delta((p,q)_l, (r, s))_l = \delta_a(p,r)_l * \delta_b(q,s)  \]
 
+\[
+  weight(w) =  \sum_{r over runs on w} \lambda_a(p_0) * lambda_b(p_0) * (\prod_{i \in [0,n-1)}  \delta_a(p_i, p_{i+1})_{w_i}
+  * \delta_b(p_i, p_{i+1})_{w_i} ) *  \mu_a(p_{n-1}) * \mu_b(p_{n-1})
+\]
+We can rearrenge it, to product of two automata A,B, because we are in ring.
 
 \section{Exercise 3}
 Consider the following two famous De Morgan's laws:

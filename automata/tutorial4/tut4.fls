@@ -1,7 +1,7 @@
 PWD /home/sileanth/studia/automata/tutorial4
 INPUT /nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/texmf.cnf
 INPUT /nix/store/zi899rnhfwhmpsv3b1zvw7qvk9kckya5-texlive-combined-full-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT tut4.tex
+INPUT /home/sileanth/studia/automata/tutorial4/tut4.tex
 OUTPUT tut4.log
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/base/article.cls
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/tex/latex/base/article.cls
@@ -606,6 +606,7 @@ INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.202
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /nix/store/c5rdayr3rippgdlzj765bhq3yfm066hw-texlive-combined-full-2022.20221227-texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb
