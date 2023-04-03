@@ -8,69 +8,59 @@
 \begin{document}
 \maketitle
 
-\section{Exercise 1}
-Define by first-order sentences the two languages over $\{a,b,c\}$ defined by the following star-free expressions:
-\subsection{$(\emptyset^c * c * \emptyset^c)^c + 
-(\emptyset^c * a * \emptyset^c * b * \emptyset^c)$}
+\section*{Exercise 1}
+
 \[
-  (\forall x. \neg c(x)) \lor (\exists x. \exists y. x < y \land a(x) \land b(y))
+  \forall x. a(x) \implies \exists y. c(y) \land y > x 
 \]
-\subsection{$(\emptyset^c * a * (\emptyset^c * c * \emptyset^c)^c * a * \emptyset^c)^c$}
-\[
-  \neg (\exists x. \exists y. (x < y \land a(x) \land a(y) \land (\forall z. (z > x \land z < y) \implies \neg c(z))))
-\]
+
 
 \section{Exercise 2}
-Express in term of star-free expressions the langauges over $\{a, b, c\}$ defined by the following first order sentences:
-\subsection{$[\exists x,y. a(x) \land a(y) \land succ(x,y)] \land [\exists x,y. a(x) \land b(y)\land succ(x,y)]$}
+
+$  
+ \forall x, y. b(x) \land b(y) \land x < y \land (\forall z. x < z < y \implies a(z)) \land \exists O,E.
+ \land (suc(x,y) \lor 
+ (\forall z. x < z < y \iff z \in O \oplus z \in E.
+ \land \exists xs yp. suc(x, xs) \land suc(yp, y) \land xs \in O \land ys \in E.
+ \land \forall z, zs. x < z < zs < y \land suc(z, zs). z \in O \iff zs \in E \land z \in E \iff zs \in O
+ ))
+$
+
+
+\section*{Exercise 3}
+We can transform  automaton to be without epslion transitions.
+
+
+Our states is powerset of old states. Initial/Accepting state is powerset of old initial/accepting states.
+
+Transition beetwen two states is possible if all old states beloning to our state can travel somewhere. If yes, then we transfrom all old states to their all transtions. And its our new state.
+
+\section*{Exercise 4}
+definicja suc(x,y)
 \[
-  [\emptyset^c * (aa) * \emptyset^c] \cap [ \emptyset^c * (ab) * \emptyset^c] 
+   \forall z. z > x \implies z = y \lor z > y
 \]
-
-\section{Exercise 3}
-Let $u, v$ be two words over $\Sigma$. A k-shuffle of $u$ and $v$ is any word of the shape 
-$w = u_0 * v_0 * u_1 * v_1 * \ldots * u_{k-1} * v_{k-1}$, where the $u_i, v_i$ are such that
-$u = u_0 * \ldots u_{k-1}$ and $v = v_0 * \ldots * v_{k-1}$.
-
-By $u \oplus_k v$ we denote the set of k-shuffles of $u$ and $v$, and if $K, L$ are languages over $\Sigma$, $K \oplus_k L$ is the union $\bigcup_{u\in K, v \in L} u \oplus_k v$.
-
-Prove that k-shuffle of two star-free languages is also star-free.
-
-\section{Exercise 5}
-
-\subsection{Part 1}
-Prove that two finite words $x$ and $y$ commute $(x*y = y * x)$ if and only if they are
-the exponential powers of the same word ($x = z^p$ and $y=z^q$)
-
-\subsubsection{<=}
-Assume that $x = z^p$ and $y = z^a$. Then $x*y = z^p * z^q = z^{p+q} = z^q * z^p = y*z$ \coffee. 
-
-\subsubsection{=>}
-We will proof that by induction on $max(|x|, |y|)$.
-
-Base of induction is trival ($n \in \{0,1,2\}$)
+definicja $x < y$
 
 
-Induction step $|x|, |y| \leq n+1$. If $|x| = |y|$ then $x = y$. So from now we can assume W.L.O.G.
-that $|x| < |y|$. Then $y = p * x$. Lets use that $x,y$ commutes
-\[ x * y = x * (p * x) = (p * x) * x = y * x\]
-we can delete x from right on both sides.
-\[ x * p = p * x\]
-Now we know that $|x|, |p| \leq n$. So we can use induction step to know that there are such $a,b \in \N ,w \in \Sigma^*$ that $x =w^a$ and $p = w^b$. Then $y = p * x = w^a * w^b = w^{a+b}$ \coffee. 
+$
+  \exists P. x \in P \land y \in P \land (\forall z \in P. \neg (succ(z,x) \lor succ(y,z)))
+  \land (\forall z \in P. x \neq z \implies \exists p. succ(p, z)) 
+  \land (\forall z \in P. y \neq z \implies \exists s. succ(z, s))
+$
 
-\subsection{Part 2}
-Deduce that, if $u$ is non-empty word over $\Sigma$, the language $u^*$ is star-free if and only if $u$ is not the $n-th$ power $v^n$ of some word $v$(n > 1). I could'nt deduce that from 1 part of exercise so it will propably be longer.
+So all 3 are eqvialent, which woudlnt be true in FSO.
 
-\subsubsection{<=}
-Assume that $u = v^n, n > 1$. And assume that langauge is star-free, so there is FO formula $\alpha$ that defines it. Let $m$ be quantifier rank of $\alpha$. Then we can make E-F game on $a = v^{2^m * n}$ and $b = v^{2^m * n + 1}$. We will show that there is winning strategy for duplicator.
+\section*{Exercise 6 }
+purse is easily contained in MSO 
+define all 3 constructions.
 
-We can divide our words into segments. Each segment is just word $v$. The word $a$ contains $2^m *n $ segments and word $b$ contains $2^*m * n + 1$ segments. When spolier picks an elements in some segment we always reply with the same position inside segment. The only remaing part is with which segment reply. We use the same strategy as in Exercise 6, or in linear orders.
-
-\subsubsection{=>} we can define such formula. Here is that formula in natural language. Word is empty or it has length of at least $|u|$. And its prefix of length $|u|$ is equal to $u$. And for each postition $letter(x) = letter(x + |u|)$. 
-\section{Exercise 7}
-counter example
-\[\forall x, y. (a(x) \land b(y)) \implies x < y)\]
+Mso is definable in pure 
+we just need singleton quantifiers. $kwant (x). (\forall y. y \subseteq x \implies x = y \lor y =\emptyset)$
 
 
-\[b * c^{2^m} * a\]
+\section*{Exercise 7}
+We are doing the same proof as on lecture. But Instead $X_0, \ldots, X_{m-1}$. We define sets $B_i$ which tell us for each x, does $X_k$ corrensponding to x has i-th bit set to true($bit_i(k)$)?
+
+
 \end{document}
