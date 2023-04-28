@@ -1,0 +1,24 @@
+Opening bytecode executable /usr/bin/ocamlrun
+Not a bytecode executable
+Opening bytecode executable /usr/bin/ocamlrun
+Not a bytecode executable
+Opening bytecode executable ./a.out
+Initial minor heap size: 256k words
+Initial major heap size: 992k bytes
+Initial space overhead: 120%
+Initial max overhead: 500%
+Initial heap increment: 15%
+Initial allocation policy: 2
+Initial smoothing window: 1
+Initial stack limit: 8192k bytes
+allocated_words: 3133
+minor_words: 2448
+promoted_words: 0
+major_words: 685
+minor_collections: 0
+major_collections: 0
+heap_words: 126976
+heap_chunks: 1
+top_heap_words: 126976
+compactions: 0
+forced_major_collections: 0
