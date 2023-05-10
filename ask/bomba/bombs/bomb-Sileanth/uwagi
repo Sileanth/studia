@@ -1,0 +1,9 @@
+Strings warte uwage
+
+gethostbyname
+GET /%s/submitr.pl/?userid=%s&userpwd=%s&lab=%s&result=%s&submit=submit HTTP/1.0
+
+
+symbole warte uwagi
+read_six_numbers
+strings_not_equal
