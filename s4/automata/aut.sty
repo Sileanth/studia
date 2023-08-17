@@ -1,0 +1,54 @@
+\ProvidesPackage{tpjp}
+
+
+% logic packages
+\usepackage{bussproofs}
+\newcommand*{\impl}{\mathbin{\to}}
+
+\usepackage{amsmath}
+\newcommand\mdef{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand\ind{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily ind}}}{=}}}
+
+% Language packages
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+
+% fonts
+\RequirePackage{paratype}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+%==== KOLORY I OZDOBNIKI ====%
+
+\RequirePackage{xcolor}
+
+\definecolor{back}{HTML}{282828}%{011718}
+\definecolor{text}{HTML}{fbf1c7}%{e0e0e0}
+
+\definecolor{title-color}{HTML}{E86354}%{E0655A}
+\definecolor{def}{HTML}{c9cc23}%{D9B86C}
+\definecolor{acc}{HTML}{fabd2f}%{6FBDB0}
+
+\definecolor{sep}{HTML}{458588}%{00b0a5}
+\definecolor{sep2}{HTML}{689d6a}
+
+\pagecolor{back}
+\color{text}
+
+
+\RequirePackage{sectsty} % żeby można było zmienić styl nagłówków
+\sectionfont{\LARGE\ttfamily\color{title-color}}
+\subsectionfont{\Large\ttfamily\color{title-color}}
+
+%==== Fajne cosie====%
+
+\RequirePackage{marvosym}
+\RequirePackage{phaistos}
+
+\newcommand{\coffee}{\text{\color{def}\large\Coffeecup}}
+\newcommand{\bat}{\text{\color{acc}\large\Bat}}
+
+\newcommand{\cat}{\text{\PHcat}}
+\newcommand{\sheep}{\text{\PHram}}
+\newcommand{\flower}{\text{\PHrosette}}
