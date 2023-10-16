@@ -1,0 +1,340 @@
+DIGEST 0232940b274a4e9586b743b3503da2c3
+FTop.Typing
+R142:145 Coq.Unicode.Utf8 <> <> lib
+R163:168 Top.Syntax <> <> lib
+def 644:646 <> env
+binder 649:649 <> A:1
+R668:672 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R667:667 Top.Typing <> A:1 var
+R673:676 Top.Syntax <> type ind
+def 716:724 <> env_empty
+R728:730 Top.Typing <> env def
+R732:740 Coq.Init.Datatypes <> Empty_set ind
+R747:749 Coq.Unicode.Utf8_core <> :::'λ'_x_'..'_x_','_x not
+R751:752 Coq.Unicode.Utf8_core <> :::'λ'_x_'..'_x_','_x not
+binder 750:750 <> x:2
+R759:759 Top.Typing <> x:2 var
+def 816:822 <> env_ext
+binder 825:825 <> A:4
+R840:842 Top.Typing <> env def
+R844:844 Top.Typing <> A:4 var
+binder 835:836 <> Γ:5
+R853:856 Top.Syntax <> type ind
+binder 848:849 <> τ:6
+R861:863 Top.Typing <> env def
+R866:868 Top.Syntax <> inc ind
+R870:870 Top.Typing <> A:4 var
+R878:880 Coq.Unicode.Utf8_core <> :::'λ'_x_'..'_x_','_x not
+R882:885 Coq.Unicode.Utf8_core <> :::'λ'_x_'..'_x_','_x not
+binder 881:881 <> x:7
+R892:892 Top.Typing <> x:7 var
+R903:904 Top.Syntax <> VZ constr
+R911:912 Top.Typing <> τ:6 var
+R918:919 Top.Syntax <> VS constr
+R926:927 Top.Typing <> Γ:5 var
+ind 1188:1193 <> typing
+constr 1250:1255 <> T_Unit
+constr 1296:1300 <> T_Var
+constr 1347:1351 <> T_Lam
+constr 1508:1512 <> T_App
+constr 1709:1713 <> T_Fix
+binder 1196:1196 <> A:9
+R1211:1213 Top.Typing <> env def
+R1215:1215 Top.Typing <> A:9 var
+binder 1206:1207 <> Γ:10
+R1226:1230 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1220:1223 Top.Syntax <> expr ind
+R1235:1239 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1231:1234 Top.Syntax <> type ind
+R1912:1917 Top.Typing <> typing:12 ind
+R1263:1265 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1268:1272 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1279:1283 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1290:1291 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1266:1267 Top.Typing <> Γ:10 var
+R1273:1278 Top.Syntax <> v_unit constr
+R1284:1289 Top.Syntax <> t_unit constr
+R1304:1307 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R1309:1314 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 1308:1308 <> x:13
+R1315:1317 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1320:1324 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1332:1336 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1341:1342 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1318:1319 Top.Typing <> Γ:10 var
+R1325:1329 Top.Syntax <> v_var constr
+R1331:1331 Top.Typing <> x:13 var
+R1337:1338 Top.Typing <> Γ:10 var
+R1340:1340 Top.Typing <> x:13 var
+R1355:1358 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R1372:1377 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 1359:1359 <> e:14
+binder 1361:1365 <> τ₁:15
+binder 1367:1371 <> τ₂:16
+R1415:1460 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1378:1380 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1397:1401 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1403:1407 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1413:1414 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1381:1387 Top.Typing <> env_ext def
+R1392:1396 Top.Typing <> τ₁:15 var
+R1389:1390 Top.Typing <> Γ:10 var
+R1402:1402 Top.Typing <> e:14 var
+R1408:1412 Top.Typing <> τ₂:16 var
+R1461:1463 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1466:1470 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1478:1482 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1502:1503 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1464:1465 Top.Typing <> Γ:10 var
+R1471:1475 Top.Syntax <> v_lam constr
+R1477:1477 Top.Typing <> e:14 var
+R1483:1489 Top.Syntax <> t_arrow constr
+R1491:1495 Top.Typing <> τ₁:15 var
+R1497:1501 Top.Typing <> τ₂:16 var
+R1516:1519 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R1541:1546 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 1520:1523 <> e₁:17
+binder 1525:1528 <> e₂:18
+binder 1530:1534 <> τ₂:19
+binder 1536:1540 <> τ₁:20
+R1587:1595 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1547:1549 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1552:1556 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1561:1565 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1585:1586 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1550:1551 Top.Typing <> Γ:10 var
+R1557:1560 Top.Typing <> e₁:17 var
+R1566:1572 Top.Syntax <> t_arrow constr
+R1574:1578 Top.Typing <> τ₂:19 var
+R1580:1584 Top.Typing <> τ₁:20 var
+R1622:1667 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1596:1598 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1601:1605 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1610:1614 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1620:1621 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1599:1600 Top.Typing <> Γ:10 var
+R1606:1609 Top.Typing <> e₂:18 var
+R1615:1619 Top.Typing <> τ₂:19 var
+R1668:1670 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1673:1677 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1693:1697 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1703:1704 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1671:1672 Top.Typing <> Γ:10 var
+R1678:1682 Top.Syntax <> e_app constr
+R1689:1692 Top.Typing <> e₂:18 var
+R1684:1687 Top.Typing <> e₁:17 var
+R1698:1702 Top.Typing <> τ₁:20 var
+R1717:1720 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R1730:1733 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 1721:1721 <> e:21
+binder 1723:1725 <> τ1:22
+binder 1727:1729 <> τ2:23
+R1795:1836 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1734:1736 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1779:1783 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1785:1789 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1793:1794 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1737:1743 Top.Typing <> env_ext def
+R1763:1769 Top.Syntax <> t_arrow constr
+R1771:1773 Top.Typing <> τ1:22 var
+R1775:1777 Top.Typing <> τ2:23 var
+R1746:1752 Top.Typing <> env_ext def
+R1757:1759 Top.Typing <> τ1:22 var
+R1754:1755 Top.Typing <> Γ:10 var
+R1784:1784 Top.Typing <> e:21 var
+R1790:1792 Top.Typing <> τ2:23 var
+R1837:1839 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1842:1846 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1854:1858 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1874:1875 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R1840:1841 Top.Typing <> Γ:10 var
+R1847:1851 Top.Syntax <> v_fix constr
+R1853:1853 Top.Typing <> e:21 var
+R1859:1865 Top.Syntax <> t_arrow constr
+R1867:1869 Top.Typing <> τ1:22 var
+R1871:1873 Top.Typing <> τ2:23 var
+scheme 1188:1193 <> typing_ind
+scheme 1188:1193 <> typing_sind
+R1912:1917 Top.Typing <> typing ind
+not 1884:1884 <> :::'T['_x_'⊢'_x_'∷'_x_']'
+prf 2482:2492 <> typing_fmap
+binder 2495:2495 <> A:24
+binder 2497:2497 <> B:25
+R2512:2516 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2511:2511 Top.Typing <> A:24 var
+R2517:2517 Top.Typing <> B:25 var
+binder 2507:2507 <> f:26
+R2526:2528 Top.Typing <> env def
+R2530:2530 Top.Typing <> A:24 var
+binder 2521:2522 <> Γ:27
+R2539:2541 Top.Typing <> env def
+R2543:2543 Top.Typing <> B:25 var
+binder 2534:2535 <> Δ:28
+binder 2546:2546 <> e:29
+binder 2548:2549 <> τ:30
+R2555:2555 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2578:2585 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2556:2559 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R2561:2562 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 2560:2560 <> x:31
+R2571:2573 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2563:2564 Top.Typing <> Δ:28 var
+R2567:2567 Top.Typing <> f:26 var
+R2569:2569 Top.Typing <> x:31 var
+R2574:2575 Top.Typing <> Γ:27 var
+R2577:2577 Top.Typing <> x:31 var
+R2606:2610 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2586:2588 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2591:2595 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2597:2601 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2604:2605 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2589:2590 Top.Typing <> Γ:27 var
+R2596:2596 Top.Typing <> e:29 var
+R2602:2603 Top.Typing <> τ:30 var
+R2611:2613 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2616:2620 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2629:2633 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2636:2637 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R2614:2615 Top.Typing <> Δ:28 var
+R2621:2624 Top.Syntax <> emap def
+R2628:2628 Top.Typing <> e:29 var
+R2626:2626 Top.Typing <> f:26 var
+R2634:2635 Top.Typing <> τ:30 var
+prf 3137:3149 <> typing_weaken
+binder 3152:3152 <> A:32
+R3167:3169 Top.Typing <> env def
+R3171:3171 Top.Typing <> A:32 var
+binder 3162:3163 <> Γ:33
+binder 3174:3174 <> e:34
+binder 3176:3178 <> τ':35
+binder 3180:3181 <> τ:36
+R3207:3211 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3187:3189 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3192:3196 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3198:3202 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3205:3206 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3190:3191 Top.Typing <> Γ:33 var
+R3197:3197 Top.Typing <> e:34 var
+R3203:3204 Top.Typing <> τ:36 var
+R3212:3214 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3229:3233 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3242:3246 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3249:3250 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3215:3221 Top.Typing <> env_ext def
+R3226:3228 Top.Typing <> τ':35 var
+R3223:3224 Top.Typing <> Γ:33 var
+R3234:3239 Top.Syntax <> eshift def
+R3241:3241 Top.Typing <> e:34 var
+R3247:3248 Top.Typing <> τ:36 var
+R3268:3278 Top.Typing <> typing_fmap thm
+R3268:3278 Top.Typing <> typing_fmap thm
+prf 3307:3321 <> vshif_eq_eshift
+binder 3324:3324 <> A:37
+R3338:3342 Top.Syntax <> value ind
+R3344:3344 Top.Typing <> A:37 var
+binder 3334:3334 <> v:38
+R3366:3368 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3348:3354 Top.Syntax <> e_value constr
+R3357:3362 Top.Syntax <> vshift def
+R3364:3364 Top.Typing <> v:38 var
+R3369:3374 Top.Syntax <> eshift def
+R3377:3383 Top.Syntax <> e_value constr
+R3385:3385 Top.Typing <> v:38 var
+prf 3600:3610 <> typing_bind
+binder 3613:3613 <> A:39
+binder 3615:3615 <> B:40
+R3630:3634 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3629:3629 Top.Typing <> A:39 var
+R3635:3639 Top.Syntax <> value ind
+R3641:3641 Top.Typing <> B:40 var
+binder 3625:3625 <> f:41
+R3650:3652 Top.Typing <> env def
+R3654:3654 Top.Typing <> A:39 var
+binder 3645:3646 <> Γ:42
+R3663:3665 Top.Typing <> env def
+R3667:3667 Top.Typing <> B:40 var
+binder 3658:3659 <> Δ:43
+binder 3670:3670 <> e:44
+binder 3672:3673 <> τ:45
+R3679:3679 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3711:3718 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3680:3683 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R3685:3686 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 3684:3684 <> x:46
+R3687:3689 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3692:3696 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3700:3704 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3709:3710 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3690:3691 Top.Typing <> Δ:43 var
+R3697:3697 Top.Typing <> f:41 var
+R3699:3699 Top.Typing <> x:46 var
+R3705:3706 Top.Typing <> Γ:42 var
+R3708:3708 Top.Typing <> x:46 var
+R3739:3743 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3719:3721 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3724:3728 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3730:3734 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3737:3738 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3722:3723 Top.Typing <> Γ:42 var
+R3729:3729 Top.Typing <> e:44 var
+R3735:3736 Top.Typing <> τ:45 var
+R3744:3746 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3749:3753 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3763:3767 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3770:3771 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3747:3748 Top.Typing <> Δ:43 var
+R3754:3758 Top.Syntax <> ebind def
+R3762:3762 Top.Typing <> e:44 var
+R3760:3760 Top.Typing <> f:41 var
+R3768:3769 Top.Typing <> τ:45 var
+R4104:4116 Top.Typing <> typing_weaken thm
+R4104:4116 Top.Typing <> typing_weaken thm
+R4269:4283 Top.Typing <> vshif_eq_eshift thm
+R4269:4283 Top.Typing <> vshif_eq_eshift thm
+R4269:4283 Top.Typing <> vshif_eq_eshift thm
+R4292:4304 Top.Typing <> typing_weaken thm
+R4292:4304 Top.Typing <> typing_weaken thm
+R4371:4385 Top.Typing <> vshif_eq_eshift thm
+R4371:4385 Top.Typing <> vshif_eq_eshift thm
+R4371:4385 Top.Typing <> vshif_eq_eshift thm
+R4394:4406 Top.Typing <> typing_weaken thm
+R4394:4406 Top.Typing <> typing_weaken thm
+prf 4458:4469 <> typing_subst
+binder 4472:4472 <> A:47
+R4487:4489 Top.Typing <> env def
+R4491:4491 Top.Typing <> A:47 var
+binder 4482:4483 <> Γ:48
+binder 4494:4494 <> e:49
+R4501:4505 Top.Syntax <> value ind
+binder 4497:4497 <> v:50
+binder 4510:4511 <> τ:51
+binder 4513:4515 <> τ':52
+R4542:4548 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R4521:4523 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4526:4530 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4532:4536 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4540:4541 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4524:4525 Top.Typing <> Γ:48 var
+R4531:4531 Top.Typing <> v:50 var
+R4537:4539 Top.Typing <> τ':52 var
+R4581:4587 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R4549:4551 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4566:4570 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4572:4576 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4579:4580 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4552:4558 Top.Typing <> env_ext def
+R4563:4565 Top.Typing <> τ':52 var
+R4560:4561 Top.Typing <> Γ:48 var
+R4571:4571 Top.Typing <> e:49 var
+R4577:4578 Top.Typing <> τ:51 var
+R4588:4590 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4593:4597 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4608:4612 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4615:4616 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R4591:4592 Top.Typing <> Γ:48 var
+R4598:4603 Top.Syntax <> esubst def
+R4607:4607 Top.Typing <> v:50 var
+R4605:4605 Top.Typing <> e:49 var
+R4613:4614 Top.Typing <> τ:51 var
+R4644:4654 Top.Typing <> typing_bind thm
+R4644:4654 Top.Typing <> typing_bind thm

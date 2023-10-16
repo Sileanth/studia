@@ -1,0 +1,82 @@
+DIGEST ed6d1a7adace7ee60cc8b26674eb83d3
+FTop.SemanticsSOS
+R62:65 Coq.Unicode.Utf8 <> <> lib
+R83:88 Top.Syntax <> <> lib
+ind 129:131 <> red
+constr 177:184 <> red_beta
+constr 253:260 <> red_app1
+constr 356:363 <> red_app2
+constr 444:455 <> ref_beta_fix
+binder 134:134 <> A:1
+R151:155 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R145:148 Top.Syntax <> expr ind
+R162:166 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R156:159 Top.Syntax <> expr ind
+R188:191 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R206:212 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 192:192 <> e:4
+R199:203 Top.Syntax <> value ind
+R205:205 Top.SemanticsSOS <> A:1 var
+binder 195:195 <> v:5
+R213:215 Top.SemanticsSOS <> red:2 ind
+R238:243 Top.Syntax <> esubst def
+R247:247 Top.SemanticsSOS <> v:5 var
+R245:245 Top.SemanticsSOS <> e:4 var
+R218:222 Top.Syntax <> e_app constr
+R234:234 Top.SemanticsSOS <> v:5 var
+R225:229 Top.Syntax <> v_lam constr
+R231:231 Top.SemanticsSOS <> e:4 var
+R264:267 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R283:288 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 268:271 <> e₁:6
+binder 273:277 <> e₁':7
+binder 279:282 <> e₂:8
+R303:311 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R289:291 Top.SemanticsSOS <> red:2 ind
+R298:302 Top.SemanticsSOS <> e₁':7 var
+R293:296 Top.SemanticsSOS <> e₁:6 var
+R312:314 Top.SemanticsSOS <> red:2 ind
+R335:339 Top.Syntax <> e_app constr
+R347:350 Top.SemanticsSOS <> e₂:8 var
+R341:345 Top.SemanticsSOS <> e₁':7 var
+R317:321 Top.Syntax <> e_app constr
+R328:331 Top.SemanticsSOS <> e₂:8 var
+R323:326 Top.SemanticsSOS <> e₁:6 var
+R367:371 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R389:394 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R376:380 Top.Syntax <> value ind
+R382:382 Top.SemanticsSOS <> A:1 var
+binder 372:372 <> v:9
+binder 385:385 <> e:10
+binder 387:388 <> e':11
+R403:411 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R395:397 Top.SemanticsSOS <> red:2 ind
+R401:402 Top.SemanticsSOS <> e':11 var
+R399:399 Top.SemanticsSOS <> e:10 var
+R412:414 Top.SemanticsSOS <> red:2 ind
+R429:433 Top.Syntax <> e_app constr
+R437:438 Top.SemanticsSOS <> e':11 var
+R435:435 Top.SemanticsSOS <> v:9 var
+R417:421 Top.Syntax <> e_app constr
+R425:425 Top.SemanticsSOS <> e:10 var
+R423:423 Top.SemanticsSOS <> v:9 var
+R459:463 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R478:484 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R468:472 Top.Syntax <> value ind
+R474:474 Top.SemanticsSOS <> A:1 var
+binder 464:464 <> v:12
+binder 477:477 <> e:13
+R485:487 Top.SemanticsSOS <> red:2 ind
+R510:515 Top.Syntax <> esubst def
+R547:547 Top.SemanticsSOS <> v:12 var
+R518:523 Top.Syntax <> esubst def
+R528:533 Top.Syntax <> vshift def
+R536:540 Top.Syntax <> v_fix constr
+R542:542 Top.SemanticsSOS <> e:13 var
+R525:525 Top.SemanticsSOS <> e:13 var
+R490:494 Top.Syntax <> e_app constr
+R506:506 Top.SemanticsSOS <> v:12 var
+R497:501 Top.Syntax <> v_fix constr
+R503:503 Top.SemanticsSOS <> e:13 var
+scheme 129:131 <> red_ind
+scheme 129:131 <> red_sind

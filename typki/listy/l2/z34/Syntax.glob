@@ -1,0 +1,313 @@
+DIGEST a260adb53b4c037fbc8f94be95c58818
+FTop.Syntax
+R154:157 Coq.Unicode.Utf8 <> <> lib
+ind 207:209 <> inc
+constr 232:233 <> VZ
+constr 245:246 <> VS
+binder 212:212 <> V:1
+R237:239 Top.Syntax <> inc:2 ind
+R241:241 Top.Syntax <> V:1 var
+R251:255 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R250:250 Top.Syntax <> V:1 var
+R256:258 Top.Syntax <> inc:2 ind
+R260:260 Top.Syntax <> V:1 var
+scheme 207:209 <> inc_rect
+scheme 207:209 <> inc_ind
+scheme 207:209 <> inc_rec
+scheme 207:209 <> inc_sind
+R275:276 Top.Syntax <> VZ constr
+R275:276 Top.Syntax <> VZ constr
+R293:294 Top.Syntax <> VS constr
+R293:294 Top.Syntax <> VS constr
+ind 325:328 <> type
+constr 341:346 <> t_unit
+constr 358:364 <> t_arrow
+R351:354 Top.Syntax <> type:4 ind
+R372:376 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R368:371 Top.Syntax <> type:4 ind
+R381:385 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R377:380 Top.Syntax <> type:4 ind
+R386:389 Top.Syntax <> type:4 ind
+scheme 325:328 <> type_rect
+scheme 325:328 <> type_ind
+scheme 325:328 <> type_rec
+scheme 325:328 <> type_sind
+ind 434:437 <> expr
+constr 460:466 <> e_value
+constr 491:495 <> e_app
+ind 536:540 <> value
+constr 563:567 <> v_var
+constr 588:592 <> v_fix
+constr 629:633 <> v_lam
+constr 665:670 <> v_unit
+binder 440:440 <> V:6
+R477:481 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R470:474 Top.Syntax <> value:8 ind
+R476:476 Top.Syntax <> V:6 var
+R482:485 Top.Syntax <> expr:7 ind
+R487:487 Top.Syntax <> V:6 var
+R507:511 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R501:504 Top.Syntax <> expr:7 ind
+R506:506 Top.Syntax <> V:6 var
+R518:522 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R512:515 Top.Syntax <> expr:7 ind
+R517:517 Top.Syntax <> V:6 var
+R523:526 Top.Syntax <> expr:7 ind
+R528:528 Top.Syntax <> V:6 var
+R573:577 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R572:572 Top.Syntax <> V:6 var
+R578:582 Top.Syntax <> value:8 ind
+R584:584 Top.Syntax <> V:6 var
+R615:618 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R597:600 Top.Syntax <> expr:7 ind
+R603:605 Top.Syntax <> inc ind
+R608:610 Top.Syntax <> inc ind
+R612:612 Top.Syntax <> V:6 var
+R619:623 Top.Syntax <> value:8 ind
+R625:625 Top.Syntax <> V:6 var
+R650:654 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R638:641 Top.Syntax <> expr:7 ind
+R644:646 Top.Syntax <> inc ind
+R648:648 Top.Syntax <> V:6 var
+R655:659 Top.Syntax <> value:8 ind
+R661:661 Top.Syntax <> V:6 var
+R674:678 Top.Syntax <> value:8 ind
+R680:680 Top.Syntax <> V:6 var
+scheme 434:437 <> expr_rect
+scheme 434:437 <> expr_ind
+scheme 434:437 <> expr_rec
+scheme 434:437 <> expr_sind
+scheme 536:540 <> value_rect
+scheme 536:540 <> value_ind
+scheme 536:540 <> value_rec
+scheme 536:540 <> value_sind
+R695:701 Top.Syntax <> e_value constr
+R695:701 Top.Syntax <> e_value constr
+R718:722 Top.Syntax <> e_app constr
+R718:722 Top.Syntax <> e_app constr
+R742:746 Top.Syntax <> v_var constr
+R742:746 Top.Syntax <> v_var constr
+R765:769 Top.Syntax <> v_lam constr
+R765:769 Top.Syntax <> v_lam constr
+R788:792 Top.Syntax <> v_fix constr
+R788:792 Top.Syntax <> v_fix constr
+R811:816 Top.Syntax <> v_unit constr
+R811:816 Top.Syntax <> v_unit constr
+R938:970 Top.Syntax <> e_value constr
+def 1149:1153 <> liftA
+binder 1156:1156 <> A:11
+binder 1158:1158 <> B:12
+R1173:1177 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1172:1172 Top.Syntax <> A:11 var
+R1178:1178 Top.Syntax <> B:12 var
+binder 1168:1168 <> f:13
+R1186:1188 Top.Syntax <> inc ind
+R1190:1190 Top.Syntax <> A:11 var
+binder 1182:1182 <> x:14
+R1195:1197 Top.Syntax <> inc ind
+R1199:1199 Top.Syntax <> B:12 var
+R1212:1212 Top.Syntax <> x:14 var
+R1223:1224 Top.Syntax <> VZ constr
+R1231:1232 Top.Syntax <> VZ constr
+R1238:1239 Top.Syntax <> VS constr
+R1246:1247 Top.Syntax <> VS constr
+R1250:1250 Top.Syntax <> f:13 var
+def 1329:1332 <> emap
+def 1496:1499 <> vmap
+binder 1335:1335 <> A:16
+binder 1337:1337 <> B:17
+R1352:1356 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1351:1351 Top.Syntax <> A:16 var
+R1357:1357 Top.Syntax <> B:17 var
+binder 1347:1347 <> f:18
+R1365:1368 Top.Syntax <> expr ind
+R1370:1370 Top.Syntax <> A:16 var
+binder 1361:1361 <> e:19
+binder 1502:1502 <> A:20
+binder 1504:1504 <> B:21
+R1519:1523 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R1518:1518 Top.Syntax <> A:20 var
+R1524:1524 Top.Syntax <> B:21 var
+binder 1514:1514 <> f:22
+R1532:1536 Top.Syntax <> value ind
+R1538:1538 Top.Syntax <> A:20 var
+binder 1528:1528 <> v:23
+R1375:1378 Top.Syntax <> expr ind
+R1380:1380 Top.Syntax <> B:17 var
+R1543:1547 Top.Syntax <> value ind
+R1549:1549 Top.Syntax <> B:21 var
+R1393:1393 Top.Syntax <> e:19 var
+R1404:1410 Top.Syntax <> e_value constr
+R1419:1422 Top.Syntax <> vmap:25 def
+R1424:1424 Top.Syntax <> f:18 var
+R1432:1436 Top.Syntax <> e_app constr
+R1451:1455 Top.Syntax <> e_app constr
+R1472:1475 Top.Syntax <> emap:24 def
+R1477:1477 Top.Syntax <> f:18 var
+R1458:1461 Top.Syntax <> emap:24 def
+R1463:1463 Top.Syntax <> f:18 var
+R1562:1562 Top.Syntax <> v:23 var
+R1573:1577 Top.Syntax <> v_var constr
+R1584:1588 Top.Syntax <> v_var constr
+R1591:1591 Top.Syntax <> f:22 var
+R1600:1604 Top.Syntax <> v_fix constr
+R1611:1615 Top.Syntax <> v_fix constr
+R1618:1621 Top.Syntax <> emap:24 def
+R1624:1628 Top.Syntax <> liftA def
+R1631:1635 Top.Syntax <> liftA def
+R1637:1637 Top.Syntax <> f:22 var
+R1648:1652 Top.Syntax <> v_lam constr
+R1659:1663 Top.Syntax <> v_lam constr
+R1666:1669 Top.Syntax <> emap:24 def
+R1672:1676 Top.Syntax <> liftA def
+R1678:1678 Top.Syntax <> f:22 var
+R1688:1693 Top.Syntax <> v_unit constr
+R1699:1704 Top.Syntax <> v_unit constr
+def 1859:1864 <> eshift
+binder 1867:1867 <> A:28
+R1881:1884 Top.Syntax <> expr ind
+R1886:1886 Top.Syntax <> A:28 var
+binder 1877:1877 <> e:29
+R1891:1894 Top.Syntax <> expr ind
+R1897:1899 Top.Syntax <> inc ind
+R1901:1901 Top.Syntax <> A:28 var
+R1907:1910 Top.Syntax <> emap def
+R1915:1915 Top.Syntax <> e:29 var
+R1912:1913 Top.Syntax <> VS constr
+def 1956:1961 <> vshift
+binder 1964:1964 <> A:30
+R1978:1982 Top.Syntax <> value ind
+R1984:1984 Top.Syntax <> A:30 var
+binder 1974:1974 <> v:31
+R1989:1993 Top.Syntax <> value ind
+R1996:1998 Top.Syntax <> inc ind
+R2000:2000 Top.Syntax <> A:30 var
+R2006:2009 Top.Syntax <> vmap def
+R2014:2014 Top.Syntax <> v:31 var
+R2011:2012 Top.Syntax <> VS constr
+def 2204:2208 <> liftS
+binder 2211:2211 <> A:32
+binder 2213:2213 <> B:33
+R2228:2232 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2227:2227 Top.Syntax <> A:32 var
+R2233:2237 Top.Syntax <> value ind
+R2239:2239 Top.Syntax <> B:33 var
+binder 2223:2223 <> f:34
+R2247:2249 Top.Syntax <> inc ind
+R2251:2251 Top.Syntax <> A:32 var
+binder 2243:2243 <> x:35
+R2256:2260 Top.Syntax <> value ind
+R2263:2265 Top.Syntax <> inc ind
+R2267:2267 Top.Syntax <> B:33 var
+R2281:2281 Top.Syntax <> x:35 var
+R2292:2293 Top.Syntax <> VZ constr
+R2300:2304 Top.Syntax <> v_var constr
+R2306:2307 Top.Syntax <> VZ constr
+R2313:2314 Top.Syntax <> VS constr
+R2321:2326 Top.Syntax <> vshift def
+R2329:2329 Top.Syntax <> f:34 var
+def 2406:2410 <> ebind
+def 2583:2587 <> vbind
+binder 2413:2413 <> A:37
+binder 2415:2415 <> B:38
+R2430:2434 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2429:2429 Top.Syntax <> A:37 var
+R2435:2439 Top.Syntax <> value ind
+R2441:2441 Top.Syntax <> B:38 var
+binder 2425:2425 <> f:39
+R2449:2452 Top.Syntax <> expr ind
+R2454:2454 Top.Syntax <> A:37 var
+binder 2445:2445 <> e:40
+binder 2590:2590 <> A:41
+binder 2592:2592 <> B:42
+R2607:2611 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2606:2606 Top.Syntax <> A:41 var
+R2612:2616 Top.Syntax <> value ind
+R2618:2618 Top.Syntax <> B:42 var
+binder 2602:2602 <> f:43
+R2626:2630 Top.Syntax <> value ind
+R2632:2632 Top.Syntax <> A:41 var
+binder 2622:2622 <> v:44
+R2459:2462 Top.Syntax <> expr ind
+R2464:2464 Top.Syntax <> B:38 var
+R2637:2641 Top.Syntax <> value ind
+R2643:2643 Top.Syntax <> B:42 var
+R2477:2477 Top.Syntax <> e:40 var
+R2488:2494 Top.Syntax <> e_value constr
+R2503:2507 Top.Syntax <> vbind:46 def
+R2509:2509 Top.Syntax <> f:39 var
+R2517:2521 Top.Syntax <> e_app constr
+R2536:2540 Top.Syntax <> e_app constr
+R2558:2562 Top.Syntax <> ebind:45 def
+R2564:2564 Top.Syntax <> f:39 var
+R2543:2547 Top.Syntax <> ebind:45 def
+R2549:2549 Top.Syntax <> f:39 var
+R2656:2656 Top.Syntax <> v:44 var
+R2667:2671 Top.Syntax <> v_var constr
+R2678:2678 Top.Syntax <> f:43 var
+R2686:2690 Top.Syntax <> v_lam constr
+R2697:2701 Top.Syntax <> v_lam constr
+R2704:2708 Top.Syntax <> ebind:45 def
+R2711:2715 Top.Syntax <> liftS def
+R2717:2717 Top.Syntax <> f:43 var
+R2727:2731 Top.Syntax <> v_fix constr
+R2738:2742 Top.Syntax <> v_fix constr
+R2745:2749 Top.Syntax <> ebind:45 def
+R2752:2756 Top.Syntax <> liftS def
+R2759:2763 Top.Syntax <> liftS def
+R2765:2765 Top.Syntax <> f:43 var
+R2776:2781 Top.Syntax <> v_unit constr
+R2787:2792 Top.Syntax <> v_unit constr
+def 2859:2863 <> scons
+binder 2866:2866 <> A:49
+binder 2868:2868 <> B:50
+R2882:2886 Top.Syntax <> value ind
+R2888:2888 Top.Syntax <> B:50 var
+binder 2878:2878 <> v:51
+R2897:2901 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R2896:2896 Top.Syntax <> A:49 var
+R2902:2906 Top.Syntax <> value ind
+R2908:2908 Top.Syntax <> B:50 var
+binder 2892:2892 <> f:52
+R2916:2918 Top.Syntax <> inc ind
+R2920:2920 Top.Syntax <> A:49 var
+binder 2912:2912 <> x:53
+R2929:2933 Top.Syntax <> value ind
+R2935:2935 Top.Syntax <> B:50 var
+R2948:2948 Top.Syntax <> x:53 var
+R2959:2960 Top.Syntax <> VZ constr
+R2967:2967 Top.Syntax <> v:51 var
+R2973:2974 Top.Syntax <> VS constr
+R2981:2981 Top.Syntax <> f:52 var
+def 3054:3059 <> esubst
+binder 3062:3062 <> A:55
+R3076:3079 Top.Syntax <> expr ind
+R3082:3084 Top.Syntax <> inc ind
+R3086:3086 Top.Syntax <> A:55 var
+binder 3072:3072 <> e:56
+R3095:3099 Top.Syntax <> value ind
+R3101:3101 Top.Syntax <> A:55 var
+binder 3091:3091 <> v:57
+R3106:3109 Top.Syntax <> expr ind
+R3111:3111 Top.Syntax <> A:55 var
+R3118:3122 Top.Syntax <> ebind def
+R3140:3140 Top.Syntax <> e:56 var
+R3125:3129 Top.Syntax <> scons def
+R3133:3137 Top.Syntax <> v_var constr
+R3131:3131 Top.Syntax <> v:57 var
+def 3200:3205 <> vsubst
+binder 3208:3208 <> A:58
+R3223:3227 Top.Syntax <> value ind
+R3230:3232 Top.Syntax <> inc ind
+R3234:3234 Top.Syntax <> A:58 var
+binder 3218:3219 <> v':59
+R3243:3247 Top.Syntax <> value ind
+R3249:3249 Top.Syntax <> A:58 var
+binder 3239:3239 <> v:60
+R3254:3258 Top.Syntax <> value ind
+R3260:3260 Top.Syntax <> A:58 var
+R3267:3271 Top.Syntax <> vbind def
+R3289:3290 Top.Syntax <> v':59 var
+R3274:3278 Top.Syntax <> scons def
+R3282:3286 Top.Syntax <> v_var constr
+R3280:3280 Top.Syntax <> v:60 var

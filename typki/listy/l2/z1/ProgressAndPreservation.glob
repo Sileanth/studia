@@ -1,0 +1,180 @@
+DIGEST 92e54fb7b28728cfa9209592837ade4b
+FTop.ProgressAndPreservation
+R121:124 Coq.Unicode.Utf8 <> <> lib
+R142:147 Top.Syntax <> <> lib
+R149:160 Top.SemanticsSOS <> <> lib
+R162:167 Top.Typing <> <> lib
+prf 237:251 <> arrow_value_inv
+R259:261 Top.Typing <> env def
+R263:271 Coq.Init.Datatypes <> Empty_set ind
+binder 254:255 <> Γ:1
+R279:283 Top.Syntax <> value ind
+binder 275:275 <> v:2
+R303:306 Top.Syntax <> type ind
+binder 289:293 <> τ₁:3
+binder 295:299 <> τ₂:4
+R350:356 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R313:315 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R318:322 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R324:328 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R348:349 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R316:317 Top.ProgressAndPreservation <> Γ:1 var
+R323:323 Top.ProgressAndPreservation <> v:2 var
+R329:335 Top.Syntax <> t_arrow constr
+R337:341 Top.ProgressAndPreservation <> τ₁:3 var
+R343:347 Top.ProgressAndPreservation <> τ₂:4 var
+R357:360 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+R362:363 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+binder 361:361 <> e:5
+R375:379 Coq.Unicode.Utf8_core <> ::type_scope:x_'∧'_x not
+R365:367 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R364:364 Top.ProgressAndPreservation <> v:2 var
+R368:372 Top.Syntax <> v_lam constr
+R374:374 Top.ProgressAndPreservation <> e:5 var
+R380:382 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R399:403 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R405:409 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R415:416 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R383:389 Top.Typing <> env_ext def
+R394:398 Top.ProgressAndPreservation <> τ₁:3 var
+R391:392 Top.ProgressAndPreservation <> Γ:1 var
+R404:404 Top.ProgressAndPreservation <> e:5 var
+R410:414 Top.ProgressAndPreservation <> τ₂:4 var
+prf 502:515 <> pair_value_inv
+R523:525 Top.Typing <> env def
+R527:535 Coq.Init.Datatypes <> Empty_set ind
+binder 518:519 <> Γ:6
+R543:547 Top.Syntax <> value ind
+binder 539:539 <> v:7
+R567:570 Top.Syntax <> type ind
+binder 553:557 <> τ₁:8
+binder 559:563 <> τ₂:9
+R613:619 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R577:579 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R582:586 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R588:592 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R611:612 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R580:581 Top.ProgressAndPreservation <> Γ:6 var
+R587:587 Top.ProgressAndPreservation <> v:7 var
+R593:598 Top.Syntax <> t_pair constr
+R600:604 Top.ProgressAndPreservation <> τ₁:8 var
+R606:610 Top.ProgressAndPreservation <> τ₂:9 var
+R620:623 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+R629:630 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+binder 624:625 <> v1:10
+binder 627:628 <> v2:11
+R632:634 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R631:631 Top.ProgressAndPreservation <> v:7 var
+R635:640 Top.Syntax <> v_pair constr
+R645:646 Top.ProgressAndPreservation <> v2:11 var
+R642:643 Top.ProgressAndPreservation <> v1:10 var
+prf 713:720 <> progress
+R727:730 Top.Syntax <> expr ind
+binder 723:723 <> e:12
+R741:744 Top.Syntax <> type ind
+binder 736:737 <> τ:13
+R778:784 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R751:753 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R763:767 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R769:773 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R776:777 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R754:762 Top.Typing <> env_empty def
+R768:768 Top.ProgressAndPreservation <> e:12 var
+R774:775 Top.ProgressAndPreservation <> τ:13 var
+R785:785 Coq.Unicode.Utf8_core <> ::type_scope:x_'∨'_x not
+R808:814 Coq.Unicode.Utf8_core <> ::type_scope:x_'∨'_x not
+R831:831 Coq.Unicode.Utf8_core <> ::type_scope:x_'∨'_x not
+R786:789 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+R801:802 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+R794:798 Top.Syntax <> value ind
+binder 790:790 <> v:14
+R804:806 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R803:803 Top.ProgressAndPreservation <> e:12 var
+R807:807 Top.ProgressAndPreservation <> v:14 var
+R815:818 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+R821:822 Coq.Unicode.Utf8_core <> ::type_scope:'∃'_x_'..'_x_','_x not
+binder 819:820 <> e':15
+R823:825 Top.SemanticsSOS <> red ind
+R829:830 Top.ProgressAndPreservation <> e':15 var
+R827:827 Top.ProgressAndPreservation <> e:12 var
+R1281:1289 Top.Typing <> env_empty def
+R1281:1289 Top.Typing <> env_empty def
+R1307:1315 Coq.Init.Datatypes <> Empty_set ind
+R1307:1315 Coq.Init.Datatypes <> Empty_set ind
+R1863:1877 Top.ProgressAndPreservation <> arrow_value_inv thm
+R1863:1877 Top.ProgressAndPreservation <> arrow_value_inv thm
+R1937:1944 Top.SemanticsSOS <> red_beta constr
+R1937:1944 Top.SemanticsSOS <> red_beta constr
+R1975:1982 Top.SemanticsSOS <> red_app2 constr
+R1975:1982 Top.SemanticsSOS <> red_app2 constr
+R2019:2026 Top.SemanticsSOS <> red_app1 constr
+R2019:2026 Top.SemanticsSOS <> red_app1 constr
+R2202:2210 Top.SemanticsSOS <> red_ep_vp constr
+R2202:2210 Top.SemanticsSOS <> red_ep_vp constr
+R2272:2278 Top.SemanticsSOS <> red_ep2 constr
+R2272:2278 Top.SemanticsSOS <> red_ep2 constr
+R2321:2327 Top.SemanticsSOS <> red_ep1 constr
+R2321:2327 Top.SemanticsSOS <> red_ep1 constr
+R2459:2472 Top.ProgressAndPreservation <> pair_value_inv thm
+R2459:2472 Top.ProgressAndPreservation <> pair_value_inv thm
+R2541:2548 Top.SemanticsSOS <> red_vfst constr
+R2541:2548 Top.SemanticsSOS <> red_vfst constr
+R2591:2598 Top.SemanticsSOS <> red_efst constr
+R2591:2598 Top.SemanticsSOS <> red_efst constr
+R2713:2726 Top.ProgressAndPreservation <> pair_value_inv thm
+R2713:2726 Top.ProgressAndPreservation <> pair_value_inv thm
+R2795:2802 Top.SemanticsSOS <> red_vsnd constr
+R2795:2802 Top.SemanticsSOS <> red_vsnd constr
+R2845:2852 Top.SemanticsSOS <> red_esnd constr
+R2845:2852 Top.SemanticsSOS <> red_esnd constr
+prf 2958:2969 <> preservation
+binder 2972:2972 <> A:16
+R2987:2989 Top.Typing <> env def
+R2991:2991 Top.ProgressAndPreservation <> A:16 var
+binder 2982:2983 <> Γ:17
+binder 2994:2994 <> e:18
+binder 2996:2997 <> e':19
+binder 2999:3000 <> τ:20
+R3014:3020 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3006:3008 Top.SemanticsSOS <> red ind
+R3012:3013 Top.ProgressAndPreservation <> e':19 var
+R3010:3010 Top.ProgressAndPreservation <> e:18 var
+R3041:3045 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R3021:3023 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3026:3030 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3032:3036 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3039:3040 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3024:3025 Top.ProgressAndPreservation <> Γ:17 var
+R3031:3031 Top.ProgressAndPreservation <> e:18 var
+R3037:3038 Top.ProgressAndPreservation <> τ:20 var
+R3046:3048 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3051:3055 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3058:3062 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3065:3066 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3049:3050 Top.ProgressAndPreservation <> Γ:17 var
+R3056:3057 Top.ProgressAndPreservation <> e':19 var
+R3063:3064 Top.ProgressAndPreservation <> τ:20 var
+R3339:3341 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3343:3347 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3357:3361 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3363:3364 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3348:3352 Top.Syntax <> e_app constr
+R3339:3341 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3343:3347 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3357:3361 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3363:3364 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3348:3352 Top.Syntax <> e_app constr
+R3415:3417 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3419:3423 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3441:3445 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3447:3448 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3424:3430 Top.Syntax <> e_value constr
+R3433:3437 Top.Syntax <> v_lam constr
+R3415:3417 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3419:3423 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3441:3445 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3447:3448 Top.Typing <> :::'T['_x_'⊢'_x_'∷'_x_']' not
+R3424:3430 Top.Syntax <> e_value constr
+R3433:3437 Top.Syntax <> v_lam constr
+R3508:3519 Top.Typing <> typing_subst thm
+R3508:3519 Top.Typing <> typing_subst thm

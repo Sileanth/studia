@@ -1,0 +1,65 @@
+DIGEST b7292d2e08331281b23c56f39a208cd2
+FTop.SemanticsSOS
+R62:65 Coq.Unicode.Utf8 <> <> lib
+R83:88 Top.Syntax <> <> lib
+ind 129:131 <> red
+constr 177:184 <> red_beta
+constr 257:264 <> red_app1
+constr 360:367 <> red_app2
+binder 134:134 <> A:1
+R151:155 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R145:148 Top.Syntax <> expr ind
+R162:166 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R156:159 Top.Syntax <> expr ind
+R188:191 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R208:214 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 192:192 <> t:4
+binder 194:194 <> e:5
+R201:205 Top.Syntax <> value ind
+R207:207 Top.SemanticsSOS <> A:1 var
+binder 197:197 <> v:6
+R215:217 Top.SemanticsSOS <> red:2 ind
+R242:247 Top.Syntax <> esubst def
+R251:251 Top.SemanticsSOS <> v:6 var
+R249:249 Top.SemanticsSOS <> e:5 var
+R220:224 Top.Syntax <> e_app constr
+R238:238 Top.SemanticsSOS <> v:6 var
+R227:231 Top.Syntax <> v_lam constr
+R235:235 Top.SemanticsSOS <> e:5 var
+R233:233 Top.SemanticsSOS <> t:4 var
+R268:271 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R287:292 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+binder 272:275 <> e₁:7
+binder 277:281 <> e₁':8
+binder 283:286 <> e₂:9
+R307:315 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R293:295 Top.SemanticsSOS <> red:2 ind
+R302:306 Top.SemanticsSOS <> e₁':8 var
+R297:300 Top.SemanticsSOS <> e₁:7 var
+R316:318 Top.SemanticsSOS <> red:2 ind
+R339:343 Top.Syntax <> e_app constr
+R351:354 Top.SemanticsSOS <> e₂:9 var
+R345:349 Top.SemanticsSOS <> e₁':8 var
+R321:325 Top.Syntax <> e_app constr
+R332:335 Top.SemanticsSOS <> e₂:9 var
+R327:330 Top.SemanticsSOS <> e₁:7 var
+R371:375 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R393:398 Coq.Unicode.Utf8_core <> ::type_scope:'∀'_x_'..'_x_','_x not
+R380:384 Top.Syntax <> value ind
+R386:386 Top.SemanticsSOS <> A:1 var
+binder 376:376 <> v:10
+binder 389:389 <> e:11
+binder 391:392 <> e':12
+R407:415 Coq.Unicode.Utf8_core <> ::type_scope:x_'→'_x not
+R399:401 Top.SemanticsSOS <> red:2 ind
+R405:406 Top.SemanticsSOS <> e':12 var
+R403:403 Top.SemanticsSOS <> e:11 var
+R416:418 Top.SemanticsSOS <> red:2 ind
+R433:437 Top.Syntax <> e_app constr
+R441:442 Top.SemanticsSOS <> e':12 var
+R439:439 Top.SemanticsSOS <> v:10 var
+R421:425 Top.Syntax <> e_app constr
+R429:429 Top.SemanticsSOS <> e:11 var
+R427:427 Top.SemanticsSOS <> v:10 var
+scheme 129:131 <> red_ind
+scheme 129:131 <> red_sind
