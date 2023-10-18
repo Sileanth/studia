@@ -1,0 +1,7 @@
+
+
+type var = string 
+
+
+
+

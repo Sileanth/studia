@@ -1,0 +1,231 @@
+# dune build --watch
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Workspace root: /home/sileanth/ocaml_template/run
+# Auto-detected concurrency: 12
+$ /nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt -config > /tmp/dune_9b9e99_output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; ocaml_bin =
+#      External "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin"
+#  ; ocaml =
+#      Ok
+#        External
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocaml"
+#  ; ocamlc =
+#      External
+#        "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt"
+#  ; ocamlopt =
+#      Ok
+#        External
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlopt.opt"
+#  ; ocamldep =
+#      Ok
+#        External
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamldep.opt"
+#  ; ocamlmklib =
+#      Ok
+#        External
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "DUNE_OCAML_HARDCODED" :
+#            "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml:/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "/home/sileanth/ocaml_template/run"
+#        ; "INSIDE_DUNE" : "/home/sileanth/ocaml_template/run/_build/default"
+#        ; "MANPATH" :
+#            "/home/sileanth/ocaml_template/run/_build/install/default/man"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/home/sileanth/ocaml_template/run/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/home/sileanth/ocaml_template/run/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_paths =
+#      [ External
+#          "/nix/store/x1znk0pjl4q9cxh29a2z10b3xkqvakfg-ocaml5.0.0-ocamlformat-0.26.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/dr1z2qa7864imawck010c6xbr3hnlpj7-ocaml5.0.0-ocaml-lsp-server-1.16.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/mikq7gpvw4jpbxalxyydknmdwknislhp-dune-3.10.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/1fhwmzxph997flhm5g655jfbkafsmxlg-ocaml5.0.0-utop-2.13.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/jirs3s51vqcksl18xnh1fl0kb7dr9l7m-ocaml5.0.0-findlib-1.9.6/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/8nfrqw34lsza6df1j7hgq6hkfwdn67ip-ocaml5.0.0-lambda-term-3.3.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/rhnx2rrgqgk44z221z19v39cfdmsfvmk-ocaml5.0.0-zed-3.2.3/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/zn3r7g9fmbjdg1z6phd6cp2cdrbv4ffc-ocaml-react-1.2.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/ayhkhbgswms289sdl3ss09wq7dsjbvw5-ocaml5.0.0-result-1.5/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/h429mqq9r7jwc2ngvqig19plm95gdfp4-ocaml5.0.0-uchar-0.0.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kgwqfgq9d6kfc59mcci3r8cqwzi5pjhj-ocaml5.0.0-uutf-1.0.3/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/4nmdvj730vsqmxziqw34nsq9alxxg459-ocaml5.0.0-uucp-15.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/xf3f8v1pr1slggg72p9mr7czixr4d0xq-ocaml5.0.0-uuseg-15.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/5cw06wrd2irdf1yiaqc29mq5qpha41xl-ocaml5.0.0-lwt_log-1.1.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kg6rxlp8gs5b91x0jcwkl83lz7m555vk-ocaml5.0.0-lwt-5.6.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/zxp9fvcyny7nc4qfai1qljjafq32vdxy-ocaml5.0.0-ocplib-endian-1.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/l5cc86zc84aqb0pmy447lc9grv7q868k-ocaml5.0.0-lwt_react-1.1.5/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/y7pw70jqj4dba75x9gwv28wzhzk10hz9-ocaml5.0.0-mew_vi-0.5.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kgz9gdkxlkahaya53kx1s1bgd3w48zhk-ocaml5.0.0-mew-0.1.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/mqxpbpnj92rmr8caym1v84i3v42gpsav-ocaml5.0.0-trie-1.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/973jmljgz78pjcb4xmc97k5xl71hpffk-ocaml5.0.0-logs-0.7.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/w5j52byspzrvf7llnd1p1v0nr2kndgm1-ocaml5.0.0-xdg-3.10.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/x1znk0pjl4q9cxh29a2z10b3xkqvakfg-ocaml5.0.0-ocamlformat-0.26.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/dr1z2qa7864imawck010c6xbr3hnlpj7-ocaml5.0.0-ocaml-lsp-server-1.16.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/mikq7gpvw4jpbxalxyydknmdwknislhp-dune-3.10.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/1fhwmzxph997flhm5g655jfbkafsmxlg-ocaml5.0.0-utop-2.13.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/jirs3s51vqcksl18xnh1fl0kb7dr9l7m-ocaml5.0.0-findlib-1.9.6/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/8nfrqw34lsza6df1j7hgq6hkfwdn67ip-ocaml5.0.0-lambda-term-3.3.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/rhnx2rrgqgk44z221z19v39cfdmsfvmk-ocaml5.0.0-zed-3.2.3/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/zn3r7g9fmbjdg1z6phd6cp2cdrbv4ffc-ocaml-react-1.2.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/ayhkhbgswms289sdl3ss09wq7dsjbvw5-ocaml5.0.0-result-1.5/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/h429mqq9r7jwc2ngvqig19plm95gdfp4-ocaml5.0.0-uchar-0.0.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kgwqfgq9d6kfc59mcci3r8cqwzi5pjhj-ocaml5.0.0-uutf-1.0.3/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/4nmdvj730vsqmxziqw34nsq9alxxg459-ocaml5.0.0-uucp-15.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/xf3f8v1pr1slggg72p9mr7czixr4d0xq-ocaml5.0.0-uuseg-15.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/5cw06wrd2irdf1yiaqc29mq5qpha41xl-ocaml5.0.0-lwt_log-1.1.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kg6rxlp8gs5b91x0jcwkl83lz7m555vk-ocaml5.0.0-lwt-5.6.1/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/zxp9fvcyny7nc4qfai1qljjafq32vdxy-ocaml5.0.0-ocplib-endian-1.2/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/l5cc86zc84aqb0pmy447lc9grv7q868k-ocaml5.0.0-lwt_react-1.1.5/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/y7pw70jqj4dba75x9gwv28wzhzk10hz9-ocaml5.0.0-mew_vi-0.5.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/kgz9gdkxlkahaya53kx1s1bgd3w48zhk-ocaml5.0.0-mew-0.1.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/mqxpbpnj92rmr8caym1v84i3v42gpsav-ocaml5.0.0-trie-1.0.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/973jmljgz78pjcb4xmc97k5xl71hpffk-ocaml5.0.0-logs-0.7.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/w5j52byspzrvf7llnd1p1v0nr2kndgm1-ocaml5.0.0-xdg-3.10.0/lib/ocaml/5.0.0/site-lib/"
+#      ; External
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml"
+#      ; External "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib"
+#      ]
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "5.0.0"
+#      ; standard_library_default =
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml"
+#      ; standard_library =
+#          "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; bytecomp_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; native_c_libraries = [ "-lm"; "-lpthread" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-unknown-linux-gnu"
+#      ; target = "x86_64-unknown-linux-gnu"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X032"
+#      ; cmi_magic_number = "Caml1999I032"
+#      ; cmo_magic_number = "Caml1999O032"
+#      ; cma_magic_number = "Caml1999A032"
+#      ; cmx_magic_number = "Caml1999Y032"
+#      ; cmxa_magic_number = "Caml1999Z032"
+#      ; ast_impl_magic_number = "Caml1999M032"
+#      ; ast_intf_magic_number = "Caml1999N032"
+#      ; cmxs_magic_number = "Caml1999D032"
+#      ; cmt_magic_number = "Caml1999T032"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
+#  }
+# Attempted to add watch to non-existent directory
+# /home/sileanth/.local/share/flatpak/exports.
+# Attempted to add watch to non-existent directory /home/sileanth/.nix-profile.
+# Attempted to add watch to non-existent directory
+# /nix/var/nix/profiles/default.
+# Attempted to add watch to non-existent directory
+# /home/sileanth/.local/share/flatpak/exports.
+# Attempted to add watch to non-existent directory /home/sileanth/.nix-profile.
+# Attempted to add watch to non-existent directory
+# /nix/var/nix/profiles/default.
