@@ -1,9 +1,9 @@
-# dune build --watch
+# dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /home/sileanth/ocaml_template/run
+# Workspace root: /home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run
 # Auto-detected concurrency: 12
-$ /nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt -config > /tmp/dune_9b9e99_output
+$ /nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt -config > /tmp/dune_302f65_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -39,16 +39,16 @@ $ /nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt -config
 #            "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml:/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib"
 #        ; "DUNE_OCAML_STDLIB" :
 #            "/nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" : "/home/sileanth/ocaml_template/run"
-#        ; "INSIDE_DUNE" : "/home/sileanth/ocaml_template/run/_build/default"
+#        ; "DUNE_SOURCEROOT" :
+#            "/home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run"
+#        ; "INSIDE_DUNE" :
+#            "/home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run/_build/default"
 #        ; "MANPATH" :
-#            "/home/sileanth/ocaml_template/run/_build/install/default/man"
+#            "/home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run/_build/install/default/man"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/home/sileanth/ocaml_template/run/_build/install/default/lib"
+#            "/home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/home/sileanth/ocaml_template/run/_build/install/default/lib/toplevel"
-#        ; "OCAML_COLOR" : "always"
-#        ; "OPAMCOLOR" : "always"
+#            "/home/sileanth/studia/typki/listy/l2/z57/ocaml_template/run/_build/install/default/lib/toplevel"
 #        }
 #  ; findlib_paths =
 #      [ External
@@ -219,13 +219,3 @@ $ /nix/store/0plfh4q08s97ajcjm1397afrfs3y17wg-ocaml-5.0.0/bin/ocamlc.opt -config
 #      ; windows_unicode = false
 #      }
 #  }
-# Attempted to add watch to non-existent directory
-# /home/sileanth/.local/share/flatpak/exports.
-# Attempted to add watch to non-existent directory /home/sileanth/.nix-profile.
-# Attempted to add watch to non-existent directory
-# /nix/var/nix/profiles/default.
-# Attempted to add watch to non-existent directory
-# /home/sileanth/.local/share/flatpak/exports.
-# Attempted to add watch to non-existent directory /home/sileanth/.nix-profile.
-# Attempted to add watch to non-existent directory
-# /nix/var/nix/profiles/default.
