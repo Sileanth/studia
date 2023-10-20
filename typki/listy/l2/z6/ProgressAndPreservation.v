@@ -103,32 +103,17 @@ Fixpoint infer_type (A : Set) (Γ : env A) (e : expr A): option type :=
     | pair (Some (t_arrow t1 t2)) (Some t3) => if eq_types t1 t3 then Some t2 else None
     | _ => None
     end
-  | e_value (v_var x) => Some (Γ x)
-  | e_value (v_lam t e) =>
-    match infer_type (inc A) (env_ext Γ t) e with
-    | Some t2 => Some (t_arrow t t2)
-    | _ => None
-    end
-  | e_value v_unit => Some t_unit
-  end.
-
-(*Check nat_ind :
-  ∀ P : nat → Prop,
-    P 0 →
-    (∀ n : nat, P n → P (S n)) →
-    ∀ n : nat, P n.*)
-
-Fixpoint build_proof
-         (P : nat → Prop)
-         (evPO : P 0)
-         (evPS : ∀ n : nat, P n → P (S n))
-         (n : nat) : P n :=
-  match n with
-  | 0 => evPO
-  | S k => evPS k (build_proof P evPO evPS k)
-  end.
-Definition nat_ind_tidy := build_proof.
-Print nat_ind_tidy.
+  | e_value v => infer_value_type A Γ v
+  end 
+  with infer_value_type (A : Set) (Γ : env A) (v : value A) : option type :=
+    match v with
+    | v_var x => Some (Γ x) 
+    | v_lam t e => match infer_type (inc A) (env_ext Γ t) e with
+      | Some t2 => Some (t_arrow t t2)
+      | _ => None
+        end
+    | v_unit => Some t_unit
+    end.
 
 Fixpoint ev_proof (P : forall A, expr A -> Prop)
                   (Papp : forall A e1 e2, P A e1 -> P A e2 -> P A (e_app e1 e2))
@@ -143,9 +128,7 @@ Fixpoint ev_proof (P : forall A, expr A -> Prop)
   | e_value (v_lam t e) => Plam A e t (ev_proof P Papp Pvar Plam Punt (inc A) e)
   | e_value v_unit      => Punt A
   end.
-Definition ev_ind := ev_proof.
 
-Check ev_proof.
 
 
 

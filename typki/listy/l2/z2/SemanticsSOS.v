@@ -16,28 +16,27 @@ Inductive red {A : Set} : expr A → expr A → Prop :=
     red e e' →
     red (e_app v e) (e_app v e')
 
-| red_ep_vp : ∀ (v1 v2 : value A),
-    red (e_pair v1 v2) (v_pair v1 v2)
+| red_case : ∀ e e' e1 e2,
+    red e e' ->
+    red (e_case e e1 e2) (e_case e' e1 e2)
 
-| red_ep1 : ∀ e₁ e₁' e₂,
-    red e₁ e₁' →
-    red (e_pair e₁ e₂) (e_pair e₁' e₂)
+| red_lcase : ∀ v e1 e2,
+    red (e_case (v_inl v) e1 e2) (esubst e1 v)
 
-| red_ep2 : ∀ (v : value A) e e',
+| red_rcase : ∀ v e1 e2,
+    red (e_case (v_inr v) e1 e2) (esubst e2 v)
+
+| red_einl : ∀ e e',
     red e e' →
-    red (e_pair v e) (e_pair v e')
+    red (e_inl e) (e_inl e')
 
-| red_efst : ∀ e e',
+| red_einr : ∀ e e',
     red e e' →
-    red (e_fst e) (e_fst e')
+    red (e_inr e) (e_inr e')
 
-| red_esnd : ∀ e e',
-    red e e' →
-    red (e_snd e) (e_snd e')
+| red_vinl : ∀ (v : value A),
+    red (e_inl v) (v_inl v)
 
-| red_vfst : ∀ (v1 v2 : value A),
-    red (e_fst (v_pair v1 v2)) v1
-
-| red_vsnd : ∀ (v1 v2 : value A),
-    red (e_snd (v_pair v1 v2)) v2
+| red_vinr : ∀ (v : value A),
+    red (e_inr v) (v_inr v)
 .

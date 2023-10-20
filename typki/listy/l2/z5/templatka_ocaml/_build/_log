@@ -1,0 +1,52 @@
+### Starting build.
+# Target: simple.ml.depends, tags: { extension:ml, file:simple.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules simple.ml > simple.ml.depends # cached
+# Target: eval.ml.depends, tags: { extension:ml, file:eval.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules eval.ml > eval.ml.depends # cached
+# Target: ast.ml.depends, tags: { extension:ml, file:ast.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules ast.ml > ast.ml.depends # cached
+# Target: ast.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ast.cmo, file:ast.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o ast.cmo ast.ml # cached
+# Target: utils.ml.depends, tags: { extension:ml, file:utils.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules utils.ml > utils.ml.depends # cached
+# Target: utils.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:utils.cmo, file:utils.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o utils.cmo utils.ml # cached
+# Target: eval.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:eval.cmo, file:eval.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o eval.cmo eval.ml # cached
+# Target: parser.ml.depends, tags: { extension:ml, file:parser.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules parser.ml > parser.ml.depends # cached
+# Target: lexer.mll, tags: { extension:mll, file:lexer.mll, lexer, ocaml, ocamllex, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamllex.opt -q lexer.mll # cached
+# Target: lexer.ml.depends, tags: { extension:ml, file:lexer.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules lexer.ml > lexer.ml.depends # cached
+# Target: yaccParser.mly, tags: { extension:mly, file:yaccParser.mly, infer, ocaml, ocamlyacc, parser, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlyacc yaccParser.mly
+# Target: yaccParser.mli.depends, tags: { extension:mli, file:yaccParser.mli, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules yaccParser.mli > yaccParser.mli.depends # cached
+# Target: yaccParser.cmi, tags: { byte, compile, extension:mli, file:yaccParser.mli, interf, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o yaccParser.cmi yaccParser.mli # cached
+# Target: lexer.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:lexer.cmo, file:lexer.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o lexer.cmo lexer.ml # cached
+# Target: parser.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:parser.cmo, file:parser.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o parser.cmo parser.ml # cached
+# Target: simple.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:simple.cmo, file:simple.ml, implem, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlc.opt -c -o simple.cmo simple.ml # cached
+# Target: ast.cmx, tags: { compile, extension:cmx, extension:ml, file:ast.cmx, file:ast.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o ast.cmx ast.ml # cached
+# Target: utils.cmx, tags: { compile, extension:cmx, extension:ml, file:utils.cmx, file:utils.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o utils.cmx utils.ml # cached
+# Target: yaccParser.ml.depends, tags: { extension:ml, file:yaccParser.ml, ocaml, ocamldep, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamldep.opt -modules yaccParser.ml > yaccParser.ml.depends
+# Target: yaccParser.cmx, tags: { compile, extension:cmx, extension:ml, file:yaccParser.cmx, file:yaccParser.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o yaccParser.cmx yaccParser.ml
+# Target: lexer.cmx, tags: { compile, extension:cmx, extension:ml, file:lexer.cmx, file:lexer.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o lexer.cmx lexer.ml # cached
+# Target: parser.cmx, tags: { compile, extension:cmx, extension:ml, file:parser.cmx, file:parser.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o parser.cmx parser.ml # cached
+# Target: eval.cmx, tags: { compile, extension:cmx, extension:ml, file:eval.cmx, file:eval.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o eval.cmx eval.ml
+# Target: simple.cmx, tags: { compile, extension:cmx, extension:ml, file:simple.cmx, file:simple.ml, implem, native, ocaml, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt -c -o simple.cmx simple.ml
+# Target: simple.native, tags: { dont_link_with, extension:native, file:simple.native, link, native, ocaml, program, quiet, traverse }
+/home/sileanth/.opam/default/bin/ocamlopt.opt ast.cmx utils.cmx eval.cmx yaccParser.cmx lexer.cmx parser.cmx simple.cmx -o simple.native
+# Compilation successful.

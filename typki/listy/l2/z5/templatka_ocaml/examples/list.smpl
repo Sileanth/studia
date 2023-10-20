@@ -1,0 +1,42 @@
+(* Lists can be econded using units, pairs, and variants *)
+let nil = inl ()
+let cons x xs = inr (x, xs)
+
+// Recursive functions are allowed
+let rec foldr f xs s =
+  case xs of
+  | inl _ => s
+  | inr p => f (fst p) (foldr f (snd p) s)
+
+// Another example with conditional expressions
+let rec filter f xs =
+  case xs of
+  | inl _ => nil
+  | inr p =>
+    if f (fst p) then
+      cons (fst p) (filter f (snd p))
+    else
+      filter f (snd p)
+
+(* Anonymous functions can take multiple parameters *)
+let map f xs =
+  foldr (fn x xs => cons (f x) xs) xs nil
+
+// There is a unit value and expressions sequencing
+let rec iter f xs =
+  case xs of
+  | inl _ => ()
+  | inr p => f (fst p); iter f (snd p)
+
+// Local definitions are alowed
+let foo =
+  let bar = 42
+  let baz x = x
+  in
+  baz bar
+
+(* Finally, the whole program is a just expression, so if it contains
+ * definitions it should be ended with "in" expression *)
+
+in
+map (fn _ => ()) (cons 1 (cons 2 (cons 3 nil)))

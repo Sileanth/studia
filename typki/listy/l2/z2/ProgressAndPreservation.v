@@ -10,18 +10,29 @@ Lemma arrow_value_inv {Γ : env Empty_set} {v : value _} {τ₁ τ₂ : type} :
   ∃ e, v = v_lam e ∧ T[ env_ext Γ τ₁ ⊢ e ∷ τ₂ ].
 Proof.
   inversion 1.
-  + destruct x. (* impossible case *)
+  + destruct x.
   + eauto.
 Qed.
 
-Lemma pair_value_inv {Γ : env Empty_set} {v : value _} {τ₁ τ₂ : type} :
-  T[ Γ ⊢ v ∷ t_pair τ₁ τ₂ ] →
-  ∃ v1 v2, v = v_pair v1 v2.
+Lemma union_value_inv {Γ : env Empty_set} {v : value _} {τ₁ τ₂ : type} :
+  T[ Γ ⊢ v ∷ t_union τ₁ τ₂ ] →
+  ∃ v', v_inl v' = v ∨ v_inr v' = v.
 Proof.
   inversion 1.
   + destruct x.
   + eauto.
-Qed. 
+  + eauto.
+Qed.
+
+(*Lemma union_value_inv2 {Γ : env Empty_set} {v : value _} {τ₁ τ₂ : type} :
+  T[ Γ ⊢ v ∷ t_union τ₁ τ₂ ] →
+  (∃ v', v_inl v' = v ) ∨ (∃ v', v_inr v' = v).
+Proof.
+  inversion 1.
+  + destruct x.
+  + eauto.
+  + eauto.
+Qed.*)
 
 Theorem progress (e : expr _) (τ : type) :
   T[ env_empty ⊢ e ∷ τ ] →
@@ -33,12 +44,12 @@ Proof.
    * Therefore we use Henry Ford induction here: we prove the property for any
    * set A so long as it is Empty_set. We start with permuting the assumption
    * to setup scene for the induction *)
-  generalize env_empty as Γ. remember Empty_set as A.
-  intros Γ Htyping. generalize HeqA. clear HeqA.
+  generalize env_empty as Γ; remember Empty_set as A.
+  intros Γ Htyping; generalize HeqA; clear HeqA.
   (* And now, we can proceed by induction on the typing derivation *)
-  induction Htyping as [ | | | A Γ e₁ e₂ τ₂ τ₁ Htyping1 IH1 ? IH2 | | | | ];
+  induction Htyping as [ | | | A Γ e₁ e₂ τ₂ τ₁ Htyping1 IH1 ? IH2 | | | | |];
     intro Heq; subst.
-  + left. eexists. reflexivity.
+  + left; eexists; reflexivity.
   + destruct x. (* impossible case *)
   + left; eexists; reflexivity.
   + right.
@@ -49,33 +60,24 @@ Proof.
     - subst.
       destruct (arrow_value_inv Htyping1) as [ e [ Hv He ] ].
       subst; eexists; apply red_beta.
-    - subst. eexists. apply red_app2. eassumption.
+    - subst; eexists; apply red_app2; eassumption.
     - eexists; apply red_app1; eassumption.
-  + right.
-    destruct IHHtyping1.
-    - easy.
-    - destruct IHHtyping2.
-      * easy.
-      * destruct H. destruct H0. rewrite H. rewrite H0. eexists. apply red_ep_vp.
-      * destruct H. destruct H0. rewrite H. eexists. apply red_ep2. eauto.
-    - destruct H. eexists. apply red_ep1. eauto.
-  + left. eauto.
-  + destruct IHHtyping.
-    - easy.
-    - right.
-      destruct H. rewrite H in Htyping.
-      destruct (pair_value_inv Htyping).
-      rewrite H. destruct H0. rewrite H0. eexists. apply red_vfst.
-    - right. destruct H. eexists. apply red_efst. eauto.
-  + destruct IHHtyping.
-    - easy.
-    - right.
-      destruct H. rewrite H in Htyping.
-      destruct (pair_value_inv Htyping).
-      rewrite H. destruct H0. rewrite H0. eexists. apply red_vsnd.
-    - right. destruct H. eexists. apply red_esnd. eauto.
+  + destruct IHHtyping; auto.
+    - right. destruct H. rewrite H. econstructor. apply red_vinl.
+    - right. destruct H. eexists. apply red_einl. eauto.
+  + destruct IHHtyping; auto.
+    - right. destruct H. rewrite H. econstructor. apply red_vinr.
+    - right. destruct H. eexists. apply red_einr. eauto.
+  + left. econstructor. eauto.
+  + left. econstructor. eauto.
+  + right. destruct IHHtyping1; auto.
+    - destruct H. rewrite H in Htyping1. rewrite H.
+      destruct (union_value_inv Htyping1).
+      destruct H0.
+      * rewrite <- H0. eexists. apply red_lcase.
+      * rewrite <- H0. eexists. apply red_rcase.
+    - destruct H. eexists. apply red_case. eauto. 
 Qed.
-
 
 (* ========================================================================= *)
 
@@ -84,7 +86,7 @@ Theorem preservation {A : Set} (Γ : env A) e e' τ :
   T[ Γ ⊢ e ∷ τ ] → T[ Γ ⊢ e' ∷ τ ].
 Proof.
   (* We need slightly generalize the theorem, to say: foeach τ ... *)
-  intro Hred. generalize τ. clear τ.
+  intro Hred; generalize τ; clear τ.
   (* And proceed by induction on the derivation of reduction judgement *)
   induction Hred; intro τ.
   + intro H.
@@ -95,12 +97,30 @@ Proof.
     eapply typing_subst; eassumption.
   + inversion 1; subst; econstructor; eauto.
   + inversion 1; subst; econstructor; eauto.
-  + inversion 1. subst. constructor; auto.
-  + inversion 1. subst. constructor; auto.
-  + inversion 1. subst. constructor; auto.
-  + inversion 1. subst. econstructor; eauto.
-  + inversion 1. subst. econstructor; eauto.
-  + inversion 1. inversion H1. eauto.
-  + inversion 1. inversion H1. eauto.
+  + inversion 1; subst; econstructor; eauto.
+  + inversion 1; subst. eapply typing_subst.
+    - inversion H3. eauto.
+    - easy.
+  + inversion 1; subst. eapply typing_subst.
+    - inversion H3. eauto.
+    - easy.
+  + intro. inversion H. apply T_Inl. apply IHHred. apply H1.
+  + intro. inversion H. apply T_Inr. apply IHHred. apply H1.
+  + intro. inversion H. apply T_VInl. apply H1.
+  + intro. inversion H. apply T_VInr. apply H1.
 Qed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

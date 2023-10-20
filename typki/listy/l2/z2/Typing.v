@@ -4,7 +4,6 @@
 Require Import Utf8.
 Require Import Syntax.
 
-
 (** Environments.
   * 
   * Since we work with nested-datatypes variable binding representation,
@@ -26,8 +25,6 @@ Definition env_ext {A : Set} (Γ : env A) (τ : type) : env (inc A) :=
   | VZ   => τ
   | VS y => Γ y
   end.
-
-
 
 (* We introduce some human-readable notation for typing *)
 Reserved Notation "'T[' Γ '⊢' e '∷' τ ']'".
@@ -54,27 +51,28 @@ Inductive typing {A : Set} (Γ : env A) : expr A → type → Prop :=
     (*----------------------------*)
     T[ Γ ⊢ e_app e₁ e₂ ∷ τ₁ ]
 
-| T_Pair : ∀ e₁ e₂ τ₂ τ₁,
-    T[ Γ ⊢ e₁ ∷ τ₁ ] →
-    T[ Γ ⊢ e₂ ∷ τ₂ ] →
-    (*----------------------------*)
-    T[ Γ ⊢ e_pair e₁ e₂ ∷ t_pair τ₁ τ₂ ]
+| T_Inl : ∀ e τ₂ τ₁,
+    T[ Γ ⊢ e ∷ τ₁ ] →
+    T[ Γ ⊢ e_inl e ∷ t_union τ₁ τ₂]
 
-| T_VPair : ∀ v₁ v₂ τ₂ τ₁,
-    T[ Γ ⊢ e_value v₁ ∷ τ₁ ] →
-    T[ Γ ⊢ e_value v₂ ∷ τ₂ ] →
-    (*----------------------------*)
-    T[ Γ ⊢ v_pair v₁ v₂ ∷ t_pair τ₁ τ₂ ]
+| T_Inr : ∀ e τ₂ τ₁,
+    T[ Γ ⊢ e ∷ τ₂ ] →
+    T[ Γ ⊢ e_inr e ∷ t_union τ₁ τ₂]
 
-|T_Fst : ∀ e τ₂ τ₁,
-    T[ Γ ⊢ e ∷ t_pair τ₁ τ₂ ] →
-    (*----------------------------*)
-    T[ Γ ⊢ e_fst e ∷ τ₁ ] 
+| T_VInl : ∀ (v : value A) τ₂ τ₁,
+    T[ Γ ⊢ v ∷ τ₁ ] →
+    T[ Γ ⊢ v_inl v ∷ t_union τ₁ τ₂]
 
-|T_Snd : ∀ e τ₂ τ₁,
-    T[ Γ ⊢ e ∷ t_pair τ₁ τ₂ ] →
+| T_VInr : ∀ (v : value A) τ₂ τ₁,
+    T[ Γ ⊢ v ∷ τ₂ ] →
+    T[ Γ ⊢ v_inr v ∷ t_union τ₁ τ₂]
+
+| T_Case : ∀ e1 e2 e3 τ1 τ2 τ3,
+    T[ Γ ⊢ e1 ∷ t_union τ1 τ2 ] →
+    T[ env_ext Γ τ1 ⊢ e2 ∷ τ3 ] →
+    T[ env_ext Γ τ2 ⊢ e3 ∷ τ3 ] →
     (*----------------------------*)
-    T[ Γ ⊢ e_snd e ∷ τ₂ ] 
+    T[ Γ ⊢ e_case e1 e2 e3 ∷ τ3 ]
 
 where "T[ Γ ⊢ e ∷ τ ]" := (@typing _ Γ e τ).
 
@@ -98,20 +96,24 @@ Proof.
   induction Htyping; intros B f Δ Hf; simpl.
   + constructor.
   + rewrite <- Hf; constructor.
-  + constructor. apply IHHtyping.
+  + constructor; apply IHHtyping.
     intros [ | x ]; simpl; auto.
-  + econstructor; auto.
-  + econstructor; auto. 
   + econstructor; eauto.
   + econstructor; eauto.
   + econstructor; eauto.
+  + econstructor; eauto.
+  + econstructor; eauto.
+  + econstructor.
+    - eauto.
+    - apply IHHtyping2. intros x. destruct x. auto. unfold env_ext. unfold liftA. apply Hf.
+    - apply IHHtyping3. intros x. destruct x. auto. unfold env_ext. unfold liftA. apply Hf.
 Qed.
 
 (** Weakening lemma *)
 Lemma typing_weaken {A : Set} (Γ : env A) e τ' τ :
   T[ Γ ⊢ e ∷ τ ] → T[ env_ext Γ τ' ⊢ eshift e ∷ τ ].
 Proof.
-  apply typing_fmap. reflexivity.
+  apply typing_fmap; reflexivity.
 Qed.
 
 (** Since the substitution is defined in terms of the simultaneous
@@ -132,11 +134,18 @@ Proof.
     intros [ | x ]; simpl; [ constructor | ].
     apply typing_weaken with (e := f x).
     apply Hf.
-  + econstructor; auto.
-  + econstructor; auto.
   + econstructor; eauto.
   + econstructor; eauto.
   + econstructor; eauto.
+  + econstructor; eauto.
+  + econstructor; eauto.
+  + econstructor; eauto.
+    - apply IHHtyping2. intros x. destruct x.
+      * simpl. constructor.
+      * simpl. apply typing_weaken with (e := f a). auto.
+    - apply IHHtyping3. intros x. destruct x.
+      * simpl. constructor.
+      * simpl. apply typing_weaken with (e := f a). auto.
 Qed.
 
 (** Substitution lemma *)
