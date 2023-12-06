@@ -16,34 +16,37 @@ Arguments VS {V}.
 Inductive type : Set :=
 | t_unit  : type
 | t_arrow : type → type → type
-| t_pair  : type → type → type
+| t_union : type -> type -> type
 .
 
 (** Expressions and values *)
 Inductive expr (V : Set) : Set :=
 | e_value : value V → expr V
 | e_app   : expr V → expr V → expr V
-| e_pair  : expr V → expr V → expr V
-| e_fst   : expr V → expr V
-| e_snd   : expr V → expr V
+| e_inl   : expr V -> expr V
+| e_inr   : expr V -> expr V
+| e_case : expr V -> expr (inc V)  -> expr (inc V) -> expr V
 
 with value (V : Set) : Set :=
 | v_var  : V → value V
 | v_lam  : expr (inc V) → value V
 | v_unit : value V
-| v_pair : value V -> value V -> value V
+| v_inl : value V -> value V
+| v_inr : value V -> value V
 .
+
 
 Arguments e_value {V}.
 Arguments e_app   {V}.
-Arguments e_pair  {V}.
-Arguments e_fst   {V}.
-Arguments e_snd   {V}.
+Arguments e_inr   {V}.
+Arguments e_inl   {V}.
+Arguments e_case  {V}.
 
 Arguments v_var   {V}.
 Arguments v_lam   {V}.
 Arguments v_unit  {V}.
-Arguments v_pair  {V}.
+Arguments v_inr  {V}.
+Arguments v_inl  {V}.
 
 (* We register e_value as coercion in order to allow values in any context
  * where expressions are expected. *)
@@ -64,16 +67,18 @@ Fixpoint emap {A B : Set} (f : A → B) (e : expr A) : expr B :=
   match e with
   | e_value   v => vmap f v
   | e_app e₁ e₂ => e_app (emap f e₁) (emap f e₂)
-  | e_pair e₁ e₂ => e_pair (emap f e₁) (emap f e₂)
-  | e_fst e => e_fst (emap f e)
-  | e_snd e => e_snd (emap f e)
+  | e_inr e => e_inr (emap f e)
+  | e_inl e => e_inl (emap f e)
+  | e_case e e1 e2 => e_case (emap f e) (emap (liftA f) e1) (emap (liftA f) e2)
+
   end
 with vmap {A B : Set} (f : A → B) (v : value A) : value B :=
   match v with
   | v_var x => v_var (f x)
   | v_lam e => v_lam (emap (liftA f) e)
   | v_unit  => v_unit
-  | v_pair v₁ v₂ => v_pair (vmap f v₁) (vmap f v₂)
+  | v_inr v  => v_inr (vmap f v) 
+  | v_inl v  => v_inl (vmap f v) 
   end.
 
 (** Shifting of expressions (s† operation). This operation shifts expression
@@ -98,16 +103,17 @@ Fixpoint ebind {A B : Set} (f : A → value B) (e : expr A) : expr B :=
   match e with
   | e_value   v => vbind f v
   | e_app e₁ e₂ => e_app (ebind f e₁) (ebind f e₂)
-  | e_pair e₁ e₂ => e_pair (ebind f e₁) (ebind f e₂)
-  | e_fst e => e_fst (ebind f e)
-  | e_snd e => e_snd (ebind f e)
+  | e_inl e => e_inl (ebind f e)
+  | e_inr e => e_inr (ebind f e)
+  | e_case e e1 e2 => e_case (ebind f e) (ebind (liftS f) e1) (ebind (liftS f) e2)
   end
 with vbind {A B : Set} (f : A → value B) (v : value A) : value B :=
   match v with
   | v_var x => f x
   | v_lam e => v_lam (ebind (liftS f) e)
   | v_unit  => v_unit
-  | v_pair v₁ v₂ => v_pair (vbind f v₁) (vbind f v₂)
+  | v_inl v => v_inl (vbind f v)
+  | v_inr v => v_inr (vbind f v)
   end.
 
 (** Extending substitution (◃ operation) *)

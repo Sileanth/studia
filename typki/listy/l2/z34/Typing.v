@@ -58,6 +58,9 @@ Inductive typing {A : Set} (Γ : env A) : expr A → type → Prop :=
 
 where "T[ Γ ⊢ e ∷ τ ]" := (@typing _ Γ e τ).
 
+
+Print nat_sind.
+
 (* ========================================================================= *)
 
 (** Using the classical approach to variable binding, we can use the term t

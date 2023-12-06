@@ -11,6 +11,7 @@ type typ =
   | TNum 
   | TBool
 
+
 type typ_env = typ M.t
 
 type expr = 
@@ -30,6 +31,7 @@ type expr =
   | EEq of expr * expr 
   | EPlus of expr * expr 
   | EMin of expr * expr
+
 
 
 type value = 
@@ -87,6 +89,7 @@ let rec eval (env: env) e =
     | _ -> failwith "if expected bool"
     end
 
+
 let rec type_check tenv e = 
   match e with 
   | EVar v -> M.find v tenv
@@ -132,6 +135,7 @@ let rec type_check tenv e =
     | (TBool, t1, t2) when t1 = t2 -> t1 
     | _ -> failwith "if expected bool, or difrrent types in branches"
     end
+  
 
 
  
