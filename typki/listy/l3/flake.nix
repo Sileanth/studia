@@ -29,6 +29,7 @@
           # The Nix packages provided in the environment
           packages = with pkgs; [
             ocaml 
+            ocamlPackages.utop
             ocamlPackages.ocaml-lsp
           ];
         };
