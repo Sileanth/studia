@@ -28,6 +28,7 @@
           packages = with pkgs; [
             # build tools
             gcc # The GNU Compiler Collection
+            ccls
             gnumake # A tool to control the generation of non-source files from sources
             
 

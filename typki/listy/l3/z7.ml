@@ -73,6 +73,7 @@ let term1 = name_node pre_term1
 let term2 = name_node pre_term2
 
 
+
 let _ = 
   if check_bisym term1 term2 empty_env empty_env 
   then print_endline "smiga" 

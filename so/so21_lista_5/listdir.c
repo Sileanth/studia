@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     /* TODO: Iterate over directory entries and call file_info on them. */
     for(void* ptr = buf; ptr != buf + n; ptr += d->d_reclen){
       d = (struct linux_dirent *)ptr;
-      if(d->d_name[0] != '.')
+      if(d->d_name[0] != '.') //hide hidden files
         file_info(dirfd, d->d_name);
     }
   }
