@@ -1,2 +1,0 @@
-
-val file : Unit ->[Parsing Token,Parsing.Error,Errors] Grammar

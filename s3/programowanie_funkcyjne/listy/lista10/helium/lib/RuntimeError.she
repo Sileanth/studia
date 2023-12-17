@@ -1,5 +1,0 @@
-effect RE
-
-val runtimeError  : String ->[RE] a
-val assertNoError : String -> (Datatypes.Unit ->[RE, e] a) ->[e] a
-val printAndExit  : (Datatypes.Unit ->[RE, e] a) ->[e] a

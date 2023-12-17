@@ -1,7 +1,0 @@
-
-data this =
-| EOF
-| BANG | BAR | COLON | SEMICOLON
-| LID  of String
-| UID  of String
-| CODE of String

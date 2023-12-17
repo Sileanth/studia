@@ -1,5 +1,0 @@
-data IntPair = IntPair of Int, Int
-let swap (IntPair x y) = IntPair y x
-let fst  (IntPair x _) = x
-let snd  (IntPair _ x) = x
-let _ = printInt (fst (swap (IntPair 69 42)))

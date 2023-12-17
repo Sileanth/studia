@@ -1,6 +1,0 @@
-(** @canonical Dune__exe.Grep *)
-module Grep = Dune__exe__Grep
-
-
-(** @canonical Dune__exe.Matcher *)
-module Matcher = Dune__exe__Matcher

@@ -1,4 +1,0 @@
-(executable
- (public_name grep)
- (name grep)
- (libraries grep))

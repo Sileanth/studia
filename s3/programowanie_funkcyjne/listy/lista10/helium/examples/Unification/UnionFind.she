@@ -1,9 +1,0 @@
-
-type Set : type -> type
-
-effect UF : type -> effect
-
-val new    : a ->[UF a] Set a
-val find   : Set a ->[UF a] a
-val union  : (a -> a ->[r] a) -> Set a -> Set a ->[UF a, r] Unit
-val withUF : (Unit ->[UF a, r] b) ->[RE, r] b

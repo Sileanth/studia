@@ -1,8 +1,0 @@
-data T1 = A | B
-data T2 = B | C
-
-let foo x =
-  match x with
-  | A    => B
-  | T1.B => T2.B
-  end

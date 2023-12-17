@@ -1,9 +1,0 @@
-
-module A : sig
-  type A
-  val foo : A -> Unit
-end = struct
-  data A = A
-  let foo A  = ()
-  let bar () = A
-end

@@ -1,4 +1,0 @@
-
-val args : List String
-
-val exit : Int ->[IO] a

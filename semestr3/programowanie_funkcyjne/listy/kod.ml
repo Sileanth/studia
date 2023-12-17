@@ -1,5 +1,0 @@
-
-
-
-
-(*  write merge sort*)

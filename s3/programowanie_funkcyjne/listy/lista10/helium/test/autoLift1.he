@@ -1,7 +1,0 @@
-data Lifter X =
-| Lifter of type A E L B.
-    (A ->[|L] B),
-    ((A ->[E|L] B) -> X)
-
-let runLifter (Lifter f cont) = cont f
-let lift f = runLifter (Lifter f (fn f => f))

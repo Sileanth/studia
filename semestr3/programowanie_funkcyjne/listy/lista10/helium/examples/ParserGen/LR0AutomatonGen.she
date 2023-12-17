@@ -1,3 +1,0 @@
-(** Generating LR0Automaton from Grammar *)
-
-val gen : Grammar ->[Errors] LR0Automaton
