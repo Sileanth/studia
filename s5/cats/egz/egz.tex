@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+
+\usepackage{tikz-cd}
+\usepackage{polski}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=7in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{ Egzamin Teoria Katagorii}
+\author{ Łukasz Magnuszewski }
+\date{\today}
+
+\begin{document}
+\maketitle	
+\pagebreak
+
+% Optional TOC
+% \tableofcontents
+% \pagebreak
+
+%--Paper--
+
+\section{Zadanie 1}
+
+\subsection{Kandydat na izomorfizm}
+Zdefiniujmy lambda term który odpowiada morfizmowi z $A^{1 + 1}$ do $A \times A$.
+\[
+  F  := \lambda f. \ <f L(1), f R(1)>  
+\]
+Oraz jego potencjalną odwrotność:
+\[
+  G := \lambda p. \ \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ p, R(x) \mapsto \pi_2 \ p\}
+\]
+
+\subsection{$G \circ F = \lambda x. \ x$}
+Wszystkie przejścia łączymy przechodniością $\beta, \eta$-redukcji.
+\[
+   \lambda x. \ ( \lambda p. \ \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ p, R(x) \mapsto \pi_2 \ p\}) \ (( \lambda f. \ <f L(1), f R(1)>  )\ x)
+\]
+\centerline{$(\beta - abs)$}
+\[
+   \lambda x. \ ( \lambda p. \ \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ p, R(x) \mapsto \pi_2 \ p\}) \ (\ <x L(1), x R(1)>  )
+\]
+\centerline{$(\beta - abs)$}
+\[
+   \lambda x. \ (  \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ (\ <x L(1), x R(1)>  ), R(x) \mapsto \pi_2 \ (\ <x L(1), x R(1)>  )\}) 
+\]
+\centerline{$(\beta - proj_{1,2})$}
+\[
+   \lambda x. \ (  \lambda t. \ match \ t \ with \{L(x) \mapsto x L(1), R(x) \mapsto x R(1) \} ) 
+\]
+\centerline{(równosciowa definicja koproduktu)}
+\[
+  \lambda x. \ x  
+\]
+\subsection{$F \circ G = \lambda x. \ x$}
+Wszystkie przejścia łączymy przechodniością $\beta, \eta$-redukcji.
+\[
+    \lambda x. \ ( \lambda f. \ <f L(1), f R(1)>  ) \ (( \lambda p. \ \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ p, R(x) \mapsto \pi_2 \ p\} ) \ x) 
+\]
+\centerline{$(\beta - abs)$}
+\[
+    \lambda x. \ ( \lambda f. \ <f L(1), f R(1)>  ) \ ( \ \lambda t. \ match \ t \ with \ \{L(x) \mapsto \pi_1 \ x, R(x) \mapsto \pi_2 \ x\} )  
+\]
+\centerline{$(\beta - abs)$}
+\[
+    \lambda x. <( \lambda t. match \ t \ with \{L(x) \mapsto \pi_1 x, \\ R(x) \mapsto \pi_2 x\} )  L(1), ( \lambda t. \ match \ t \ with  \{L(x) \mapsto \pi_1  x, R(x) \mapsto \pi_2 x\} )  R(1)> 
+\]
+\centerline{$(\beta - abs)$}
+\[
+    \lambda x. <( match \ L(1) \ with \{L(x) \mapsto \pi_1 x, \\ R(x) \mapsto \pi_2 x\} )  , (  \ match \ R(1) \ with  \{L(x) \mapsto \pi_1  x, R(x) \mapsto \pi_2 x\} )  > 
+\]
+\centerline{$(\beta - match_{L,R})$}
+\[
+    \lambda x. \ < \pi_1 \ x, \pi_2 \ x >
+\]
+\centerline{(równosciowa definicja produktu)}
+\[
+  \lambda x. \ x  
+\]
+
+\subsection*{Izomorfizm}
+Z tego że pokazaliśmy powyższe $\beta, \eta$-równosci, oraz z twierdzenia o poprawności interpretacji Rachunku Lambda, możemy stwierdzić,
+ że $F \circ G = id$ oraz $G \circ F = id$ czyli $F, G$ są izomorfizmami. Co pokazuje, że $A^{1 + 1} \cong A \times A$.
+
+
+\pagebreak
+\section{Zadanie 2}
+
+\subsection{Informacje z wykładu i ćwiczeń}
+Przypomijmy następujące fakty z wykładu i ćwiczeń:
+\begin{itemize}
+    \item W kategorii $Sets_*$, singletony to jednocześnie obiekty początkowe i końcowe. 
+    \item Dowolne dwa obiekty początkowe są izomorficzne, podobnie jak dwa obiekty końcowe.
+  \end{itemize}
+
+\subsection{$1 + 1$ to Obiekt początkowy}
+Ustalmy dowolny obiekt $X$ w $Sets_*$ i pokażemy, że istnieje dokładnie jeden morfizm z $1 + 1$ do $X$.
+
+\[
+    \begin{tikzcd}[row sep=huge]
+        & X  & \\
+        1\ar[ur,"X_0"] \ar[r,"L_1", swap] & 1 + 1 \ar[u,dashed,"U" description] & 1 \ar[ul,"X_0", swap] \ar[l,"R_1"]
+    \end{tikzcd}
+\]
+
+
+\subsubsection{Istnienie}
+Korzystając z diagramu powyżej, konstruujemy morfizm $U$ z $1 + 1$ do $X$ następująco:
+Skoro $1$ jest obiektem początkowym, to istnieje morfizm z $1$ do $X$, oznaczmy go $X_0$.
+I wstawmy $X_0$ do diagramu, jako morfizm z $1$ do $X$, na obu ramionach. I teraz z definicji koproduktu istnieje morfizm $U$ z $1 + 1$ do $X$ taki, że $U \circ L_1 = X_0$ i $U \circ R_1 = X_0$.
+
+\subsubsection{Unikalność}
+Załóżmy, że istnieją dwa morfizmy $U_1$ i $U_2$ z $1 + 1$ do $X$. Pokażemy, że $U_1 = U_2$.
+
+
+Korzystając z tego samego diagramu (Ważne jest to że istnieje dokładnie jeden morfizm z 1 do X), zauważmy że oba morfizmy muszą spełniać równość $U_1 \circ L_1 = X_0$ oraz $U_2 \circ L_1 = X_0$. Bo $1$ jest obiektem początkowym. Analogicznie dla $R_1$.
+
+Czyli oba morfizmy sprawiają, że diagram komutuje, więc $U_1 = U_2$. Bo istnieje dokładnie jeden morfizm by diagram koproduktu komutował.
+
+\subsection{$1 + 1 \cong 1$}
+Jako że $1$, oraz $1 + 1$ są obiektami początkowymi, to są izomorficzne.
+%--/Paper--
+
+\end{document}
