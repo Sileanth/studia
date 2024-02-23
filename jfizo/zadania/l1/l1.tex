@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[legalpaper, margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning} % LaTeX and plain TeX
+
+\usepackage{amsmath}
+\newcommand{\Lg}{{\Sigma^*}} 
+
+\begin{document}
+
+
+\section*{Zadanie 1}
+\subsection*{Treść}
+Rozważmy język $L = \{w0s : |s| = 9\}$, złożony z tych słów nad alfabetem $\{0, 1\}$
+których dziesiąty symbol od końca to 0. Udowodnij, że DFA rozpoznający ten język ma co
+najmniej 1024 stany.
+\subsection*{Rozwiązanie}
+Skorzystajmy z twierdzenia o indeksie, wskazując rodzinę słów o mocy 1024, z których każde jest w innej klasie abstrakcji $\sim_L$.
+
+Niech $R$ będzie zbiorem liczb od 0 do 1023 włącznie, zapisanych binarnie przy pomocy 10 bitów (pozwalamy na wiodące zera).
+
+Weźmy dowolne $w_1, w_2 \in R$. Jako że odpowiadają one różnym liczbom to istnieje bit $k$ taki że $w_1 [ k ] \neq w_2[ k ]$.
+Bez straty ogólności $w_1 [ k ] = 1$ oraz $ w_2 [ k ] = 0$.
+
+Wtedy $w_1 0^{10 - k} \in L$ i $w_2 0^{10 - k} \notin L$, z czego wynika że dowolne 2 słowa z $R$ są w innej klasie abstrakcji, czyli
+automat rozpoznający $L$ musi mieć przynajmniej $|R| = 1024$ stanów.
+
+\section*{Zadanie 4}
+\subsection*{Treść}
+(za 2 punkty) Dla danego języka $L \subseteq L^*$ przez $L^*$ rozumiemy najmniejszy język
+spełniający następujące warunki:
+\begin{itemize}
+    \item $\epsilon \in L^*$
+    \item $\forall x, y. [ x \in L^* \land y \in L ] \implies  x y \in L^*$  
+\end{itemize}
+Gdzie $\epsilon$ oznacza, jak zawsze, słowo puste.
+Niech L będzie dowolnym podzbiorem $\{ 0 \}^*$. Udowodnij, że $L^*$ jest językiem regularnym.
+
+\subsection*{Rozwiązanie}
+Mamy tutaj do czynienia z unarnym alfabetem, więc od tego momentu słowa utożsamiam z ich długością. 
+Możemy to zrobić bo liczby naturalne są wolnym monoidem nad $1$.
+
+
+
+Rozwiążmy najpierw podprzypadek i potem uogólnijmy go na całość.
+
+\subsubsection*{Podprzypadek}
+Załóżmy że istnieje $p, q \in L^*$ takie że $p$ i $q$ są względnie pierwsze. Wtedy z rozszerzonego algorytmu euklidesa
+otrzymujemy $x, y$ spełniające $x p + y q = \gcd(p, q) = 1$ (bo $p, q$ względnie pierwsze). 
+
+Możemy w takim razie otrzymać też wszystkie liczby od $1$ do $ p q$.
+\[
+    n (x p + y q) = n
+\]
+Czyli otrzymaliśmy wszystkie możliwe reszty z dzielenia przez $p q$, oraz dodatkowo możemy się przesuwać o $p q$ do przodu dodając p q razy.
+Czyli od pewnego momentu wszystkie liczby należą do języka.
+
+Problem jest tylko taki że $x,y$ mogą być ujemne, co nie pasuje naszej interpretacji. Ale zauważmy że jeśli dodamy p q razy, oraz q
+p razy, to reszta z dzielenia się nie zmieni, a współczynniki urosną.
+
+Istnieje takie $z$, że dla każdego $n$, $n x \leq z q$ oraz $n y \leq z p$.
+
+Czyli od liczby $ z x p + z y q$ wszystkie liczby należą do języka. A wszystkie poprzednie liczby możemy zaifować.
+
+
+Skonstruujmy teraz żuczka by był zawsze szczęsliwy i jak najbardziej wybredny \newline
+
+% TODO, nie potrafie w tikz
+ \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+    \draw[help lines] (-3,0) grid (8,5);
+  
+    \node[state,initial]  (q_0)                      {$q_0$};
+    \node[state]          (q_1) [ right=of q_0] {$q_1$};
+    \node[state]          (q_2) [ right=of q_1] {$q_2$};
+    \node[state,accepting](q_3) [ right=of q_2] {$q_3$};
+  
+    \path[->] (q_0) edge              node        {0} (q_1)
+              (q_1) edge              node        {0} (q_2)
+              (q_2) edge              node        {0} (q_3);
+            
+  \end{tikzpicture}
+
+
+\subsubsection*{Uogólnienie}
+Jeśli nie zachodzi podprzypadek, to istnieje $v = \gcd(L*)$. To się sprowadza do poprzedniego przypadku, 
+tylko żuczek w każdym kroku leci o $v$ pól do przodu.
+
+
+\end{document}
