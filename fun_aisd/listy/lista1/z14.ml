@@ -17,26 +17,15 @@ let rec cbt h v =
 
 *)
 
-module M = Map.Make(Int)
 
-let logint x =
-  let fx = Float.of_int x in 
-  let lf = Float.log2 fx in 
-  Float.to_int lf
+type tree = 
+| Leaf
+| FN of tree * int * tree
 
-let cbt n v = 
-  let rec build n v m = 
-    begin match M.find_opt n m with 
-    | Some(t) -> t, m
-    | None when n = 0 ->
-      let t = Leaf in
-      t, M.add n t m
-    | None ->
-      let (ln, rn) = split n in 
-      let (lt, m) = build ln v m in 
-      let (rt, m) = build ln v m in 
-      let t = Node(lt, v, rt) in 
-      t, M.add n t m
-    end
-  in fst (build n v M.empty)
-
+let rec bt h v = 
+  match h with 
+  | 0 -> Leaf
+  | n -> let x = bt (h-1) v in
+    match x with
+    | FN(fn_2,_,fn_1) -> FN (fn_1,v,x)
+    | Leaf -> FN(x,v,x)

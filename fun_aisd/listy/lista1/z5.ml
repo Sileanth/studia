@@ -1,39 +1,35 @@
+open List
 
 
+let rec maks cmp x xs =
+  fold_left 
+    (fun acc x -> if x > acc then x else acc)
+    x
+    xs
+
+let rec mini cmp x xs =
+  fold_left 
+    (fun acc x -> if x < acc then x else acc)
+    x
+    xs
 
 
-let rec split xs =
-    let rec helper xs l r =
-        match xs with
-        | []             -> (l, r)
-        | [x]            -> (x :: l, r)
-        | x :: (y :: zs) -> helper zs (x :: l) (y :: r)
-    in helper xs [] []
+let rec makss cmp ub lb xs = 
+  fold_left
+    (fun acc x -> if x < ub && x > acc then x else acc)
+    lb
+    xs
 
-let rec merge xs ys =
-match xs, ys with
-| [], ys -> ys
-| xs, [] -> xs
-| x :: xss, y :: yss when x <= y -> x :: (merge xss ys)
-| xs, y :: yss -> y :: (merge xs yss)
+let selsort cmp xs =
+  match xs with
+  | [] -> []
+  | [x] -> [x]
+  | x :: xss ->
+      let ma = maks cmp x xs in
+      let mi = mini cmp x xs in
+      let rec helper xs maxi =
+        let bmax = makss cmp maxi mi xs in
+        if bmax = mi then [mi] 
+        else bmax :: (helper xs bmax) 
+      in ma :: (helper xs ma)
 
-
-(*
-    czas i consy
-    mamy O(log n) pięter, bo w każym kroku połowimy liste
-    oraz na każdym piętrze merge i split wykonują sumarycznie O(n) operacji
-    czyli czas działania i liczna consów to O(log n)
-
-    żywa pamięć
-    na 1 wywołaniu rekurencji mamy n żywych komórek 
-    na 2 mamy n/2 + pierwsze piętro
-
-    czyli maksymalne zużycie pamięci nie przekracza 2n z własności szeregu geometrycznego
-
-*)
-let rec merge_sort = function
-| []  -> []
-| [x] -> [x]
-| xs  -> 
-    let (l, r) = split xs in
-    merge (merge_sort l) (merge_sort r)
