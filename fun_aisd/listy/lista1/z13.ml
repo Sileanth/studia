@@ -16,7 +16,7 @@ let rec insert x t =
   | Leaf -> Node(x, Leaf, Leaf)
   | Node(y, tl, tr) ->
       if x <= y then
-        if y <= y then t 
+        if y <= x then t 
         else Node(y, insert x tl, tr)
       else Node(y, tl, insert x tr)
 

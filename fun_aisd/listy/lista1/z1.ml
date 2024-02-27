@@ -19,7 +19,7 @@ type t = Leaf | Node of int * t * t
 let rec flat t acc =
   match t with
   | Leaf -> acc 
-  | Node(x, l, r) -> flat l (flat r acc)
+  | Node(x, l, r) -> flat l (x :: flat r acc)
 
 let flatten t = flat t []
 

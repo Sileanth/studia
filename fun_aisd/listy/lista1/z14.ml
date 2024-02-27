@@ -12,7 +12,7 @@ let rec cbt h v =
     Node(child, v, child)
 
 (* 
-    funkcja zużywa logarytmicznie wiele pamięci,
+    funkcja zużywa logarytmicznie wiele  pamięci,
     bo na kazdym z (log n) pięter jest tylko 1 unikalny node
 
 *)
@@ -21,6 +21,8 @@ let rec cbt h v =
 type tree = 
 | Leaf
 | FN of tree * int * tree
+
+
 
 let rec bt h v = 
   match h with 

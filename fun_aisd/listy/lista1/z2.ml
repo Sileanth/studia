@@ -2,7 +2,7 @@
 
 let part x xs =
   let pred y = y <= x in
-  List.partition pred xd
+  List.partition pred xs
 
 let rec quick_sort = function
   | [] -> []
