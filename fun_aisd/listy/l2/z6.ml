@@ -17,6 +17,11 @@ let desc_cmp x y = y <= x
 
 let initial_cmps = asc_cmp, desc_cmp
 
+
+(*
+TODO
+   potrzebny jakis wzorek z logiem od jakiego cmp zaczac
+*)
 let mergesort xs = 
   let xss = List.map (fun x -> [x]) xs 
   in let rec merge_row cmp xss acc = 
