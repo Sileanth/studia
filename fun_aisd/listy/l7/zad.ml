@@ -51,7 +51,7 @@ module BankQueSingleQUe = struct
 
   let check (fl, f, rl, r) =
       if ( fl >= rl ) then (fl, f, rl, r)
-      else (fl + rl, Seq.append f (list_to_seq r), 0, [])
+      else (fl + rl, Seq.append f (seq_rev (list_to_seq r)), 0, [])
     
 
   let snoc x (fl, f, rl, r) = check (fl, f, rl + 1, x :: r)
@@ -158,7 +158,7 @@ let () =
   Printf.printf "Z2: %f\n" (t3e)
 
   (*
-  BankQue: 0.265886
-BankQueSingleQueue: 0.181441
-Z2: 0.236703   
+     BankQue: 0.261055
+BankQueSingleQueue: 0.236668
+Z2: 0.225218
   *)
