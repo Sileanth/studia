@@ -2,7 +2,7 @@ let seq_rev s =
   let rec rek s (acc : 'a Seq.t) =
     match Seq.uncons s with
     | None -> acc
-    | Some(x, s) -> let tail = rek s (Seq.cons x acc) in tail
+    | Some(x, s) -> rek s (Seq.cons x acc)
   in rek s Seq.empty
 
 module BankQue = struct
@@ -90,3 +90,75 @@ module Z2 = struct
     | None -> None
     | Some(_, f) -> Some (check (fl - 1, f, rl, r))
 end
+
+
+let random_ints n = 
+  let rec helper n acc = 
+    if n = 0 then acc
+    else helper (n - 1) (Random.int 1000 :: acc)
+  in helper n []
+
+let milion_ints = random_ints 1000000
+
+let test_bankque () = 
+  let q = ref BankQue.empty in
+  for i = 0 to 1000000 do
+    q := BankQue.snoc i !q
+  done;
+  for i = 0 to 1000000 do
+    match BankQue.head !q with
+    | None -> failwith "empty"
+    | Some x -> match BankQue.tail !q with
+      | None -> failwith "empty"
+      | Some q' -> q := q'
+  done
+
+let test_bankque_single_queue () =
+  let q = ref BankQueSingleQUe.empty in
+  for i = 0 to 1000000 do
+    q := BankQueSingleQUe.snoc i !q
+  done;
+  for i = 0 to 1000000 do
+    match BankQueSingleQUe.head !q with
+    | None -> failwith "empty"
+    | Some x -> match BankQueSingleQUe.tail !q with
+      | None -> failwith "empty"
+      | Some q' -> q := q'
+  done
+
+let tesy_bankque_z2 () = 
+  let q = ref Z2.empty in
+  for i = 0 to 1000000 do
+    q := Z2.snoc i !q
+  done;
+  for i = 0 to 1000000 do
+    match Z2.head !q with
+    | None -> failwith "empty"
+    | Some x -> match Z2.tail !q with
+      | None -> failwith "empty"
+      | Some q' -> q := q'
+  done
+
+
+
+
+  (* measure time of all 3 implemnations*)
+let () =
+  let t1 = Sys.time () in
+  test_bankque ();
+  let t1e = Sys.time () -. t1 in
+  let t2 = Sys.time () in
+  test_bankque_single_queue ();
+  let t2e = Sys.time () -. t2 in
+  let t3 = Sys.time () in
+  tesy_bankque_z2 ();
+  let t3e = Sys.time () -. t3 in
+  Printf.printf "BankQue: %f\n" (t1e);
+  Printf.printf "BankQueSingleQueue: %f\n" (t2e);
+  Printf.printf "Z2: %f\n" (t3e)
+
+  (*
+  BankQue: 0.265886
+BankQueSingleQueue: 0.181441
+Z2: 0.236703   
+  *)
