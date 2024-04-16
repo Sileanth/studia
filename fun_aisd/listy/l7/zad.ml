@@ -106,9 +106,7 @@ let test_bankque () =
     q := BankQue.snoc i !q
   done;
   for i = 0 to 1000000 do
-    match BankQue.head !q with
-    | None -> failwith "empty"
-    | Some x -> match BankQue.tail !q with
+    match BankQue.tail !q with
       | None -> failwith "empty"
       | Some q' -> q := q'
   done
@@ -119,9 +117,7 @@ let test_bankque_single_queue () =
     q := BankQueSingleQUe.snoc i !q
   done;
   for i = 0 to 1000000 do
-    match BankQueSingleQUe.head !q with
-    | None -> failwith "empty"
-    | Some x -> match BankQueSingleQUe.tail !q with
+    match BankQueSingleQUe.tail !q with
       | None -> failwith "empty"
       | Some q' -> q := q'
   done
@@ -132,9 +128,7 @@ let tesy_bankque_z2 () =
     q := Z2.snoc i !q
   done;
   for i = 0 to 1000000 do
-    match Z2.head !q with
-    | None -> failwith "empty"
-    | Some x -> match Z2.tail !q with
+    match Z2.tail !q with
       | None -> failwith "empty"
       | Some q' -> q := q'
   done
@@ -160,5 +154,5 @@ let () =
   (*
      BankQue: 0.261055
 BankQueSingleQueue: 0.236668
-Z2: 0.225218
+Z2: 0.225218`
   *)
