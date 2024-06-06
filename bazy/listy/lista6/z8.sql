@@ -41,7 +41,15 @@ EXPLAIN ANALYZE
 DELETE FROM company c WHERE c.id NOT IN (
 SELECT company_id FROM oferty WHERE company_id IS NOT NULL
 );
-EXPLAIN ANALYZE
-DELETE FROM company c WHERE c.id NOT IN (
-SELECT company_id FROM oferty WHERE company_id IS NOT NULL
-);
+                                                 
+-------------------------------------------------------------------------------------------------------------------------
+ Delete on company c  (cost=847.00..1464.66 rows=0 width=0) (actual time=89.078..89.081 rows=0 loops=1)
+   ->  Seq Scan on company c  (cost=847.00..1464.66 rows=15826 width=6) (actual time=89.074..89.076 rows=0 loops=1)
+         Filter: (NOT (hashed SubPlan 1))
+         Rows Removed by Filter: 31653
+         SubPlan 1
+           ->  Seq Scan on oferty  (cost=0.00..722.00 rows=50000 width=4) (actual time=0.434..24.666 rows=50000 loops=1)
+                 Filter: (company_id IS NOT NULL)
+ Planning Time: 12.023 ms
+ Execution Time: 92.050 ms
+(9 rows)
