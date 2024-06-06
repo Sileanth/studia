@@ -2,7 +2,6 @@ create table Bombiarze(id INT PRIMARY KEY, stopien INT);
 create table Agenci(id INT PRIMARY KEY, bombiarz INT);
 
 
--- to query nie zwraca bombiarzy bez agenta
 insert into agenci values (1, NULL);
 insert into bombiarze values (1,1);
 
