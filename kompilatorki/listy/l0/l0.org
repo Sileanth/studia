@@ -1,0 +1,7 @@
+
+
+
+* Lista nr 0
+UWAGA! Poniższe zadania należy rozwiązać używając kompilatora GCC w wersji 6 (lub wyższej) generującego kod dla procesorów
+x86-64. W linii poleceń kompilatora musisz dodać następujące opcje: «-march=nehalem -fomit-frame-pointer -Os»!
+** Zadanie 1

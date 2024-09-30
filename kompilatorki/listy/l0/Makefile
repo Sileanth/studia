@@ -20,7 +20,8 @@ zad3:
 	objdump -d my_index.o
 
 zad4:
-	gcc -march=nehalem -fomit-frame-pointer -Os -fdump-tree-all -c strrchr.c
+	gcc -march=nehalem -fomit-frame-pointer -Os -fdump-tree-all -o z4/strrchr.o -c strrchr.c 
+	cat ./z4/*.cfg
 
 zad5naive:
 	gcc -march=nehalem -fomit-frame-pointer -O0 -c magic_main_naive.c

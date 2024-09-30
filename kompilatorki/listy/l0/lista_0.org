@@ -207,6 +207,72 @@ narysuj *graf przepływu sterowania* (ang. /control flow graph/).
 #+end_src
 
 
+*gcc -march=nehalem -fomit-frame-pointer -Os -fdump-tree-all -o z4/strrchr.o -c strrchr.c*
+*cat ./z4/*.cfg*
+#+begin_src
+;; Function strrchr (strrchr, funcdef_no=0, decl_uid=1715, cgraph_uid=1, symbol_order=0)
+
+Merging blocks 6 and 8
+;; 2 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4 5 6 7
+;;
+;; Loop 1
+;;  header 3, latch 7
+;;  depth 1, outer 0
+;;  nodes: 3 7 5 4
+;; 2 succs { 3 }
+;; 3 succs { 4 5 }
+;; 4 succs { 5 }
+;; 5 succs { 6 7 }
+;; 6 succs { 1 }
+;; 7 succs { 3 }
+__attribute__((nothrow, leaf, pure))
+__attribute__((nonnull))
+char * strrchr (const char * cp, int ch)
+{
+  char * save;
+  char * p;
+  char * D.2889;
+
+  <bb 2> :
+  p = cp;
+  save = 0B;
+
+  <bb 3> :
+  _1 = *p;
+  _2 = (int) _1;
+  if (ch == _2)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  save = p;
+
+  <bb 5> :
+  _3 = *p;
+  if (_3 == 0)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 6> :
+  D.2889 = save;
+  // predicted unlikely by early return (on trees) predictor.
+  return D.2889;
+
+  <bb 7> :
+  p = p + 1;
+  goto <bb 3>; [INV]
+
+}
+#+end_src
+
+
 Zapisz powyższą procedurę do pliku «strrchr.c». Następnie skompiluj go z
 opcją «-fdump-tree-all»i porównaj swoje rozwiązanie z plikiem o sufiksie
 «cfg» (np. «strrchr.c.011t.cfg»).
