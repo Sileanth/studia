@@ -1,13 +1,20 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
-module Lib
-    () where
+module Lista1
+    ( factorial
+    , ack
+    , removeVowels
+    , everyOtherIn
+    , everyOtherEx
+    , merge
+    , transpose
+    , primeFactors
+    ) where
 import Data.Char (toLower)
 
 
 
 
 -- Zadanie 1
-
 factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
@@ -26,20 +33,28 @@ ack _m 0 2 = 1
 ack m 0 _p = m
 ack m n p = ack m (ack m (n-1) p) (p-1)
 
+-- >>> ack 2 2 3
+-- 16
+
+-- >>> ack 2 3 3
+-- 65536
 
 -- >>> ack 3 7 0
--- >>> ack 3 7 1
--- >>> ack 3 7 2
 -- 10
+
+-- >>> ack 3 7 1
 -- 21
+
+-- >>> ack 3 7 2
 -- 2187
 
 
+
 -- Zadanie 3
-vowels :: [Char]
-vowels = ['a', 'e', 'i', 'o', 'u', 'u']
 removeVowels :: String -> String
 removeVowels = filter (\x -> toLower x `notElem` vowels)
+  where vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+
 
 -- >>> removeVowels "Ala ma kota"
 -- "l m kt"
