@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/avr-gcc",
+      "-g",
+      "-std=c99",
+      "-DF_CPU=16000000",
+      "-Wall",
+      "-O3",
+      "-mmcu=atmega328p",
+      "-c",
+      "-o",
+      "main.o",
+      "main.c"
+    ],
+    "directory": "/home/sileanth/repos/studia/budowa/lista2/zad1",
+    "file": "/home/sileanth/repos/studia/budowa/lista2/zad1/main.c",
+    "output": "/home/sileanth/repos/studia/budowa/lista2/zad1/main.o"
+  }
+]

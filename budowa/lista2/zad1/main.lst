@@ -1,0 +1,277 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000122  000001b6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000122  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000066  00800100  00800100  000001b6  2**0
+                  ALLOC
+  3 .comment      00000012  00000000  00000000  000001b6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001c8  2**2
+                  CONTENTS, READONLY, OCTETS
+  5 .debug_aranges 00000028  00000000  00000000  00000208  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  6 .debug_info   0000081c  00000000  00000000  00000230  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  7 .debug_abbrev 00000757  00000000  00000000  00000a4c  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  8 .debug_line   0000026f  00000000  00000000  000011a3  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .debug_frame  00000054  00000000  00000000  00001414  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 10 .debug_str    0000034a  00000000  00000000  00001468  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 11 .debug_line_str 0000006e  00000000  00000000  000017b2  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 12 .debug_loclists 0000007f  00000000  00000000  00001820  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 13 .debug_rnglists 00000049  00000000  00000000  0000189f  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+
+00000076 <.Loc.1>:
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+
+00000078 <.Loc.2>:
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+
+0000007a <.Loc.3>:
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.Loc.5>
+
+0000007c <.Loc.4>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.Loc.5>:
+  7e:	a6 36       	cpi	r26, 0x66	; 102
+
+00000080 <.Loc.6>:
+  80:	b2 07       	cpc	r27, r18
+
+00000082 <.Loc.7>:
+  82:	e1 f7       	brne	.-8      	; 0x7c <.Loc.4>
+
+00000084 <L0^A>:
+  84:	0e 94 65 00 	call	0xca	; 0xca <main>
+  88:	0c 94 8f 00 	jmp	0x11e	; 0x11e <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <incr_index>:
+#define CYCLE_BUFFER_SIZE 100
+int8_t cycle_buffer[CYCLE_BUFFER_SIZE];
+int8_t cur_idx = 0;
+
+void incr_index() {
+  cur_idx += 1;
+  90:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <cur_idx>
+  94:	81 e0       	ldi	r24, 0x01	; 1
+  96:	89 0f       	add	r24, r25
+
+00000098 <.Loc.3>:
+  if(cur_idx >= CYCLE_BUFFER_SIZE) {
+  98:	84 36       	cpi	r24, 0x64	; 100
+  9a:	14 f0       	brlt	.+4      	; 0xa0 <.L2>
+
+0000009c <.Loc.5>:
+    cur_idx -= CYCLE_BUFFER_SIZE;
+  9c:	8d e9       	ldi	r24, 0x9D	; 157
+  9e:	89 0f       	add	r24, r25
+
+000000a0 <.L2>:
+  cur_idx += 1;
+  a0:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <cur_idx>
+
+000000a4 <.Loc.8>:
+  }
+}
+  a4:	08 95       	ret
+
+000000a6 <read_value>:
+int8_t read_value() {
+  return cycle_buffer[cur_idx];
+  a6:	e0 91 01 01 	lds	r30, 0x0101	; 0x800101 <cur_idx>
+  aa:	0e 2e       	mov	r0, r30
+  ac:	00 0c       	add	r0, r0
+  ae:	ff 0b       	sbc	r31, r31
+  b0:	ee 5f       	subi	r30, 0xFE	; 254
+  b2:	fe 4f       	sbci	r31, 0xFE	; 254
+
+000000b4 <.Loc.12>:
+}
+  b4:	80 81       	ld	r24, Z
+  b6:	08 95       	ret
+
+000000b8 <set_value>:
+
+void set_value(int8_t new_value) {
+  cycle_buffer[cur_idx] = new_value; 
+  b8:	e0 91 01 01 	lds	r30, 0x0101	; 0x800101 <cur_idx>
+  bc:	0e 2e       	mov	r0, r30
+  be:	00 0c       	add	r0, r0
+  c0:	ff 0b       	sbc	r31, r31
+
+000000c2 <.Loc.16>:
+  c2:	ee 5f       	subi	r30, 0xFE	; 254
+  c4:	fe 4f       	sbci	r31, 0xFE	; 254
+  c6:	80 83       	st	Z, r24
+
+000000c8 <.Loc.17>:
+}
+  c8:	08 95       	ret
+
+000000ca <main>:
+int8_t previous_state = 0; // 0 for not pressed, 1 for pressed
+
+
+
+int main() {
+  BTN_PORT |= _BV(BTN);
+  ca:	2c 9a       	sbi	0x05, 4	; 5
+
+000000cc <.Loc.21>:
+  LED_DDR |= _BV(LED);
+  cc:	25 9a       	sbi	0x04, 5	; 4
+  ce:	1b c0       	rjmp	.+54     	; 0x106 <.L11>
+
+000000d0 <.L7>:
+    // replaying history
+    int8_t old_val = read_value();
+    if(old_val == E_ONE) {
+      LED_PORT &= ~_BV(LED);
+    } else {
+      LED_PORT |= _BV(LED);
+  d0:	2d 9a       	sbi	0x05, 5	; 5
+
+000000d2 <.L8>:
+  cycle_buffer[cur_idx] = new_value; 
+  d2:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <cur_idx>
+  d6:	e9 2f       	mov	r30, r25
+  d8:	09 2e       	mov	r0, r25
+  da:	00 0c       	add	r0, r0
+  dc:	ff 0b       	sbc	r31, r31
+
+000000de <.Loc.27>:
+    }
+    
+
+    // capturing current state
+    if (BTN_PIN & _BV(BTN)) {
+  de:	22 e0       	ldi	r18, 0x02	; 2
+  e0:	1c 99       	sbic	0x03, 4	; 3
+  e2:	21 e0       	ldi	r18, 0x01	; 1
+
+000000e4 <.LBB20>:
+  cur_idx += 1;
+  e4:	81 e0       	ldi	r24, 0x01	; 1
+
+000000e6 <.Loc.32>:
+  e6:	89 0f       	add	r24, r25
+
+000000e8 <.Loc.33>:
+  if(cur_idx >= CYCLE_BUFFER_SIZE) {
+  e8:	84 36       	cpi	r24, 0x64	; 100
+  ea:	14 f0       	brlt	.+4      	; 0xf0 <.L10>
+
+000000ec <.Loc.35>:
+    cur_idx -= CYCLE_BUFFER_SIZE;
+  ec:	8d e9       	ldi	r24, 0x9D	; 157
+  ee:	89 0f       	add	r24, r25
+
+000000f0 <.L10>:
+  cycle_buffer[cur_idx] = new_value; 
+  f0:	ee 5f       	subi	r30, 0xFE	; 254
+  f2:	fe 4f       	sbci	r31, 0xFE	; 254
+  f4:	20 83       	st	Z, r18
+
+000000f6 <.Loc.38>:
+  cur_idx += 1;
+  f6:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <cur_idx>
+
+000000fa <.LBB25>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(__builtin_ceil(__builtin_fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  fa:	8f e3       	ldi	r24, 0x3F	; 63
+  fc:	9c e9       	ldi	r25, 0x9C	; 156
+
+000000fe <.L1^B1>:
+  fe:	01 97       	sbiw	r24, 0x01	; 1
+ 100:	f1 f7       	brne	.-4      	; 0xfe <.L1^B1>
+ 102:	00 c0       	rjmp	.+0      	; 0x104 <L0^A>
+
+00000104 <L0^A>:
+	...
+
+00000106 <.L11>:
+  return cycle_buffer[cur_idx];
+ 106:	e0 91 01 01 	lds	r30, 0x0101	; 0x800101 <cur_idx>
+ 10a:	0e 2e       	mov	r0, r30
+ 10c:	00 0c       	add	r0, r0
+ 10e:	ff 0b       	sbc	r31, r31
+ 110:	ee 5f       	subi	r30, 0xFE	; 254
+ 112:	fe 4f       	sbci	r31, 0xFE	; 254
+
+00000114 <.Loc.57>:
+    if(old_val == E_ONE) {
+ 114:	80 81       	ld	r24, Z
+ 116:	81 30       	cpi	r24, 0x01	; 1
+ 118:	d9 f6       	brne	.-74     	; 0xd0 <.L7>
+
+0000011a <.Loc.59>:
+      LED_PORT &= ~_BV(LED);
+ 11a:	2d 98       	cbi	0x05, 5	; 5
+ 11c:	da cf       	rjmp	.-76     	; 0xd2 <.L8>
+
+0000011e <_exit>:
+ 11e:	f8 94       	cli
+
+00000120 <__stop_program>:
+ 120:	ff cf       	rjmp	.-2      	; 0x120 <__stop_program>
